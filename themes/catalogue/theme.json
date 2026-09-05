@@ -1,0 +1,51 @@
+{
+  "name": "catalogue",
+  "label": "Catalogue",
+  "description": "A paginated directory. Ten items to a page, numbered continuously across the whole deck, grouped into categories with a tag on every card. Built for 'N tools, M categories' maps — the format people save because it is a reference, not a read. Derived from the DcJLRbGDzu4 reference deck.",
+  "canvas": { "width": 1080, "height": 1350, "scale": 2, "safeTop": 118, "safeBottom": 118, "margin": 52 },
+  "color": {
+    "bg": "#FAF7F3", "surface": "#FFFFFF", "panel": "#F4F0EA",
+    "ink": "#15120F", "inkSoft": "#5D564E", "inkFaint": "#948C82", "rule": "#EAE4DC",
+    "accent": "#DB512C", "accentInk": "#FFFFFF", "accentTint": "#FBE9E3",
+    "chipTints": ["#FBE9E3", "#EAF1E7", "#E7EDF6", "#F5ECDD", "#F1E9F5"],
+    "chipInks": ["#B23C1D", "#3E6238", "#33507E", "#7A6120", "#5D3F78"]
+  },
+  "accentRotation": ["#DB512C"],
+  "font": {
+    "display": { "file": "geo-700.woff2", "weight": 700 },
+    "body": { "file": "sans-400.woff2", "weight": 400 },
+    "bodyMid": { "file": "sans-600.woff2", "weight": 600 },
+    "mono": { "file": "mono-400.woff2", "weight": 400 },
+    "monoBold": { "file": "mono-700.woff2", "weight": 700 }
+  },
+  "type": {
+    "eyebrow": { "size": 18, "tracking": 0.22, "weight": 600, "caps": true },
+    "headline": { "size": 62, "leading": 1.02, "tracking": -0.028, "min": 34 },
+    "deck": { "size": 25, "leading": 1.38, "min": 18 },
+    "body": { "size": 24, "leading": 1.46, "min": 18 },
+    "itemName": { "size": 26, "leading": 1.14, "min": 18 },
+    "itemBody": { "size": 20, "leading": 1.3, "min": 15 },
+    "itemMeta": { "size": 15, "tracking": 0.1, "min": 12 },
+    "tag": { "size": 14, "tracking": 0.12, "min": 11 },
+    "rowTitle": { "size": 26, "leading": 1.26, "min": 19 },
+    "rowBody": { "size": 22, "leading": 1.36, "min": 17 },
+    "statValue": { "size": 88, "leading": 1, "min": 46 },
+    "statLabel": { "size": 20, "leading": 1.25, "min": 16 },
+    "quote": { "size": 54, "leading": 1.18, "min": 32 },
+    "caption": { "size": 19, "leading": 1.35, "min": 15 },
+    "footer": { "size": 17, "tracking": 0.08 }
+  },
+  "rowStyle": "rule",
+  "fill": { "min": 0.6, "maxGrow": 1.24 },
+  "objectSize": 0.18,
+  "space": { "xs": 6, "sm": 11, "md": 18, "lg": 28, "xl": 44 },
+  "radius": { "sm": 8, "md": 16, "lg": 22 },
+  "grid": { "cols": 2, "rows": 5 },
+  "texture": { "grain": 0.04, "blotch": 0.02 },
+  "budgets": {
+    "eyebrow": 30, "headline": 30, "deck": 90, "body": 200,
+    "itemName": 18, "itemBody": 44, "itemMeta": 24, "tag": 12,
+    "rowTitle": 30, "rowBody": 84, "statValue": 6, "statLabel": 26,
+    "quote": 120, "caption": 90, "maxRows": 5, "maxSteps": 5
+  }
+}

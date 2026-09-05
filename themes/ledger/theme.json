@@ -1,0 +1,164 @@
+{
+  "name": "ledger",
+  "label": "Ledger",
+  "description": "Graph-paper cream with a big serif numeral, an entity card carrying real stats, and two proof chips per slide. Built for 'N tools' decks where each slide is a database row \u2014 pair it with scripts/fetch-entity.js and the deck writes itself.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 135,
+    "safeBottom": 135,
+    "margin": 86
+  },
+  "color": {
+    "bg": "#F2ECE0",
+    "surface": "#FFFFFF",
+    "grid": "#E2D9C6",
+    "ink": "#1B1712",
+    "inkSoft": "#5B5346",
+    "inkFaint": "#968C79",
+    "rule": "#DCD2BE",
+    "accent": "#C2481C",
+    "accentInk": "#FFFFFF",
+    "chipTints": [
+      "#F4E5DC",
+      "#E7ECE2",
+      "#E4E9F1",
+      "#F0E9DA",
+      "#EDE5F0"
+    ],
+    "chipInks": [
+      "#93381A",
+      "#3F5A3D",
+      "#37507A",
+      "#7A6420",
+      "#573F73"
+    ]
+  },
+  "accentRotation": [
+    "#C2481C",
+    "#AE3F17",
+    "#B85220"
+  ],
+  "font": {
+    "numeral": {
+      "file": "didone-700.woff2",
+      "weight": 700
+    },
+    "display": {
+      "file": "geo-700.woff2",
+      "weight": 700
+    },
+    "body": {
+      "file": "sans-400.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "sans-600.woff2",
+      "weight": 600
+    },
+    "mono": {
+      "file": "mono-400.woff2",
+      "weight": 400
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 20,
+      "tracking": 0.14,
+      "weight": 600,
+      "caps": true
+    },
+    "numeral": {
+      "size": 96,
+      "leading": 1,
+      "min": 52
+    },
+    "headline": {
+      "size": 74,
+      "leading": 1.02,
+      "tracking": -0.022,
+      "min": 40
+    },
+    "deck": {
+      "size": 27,
+      "leading": 1.42,
+      "min": 20
+    },
+    "body": {
+      "size": 25,
+      "leading": 1.48,
+      "min": 19
+    },
+    "rowTitle": {
+      "size": 26,
+      "leading": 1.26,
+      "min": 20
+    },
+    "rowBody": {
+      "size": 23,
+      "leading": 1.38,
+      "min": 18
+    },
+    "statValue": {
+      "size": 88,
+      "leading": 1,
+      "min": 48
+    },
+    "statLabel": {
+      "size": 21,
+      "leading": 1.25,
+      "min": 16
+    },
+    "quote": {
+      "size": 56,
+      "leading": 1.18,
+      "min": 32
+    },
+    "caption": {
+      "size": 20,
+      "leading": 1.35,
+      "min": 16
+    },
+    "footer": {
+      "size": 18,
+      "tracking": 0.1
+    }
+  },
+  "rowStyle": "rule",
+  "fill": {
+    "min": 0.66,
+    "maxGrow": 1.5
+  },
+  "objectSize": 0.24,
+  "space": {
+    "xs": 8,
+    "sm": 14,
+    "md": 24,
+    "lg": 38,
+    "xl": 58
+  },
+  "radius": {
+    "sm": 6,
+    "md": 12,
+    "lg": 18
+  },
+  "texture": {
+    "grain": 0.07,
+    "blotch": 0.03
+  },
+  "budgets": {
+    "eyebrow": 24,
+    "headline": 34,
+    "deck": 110,
+    "body": 200,
+    "rowTitle": 30,
+    "rowBody": 84,
+    "statValue": 6,
+    "statLabel": 26,
+    "quote": 120,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5
+  }
+}

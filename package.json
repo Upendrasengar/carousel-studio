@@ -1,0 +1,19 @@
+{
+  "name": "carousel-studio",
+  "version": "1.0.0",
+  "description": "Turns a deck JSON into publication-ready social carousel PNGs. Twenty-five theme packs, a copy validator, and deterministic Playwright rendering.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "check": "node scripts/check.js",
+    "render": "node scripts/render.js",
+    "themes": "node scripts/render.js --themes",
+    "doctor": "node scripts/doctor.js",
+    "postinstall": "playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.62.1"
+  },
+  "files": ["scripts", "themes", "assets", "references", "SKILL.md"]
+}

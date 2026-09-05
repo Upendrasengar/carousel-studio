@@ -1,0 +1,125 @@
+{
+  "slug": "watch-skill-explainer",
+  "title": "Claude can watch any video",
+  "theme": "pixel-mascot",
+  "handle": "@yourhandle",
+  "footnote": "Save for later",
+  "slides": [
+    {
+      "type": "hook",
+      "eyebrow": "The Watch Skill",
+      "headline": "My Claude can now *watch any video*.",
+      "deck": "Not the transcript. The actual frames — charts, slides, on-screen text, all of it.",
+      "prop": "monitor",
+      "dressing": "mug"
+    },
+    {
+      "type": "problem",
+      "eyebrow": "The problem",
+      "headline": "Most tools only grab the *transcript*.",
+      "body": "Half the value in a video is never spoken out loud. It is drawn on a whiteboard, shown in a chart, or typed on screen.",
+      "rows": [
+        {
+          "icon": "cross",
+          "title": "Transcript-only tools",
+          "body": "miss every visual the speaker points at"
+        },
+        {
+          "icon": "cross",
+          "title": "Manual scrubbing",
+          "body": "ten minutes of pausing to read one slide"
+        }
+      ],
+      "prop": "books"
+    },
+    {
+      "type": "point",
+      "eyebrow": "How it works",
+      "headline": "A video is really just *pictures and words*.",
+      "deck": "So the skill grabs both, then hands Claude the pair.",
+      "rows": [
+        {
+          "icon": "eye",
+          "title": "Frames",
+          "body": "a screenshot every few seconds, auto-scaled"
+        },
+        {
+          "icon": "doc",
+          "title": "Transcript",
+          "body": "pulled from captions, with timestamps"
+        },
+        {
+          "icon": "link",
+          "title": "Aligned",
+          "body": "every frame is tied to the line that was said over it"
+        }
+      ],
+      "prop": "monitor",
+      "dressing": "plant"
+    },
+    {
+      "type": "steps",
+      "eyebrow": "Setup",
+      "headline": "Running it takes *one command*.",
+      "steps": [
+        {
+          "title": "Find a video",
+          "body": "any YouTube, Loom or Instagram link"
+        },
+        {
+          "title": "Type /watch",
+          "body": "paste the link after it"
+        },
+        {
+          "title": "Ask anything",
+          "body": "Claude answers from frames and audio together"
+        }
+      ],
+      "media": {
+        "kind": "terminal",
+        "title": "claude code",
+        "lines": [
+          "/watch https://youtu.be/abcd1234",
+          "downloading  ████████████  100%",
+          "extracting 214 frames",
+          "transcript ready (45:02)",
+          "ready — ask me anything about this video"
+        ]
+      }
+    },
+    {
+      "type": "stat",
+      "eyebrow": "The real cost",
+      "headline": "Why this isn't expensive.",
+      "stats": [
+        {
+          "value": "39c",
+          "label": "Five hours of video, transcribed"
+        },
+        {
+          "value": "2 min",
+          "label": "A 45-min lecture, understood"
+        }
+      ],
+      "body": "There is no video model in the loop. The skill breaks the video into pictures and text, which Claude already reads perfectly.",
+      "prop": "chart",
+      "dressing": "mug"
+    },
+    {
+      "type": "quote",
+      "eyebrow": "The shift",
+      "quote": "You are not watching content any more. You are downloading the context.",
+      "attribution": "the whole point, in one line",
+      "prop": "clock"
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Get it",
+      "headline": "It's free, and it's *two lines*.",
+      "action": "Comment SEND",
+      "body": "and I will drop the install command in your DMs.",
+      "prop": "box",
+      "dressing": "plant"
+    }
+  ]
+}

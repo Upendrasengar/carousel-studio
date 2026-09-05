@@ -1,0 +1,190 @@
+{
+  "name": "swap",
+  "label": "Swap",
+  "description": "Paid-versus-free comparison cards. Each slide swaps one tool for another: logos and prices at the top, the two products side by side, a feature strip, and a scored verdict with the saving. Built for 'N tools I stopped paying for' decks. Derived from the DcoNSp4EkRP reference deck.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 135,
+    "safeBottom": 135,
+    "margin": 54
+  },
+  "color": {
+    "bg": "#F6F4FE",
+    "surface": "#FFFFFF",
+    "panel": "#FAF9FF",
+    "ink": "#171528",
+    "inkSoft": "#5C5878",
+    "inkFaint": "#9A96B4",
+    "rule": "#E7E3F7",
+    "accent": "#5B4BE8",
+    "accentInk": "#FFFFFF",
+    "paid": "#D63A5A",
+    "paidTint": "#FDEAEE",
+    "free": "#1E9E63",
+    "freeTint": "#E6F6EE",
+    "chipTints": [
+      "#EDEAFD",
+      "#E6F6EE",
+      "#FDEAEE",
+      "#E9F1FD",
+      "#F6EEFB"
+    ],
+    "chipInks": [
+      "#4B3BD8",
+      "#1E8A57",
+      "#C03352",
+      "#2F5FC4",
+      "#7A3FA8"
+    ]
+  },
+  "accentRotation": [
+    "#5B4BE8"
+  ],
+  "font": {
+    "display": {
+      "file": "geo-700.woff2",
+      "weight": 700
+    },
+    "body": {
+      "file": "sans-400.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "sans-600.woff2",
+      "weight": 600
+    },
+    "mono": {
+      "file": "mono-400.woff2",
+      "weight": 400
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 19,
+      "tracking": 0.22,
+      "weight": 600,
+      "caps": true
+    },
+    "headline": {
+      "size": 76,
+      "leading": 1.02,
+      "tracking": -0.024,
+      "min": 40
+    },
+    "brand": {
+      "size": 62,
+      "leading": 1.05,
+      "min": 30
+    },
+    "deck": {
+      "size": 26,
+      "leading": 1.42,
+      "min": 20
+    },
+    "body": {
+      "size": 24,
+      "leading": 1.46,
+      "min": 18
+    },
+    "tagline": {
+      "size": 34,
+      "leading": 1.3,
+      "min": 24
+    },
+    "rowTitle": {
+      "size": 29,
+      "leading": 1.26,
+      "min": 19
+    },
+    "rowBody": {
+      "size": 24,
+      "leading": 1.36,
+      "min": 17
+    },
+    "featTitle": {
+      "size": 21,
+      "tracking": 0.06,
+      "min": 15
+    },
+    "featBody": {
+      "size": 21,
+      "leading": 1.34,
+      "min": 16
+    },
+    "score": {
+      "size": 54,
+      "leading": 1.05,
+      "min": 30
+    },
+    "statValue": {
+      "size": 86,
+      "leading": 1,
+      "min": 46
+    },
+    "statLabel": {
+      "size": 20,
+      "leading": 1.25,
+      "min": 16
+    },
+    "quote": {
+      "size": 54,
+      "leading": 1.2,
+      "min": 32
+    },
+    "caption": {
+      "size": 20,
+      "leading": 1.35,
+      "min": 16
+    },
+    "footer": {
+      "size": 18,
+      "tracking": 0.1
+    }
+  },
+  "rowStyle": "rule",
+  "fill": {
+    "min": 0.82,
+    "maxGrow": 1.32
+  },
+  "objectSize": 0.2,
+  "space": {
+    "xs": 8,
+    "sm": 14,
+    "md": 22,
+    "lg": 34,
+    "xl": 52
+  },
+  "radius": {
+    "sm": 10,
+    "md": 16,
+    "lg": 24
+  },
+  "texture": {
+    "grain": 0.05,
+    "blotch": 0.03
+  },
+  "budgets": {
+    "eyebrow": 34,
+    "headline": 36,
+    "deck": 110,
+    "body": 200,
+    "tagline": 46,
+    "rowTitle": 30,
+    "rowBody": 84,
+    "featTitle": 22,
+    "featBody": 62,
+    "statValue": 6,
+    "statLabel": 26,
+    "quote": 120,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5,
+    "note": 90
+  },
+  "animate": {
+    "seconds": 4,
+    "fps": 30
+  }
+}

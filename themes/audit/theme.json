@@ -1,0 +1,220 @@
+{
+  "name": "audit",
+  "label": "Audit",
+  "description": "A dense three-column reference card: what is wasteful on the left in red, the numbered pipeline down the middle, what is clean on the right in green, and a summary strip along the foot. One slide that carries a whole system \u2014 the format people save rather than swipe past. Derived from the Dclsr-dkgiB reference deck.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 118,
+    "safeBottom": 118,
+    "margin": 40
+  },
+  "color": {
+    "bg": "#FFFFFF",
+    "surface": "#FFFFFF",
+    "panel": "#FAFAFA",
+    "ink": "#141414",
+    "inkSoft": "#4A4A4A",
+    "inkFaint": "#8A8A8A",
+    "rule": "#E6E6E6",
+    "accent": "#D93025",
+    "accentInk": "#FFFFFF",
+    "bad": "#D93025",
+    "badTint": "#FDF1F0",
+    "badRule": "#F5D9D6",
+    "good": "#1E8E3E",
+    "goodTint": "#F1F8F2",
+    "goodRule": "#D7EADC",
+    "steps": [
+      "#1A73E8",
+      "#0E9AA7",
+      "#7C4DFF",
+      "#E8710A",
+      "#1E8E3E",
+      "#C9A227",
+      "#20418A"
+    ],
+    "chipTints": [
+      "#FDF1F0",
+      "#F1F8F2",
+      "#EEF3FD",
+      "#F6F1FD",
+      "#FDF6E9"
+    ],
+    "chipInks": [
+      "#B3261E",
+      "#1E8E3E",
+      "#1A73E8",
+      "#6A3FD1",
+      "#9A7513"
+    ]
+  },
+  "accentRotation": [
+    "#D93025"
+  ],
+  "mascotPalette": {
+    "O": "#E2603C",
+    "L": "#F08360",
+    "D": "#B8452A"
+  },
+  "font": {
+    "display": {
+      "file": "impact-400.woff2",
+      "weight": 400
+    },
+    "body": {
+      "file": "sans-400.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "sans-600.woff2",
+      "weight": 600
+    },
+    "mono": {
+      "file": "mono-400.woff2",
+      "weight": 400
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 19,
+      "tracking": 0.1,
+      "weight": 600,
+      "caps": true
+    },
+    "headline": {
+      "size": 66,
+      "leading": 0.94,
+      "tracking": -0.005,
+      "min": 34
+    },
+    "subline": {
+      "size": 27,
+      "tracking": 0.02,
+      "min": 18
+    },
+    "colLabel": {
+      "size": 23,
+      "tracking": 0.04,
+      "min": 16
+    },
+    "cellTitle": {
+      "size": 20,
+      "leading": 1.16,
+      "min": 14
+    },
+    "cellBody": {
+      "size": 18,
+      "leading": 1.34,
+      "min": 13
+    },
+    "stepTitle": {
+      "size": 23,
+      "leading": 1.14,
+      "min": 16
+    },
+    "deck": {
+      "size": 26,
+      "leading": 1.4,
+      "min": 19
+    },
+    "body": {
+      "size": 24,
+      "leading": 1.46,
+      "min": 18
+    },
+    "rowTitle": {
+      "size": 26,
+      "leading": 1.26,
+      "min": 19
+    },
+    "rowBody": {
+      "size": 22,
+      "leading": 1.36,
+      "min": 17
+    },
+    "statValue": {
+      "size": 88,
+      "leading": 1,
+      "min": 46
+    },
+    "statLabel": {
+      "size": 20,
+      "leading": 1.25,
+      "min": 16
+    },
+    "quote": {
+      "size": 54,
+      "leading": 1.18,
+      "min": 32
+    },
+    "caption": {
+      "size": 19,
+      "leading": 1.35,
+      "min": 15
+    },
+    "footer": {
+      "size": 17,
+      "tracking": 0.06
+    }
+  },
+  "rowStyle": "rule",
+  "fill": {
+    "min": 0.66,
+    "maxGrow": 1.3
+  },
+  "objectSize": 0.16,
+  "space": {
+    "xs": 6,
+    "sm": 11,
+    "md": 18,
+    "lg": 28,
+    "xl": 44
+  },
+  "radius": {
+    "sm": 8,
+    "md": 12,
+    "lg": 18
+  },
+  "mascot": {
+    "px": 7,
+    "scenePx": 6,
+    "defaultPose": "idle",
+    "poseByType": {
+      "hook": "pointing",
+      "flow": "idle",
+      "compare": "detective",
+      "problem": "confused",
+      "point": "idle",
+      "steps": "laptop",
+      "stat": "idea",
+      "quote": "idle",
+      "cta": "celebrate"
+    }
+  },
+  "texture": {
+    "grain": 0.03,
+    "blotch": 0.02
+  },
+  "budgets": {
+    "eyebrow": 26,
+    "headline": 40,
+    "subline": 40,
+    "colLabel": 22,
+    "cellTitle": 22,
+    "cellBody": 62,
+    "stepTitle": 26,
+    "deck": 110,
+    "body": 200,
+    "rowTitle": 30,
+    "rowBody": 84,
+    "statValue": 6,
+    "statLabel": 26,
+    "quote": 120,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5,
+    "maxCells": 7
+  }
+}

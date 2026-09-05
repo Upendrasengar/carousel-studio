@@ -1,0 +1,74 @@
+{
+  "name": "parchment-vault",
+  "label": "Parchment Vault",
+  "description": "Kraft parchment ground with a two-line serif headline, a purple chevron badge, screenshots in a purple-chromed window, and a torn margin note. Derived from the DYmyTZfkqC0 reference deck, with an original character in place of its licensed cartoon cut-outs.",
+
+  "canvas": {
+    "width": 1080, "height": 1350, "scale": 2,
+    "safeTop": 135, "safeBottom": 135, "margin": 84
+  },
+
+  "color": {
+    "bg": "#E9DFC6",
+    "surface": "#F6EFDD",
+    "note": "#F3E7CB",
+    "ink": "#1E1A13",
+    "inkSoft": "#554B39",
+    "inkFaint": "#8E8168",
+    "rule": "#CFC0A0",
+    "accent": "#5B34A6",
+    "accentInk": "#F6EFDD",
+    "chipTints": ["#E4DAF2", "#E7E0CB", "#DFE6DB", "#E9DCD5", "#DCE2EC"],
+    "chipInks":  ["#4A2A8C", "#6E5A20", "#3D5540", "#82432B", "#33496B"]
+  },
+
+  "accentRotation": ["#5B34A6", "#4E2B93", "#6A3EB5"],
+
+  "mascotPalette": { "O": "#6B44B8", "L": "#8760D6", "D": "#4A2C89",
+                     "B": "#3E2578", "N": "#5A4632", "S": "#B79BEA", "K": "#2A1F44" },
+
+  "font": {
+    "display":       { "file": "display.woff2",        "weight": 700 },
+    "displayItalic": { "file": "display-italic.woff2", "weight": 700 },
+    "note":          { "file": "note.woff2",           "weight": 400 },
+    "body":          { "file": "body.woff2",           "weight": 400 },
+    "bodyMid":       { "file": "body-medium.woff2",    "weight": 600 }
+  },
+
+  "type": {
+    "brand":     { "size": 21, "tracking": 0.16, "weight": 600 },
+    "eyebrow":   { "size": 20, "tracking": 0.18, "weight": 600, "caps": true },
+    "headline":  { "size": 84, "leading": 1.04, "tracking": -0.016, "min": 44 },
+    "deck":      { "size": 29, "leading": 1.40, "min": 21 },
+    "body":      { "size": 26, "leading": 1.50, "min": 19 },
+    "rowTitle":  { "size": 27, "leading": 1.26, "min": 21 },
+    "rowBody":   { "size": 24, "leading": 1.38, "min": 18 },
+    "statValue": { "size": 96, "leading": 1.0, "min": 52 },
+    "statLabel": { "size": 22, "leading": 1.26, "min": 17 },
+    "quote":     { "size": 58, "leading": 1.18, "min": 34 },
+    "note":      { "size": 22, "leading": 1.44, "min": 17 },
+    "caption":   { "size": 21, "leading": 1.36, "min": 16 },
+    "footer":    { "size": 19, "tracking": 0.12 }
+  },
+
+  "rowStyle": "rule",
+  "fill": { "min": 0.62, "maxGrow": 1.34 },
+
+  "objectSize": 0.28,
+
+  "space": { "xs": 9, "sm": 16, "md": 26, "lg": 42, "xl": 62 },
+  "radius": { "sm": 6, "md": 12, "lg": 18 },
+
+  "mascot": { "px": 10,
+    "scenePx": 11, "defaultPose": "idle",
+    "poseByType": { "hook": "wizard", "problem": "confused", "point": "pointing",
+                    "steps": "laptop", "stat": "detective", "quote": "idea", "cta": "celebrate" } },
+
+  "texture": { "grain": 0.16, "blotch": 0.08 },
+
+  "budgets": {
+    "eyebrow": 24, "headline": 52, "deck": 110, "body": 230,
+    "rowTitle": 32, "rowBody": 88, "statValue": 6, "statLabel": 28,
+    "quote": 130, "note": 90, "caption": 80, "maxRows": 5, "maxSteps": 5
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "name": "notebook-tabs",
+  "label": "Notebook Tabs",
+  "description": "An inset paper card with a file-tab strip and a slide chip, serif headline with one orange keyword, and dense icon rows. Built for list decks \u2014 the 'N tools' format. Derived from the Db_GqlYkqal reference deck.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 135,
+    "safeBottom": 135,
+    "margin": 92
+  },
+  "color": {
+    "bg": "#E7DCCA",
+    "surface": "#FCF8F1",
+    "card": "#FDFAF4",
+    "ink": "#1C1813",
+    "inkSoft": "#584F41",
+    "inkFaint": "#948A78",
+    "rule": "#E0D6C4",
+    "accent": "#B8410F",
+    "accentInk": "#FCF8F1",
+    "tabs": [
+      "#E9A23B",
+      "#7FA45C",
+      "#5C86B8",
+      "#B07BC4",
+      "#D2694A"
+    ],
+    "chipTints": [
+      "#F6E7DC",
+      "#E6EDE2",
+      "#E2E9F2",
+      "#EFE6F4",
+      "#F5EEDA"
+    ],
+    "chipInks": [
+      "#8C3E18",
+      "#3F5A38",
+      "#33507A",
+      "#5B3B6B",
+      "#7A6018"
+    ]
+  },
+  "accentRotation": [
+    "#B8410F",
+    "#A5390D",
+    "#B04A18"
+  ],
+  "font": {
+    "display": {
+      "file": "display.woff2",
+      "weight": 700
+    },
+    "displayBlack": {
+      "file": "display-black.woff2",
+      "weight": 900
+    },
+    "body": {
+      "file": "body.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "body-medium.woff2",
+      "weight": 600
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 20,
+      "tracking": 0.16,
+      "weight": 600,
+      "caps": true
+    },
+    "headline": {
+      "size": 78,
+      "leading": 0.98,
+      "tracking": -0.02,
+      "min": 46
+    },
+    "deck": {
+      "size": 29,
+      "leading": 1.38,
+      "min": 21
+    },
+    "body": {
+      "size": 26,
+      "leading": 1.48,
+      "min": 19
+    },
+    "rowTitle": {
+      "size": 25,
+      "leading": 1.32,
+      "min": 21
+    },
+    "rowBody": {
+      "size": 24,
+      "leading": 1.36,
+      "min": 18
+    },
+    "statValue": {
+      "size": 96,
+      "leading": 1.0,
+      "min": 52
+    },
+    "statLabel": {
+      "size": 22,
+      "leading": 1.26,
+      "min": 17
+    },
+    "quote": {
+      "size": 58,
+      "leading": 1.16,
+      "min": 34
+    },
+    "caption": {
+      "size": 22,
+      "leading": 1.38,
+      "min": 17
+    },
+    "footer": {
+      "size": 19,
+      "tracking": 0.1
+    }
+  },
+  "rowStyle": "inline",
+  "fill": {
+    "min": 0.76,
+    "maxGrow": 1.3
+  },
+  "objectSize": 0.24,
+  "space": {
+    "xs": 9,
+    "sm": 15,
+    "md": 24,
+    "lg": 38,
+    "xl": 58
+  },
+  "radius": {
+    "sm": 8,
+    "md": 14,
+    "lg": 26
+  },
+  "mascot": {
+    "px": 11,
+    "defaultPose": "idle",
+    "poseByType": {
+      "hook": "pointing",
+      "problem": "confused",
+      "point": "idle",
+      "steps": "laptop",
+      "stat": "detective",
+      "quote": "idea",
+      "cta": "celebrate"
+    }
+  },
+  "texture": {
+    "grain": 0.11,
+    "blotch": 0.05
+  },
+  "budgets": {
+    "eyebrow": 24,
+    "headline": 42,
+    "deck": 110,
+    "body": 220,
+    "rowTitle": 32,
+    "rowBody": 90,
+    "statValue": 6,
+    "statLabel": 28,
+    "quote": 130,
+    "caption": 110,
+    "maxRows": 6,
+    "maxSteps": 6
+  }
+}

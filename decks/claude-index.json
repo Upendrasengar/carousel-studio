@@ -1,0 +1,407 @@
+{
+  "slug": "claude-index",
+  "theme": "index-rail",
+  "handle": "@yourhandle",
+  "author": {
+    "name": "Your Name",
+    "site": "example.com",
+    "initials": "YN"
+  },
+  "manual": {
+    "brand": "ANTHROPIC",
+    "title": "The\nManual",
+    "caption": "8 pages · never sent to you",
+    "mascot": "idle"
+  },
+  "index": {
+    "items": [
+      {
+        "section": "The Cookbooks",
+        "badge": "Start here",
+        "title": "Agent Skills",
+        "what": "Anthropic's own skills, including the ones that build Word, Excel and PDF files.",
+        "start": "Clone the repo, drop one folder into your skills directory. Claude uses it on the next prompt.",
+        "page": {
+          "kind": "repo",
+          "url": "github.com/anthropics/skills",
+          "org": "anthropics",
+          "name": "skills",
+          "vis": "Public",
+          "branch": "main",
+          "branches": "14 Branches",
+          "tags": "0 Tags",
+          "tabs": [
+            [
+              "Code"
+            ],
+            [
+              "Issues",
+              "309"
+            ],
+            [
+              "Pull requests",
+              "744"
+            ],
+            [
+              "Discussions"
+            ],
+            [
+              "Actions"
+            ],
+            [
+              "Insights"
+            ]
+          ],
+          "files": [
+            {
+              "kind": "dir",
+              "name": ".claude-plugin",
+              "msg": "Add claude-api skill",
+              "age": "4 months ago"
+            },
+            {
+              "kind": "dir",
+              "name": "skills",
+              "msg": "Update claude-api skill: Claude Opus 5",
+              "age": "last week"
+            },
+            {
+              "kind": "dir",
+              "name": "spec",
+              "msg": "Add link to Agent Skills specification",
+              "age": "7 months ago"
+            },
+            {
+              "kind": "dir",
+              "name": "template",
+              "msg": "Move example skills into dedicated folder",
+              "age": "8 months ago"
+            },
+            {
+              "kind": "file",
+              "name": "README.md",
+              "msg": "Update README.md",
+              "age": "2 months ago"
+            },
+            {
+              "kind": "file",
+              "name": "THIRD_PARTY_NOTICES.md",
+              "msg": "Add 3rd party notices",
+              "age": "9 months ago"
+            }
+          ],
+          "note": "Skills are folders of instructions, scripts and resources that Claude loads dynamically. They teach Claude to do a specific task the same way every time."
+        }
+      },
+      {
+        "section": "The Cookbooks",
+        "title": "Claude Cookbooks",
+        "what": "Ready-made recipes for classification, RAG, vision, tool use and prompt caching.",
+        "start": "Open the notebook closest to your job and change the prompt at the top. Nothing else.",
+        "page": {
+          "kind": "repo",
+          "url": "github.com/anthropics/claude-cookbooks",
+          "org": "anthropics",
+          "name": "claude-cookbooks",
+          "vis": "Public",
+          "branch": "main",
+          "branches": "146 Branches",
+          "tags": "0 Tags",
+          "tabs": [
+            [
+              "Code"
+            ],
+            [
+              "Issues",
+              "73"
+            ],
+            [
+              "Pull requests",
+              "220"
+            ],
+            [
+              "Actions"
+            ],
+            [
+              "Projects"
+            ],
+            [
+              "Insights"
+            ]
+          ],
+          "files": [
+            {
+              "kind": "dir",
+              "name": "capabilities",
+              "msg": "fix(rag): update rate-limit tier references",
+              "age": "29 days ago"
+            },
+            {
+              "kind": "dir",
+              "name": "claude_agent_sdk",
+              "msg": "hosting: address review comments",
+              "age": "2 months ago"
+            },
+            {
+              "kind": "dir",
+              "name": "coding",
+              "msg": "docs: update all model references",
+              "age": "5 months ago"
+            },
+            {
+              "kind": "dir",
+              "name": "extended_thinking",
+              "msg": "docs: update all model references",
+              "age": "5 months ago"
+            },
+            {
+              "kind": "dir",
+              "name": "finetuning",
+              "msg": "Lint + format all cookbooks/scripts",
+              "age": "8 months ago"
+            },
+            {
+              "kind": "dir",
+              "name": "misc",
+              "msg": "Clean up metaprompt notebook",
+              "age": "3 weeks ago"
+            }
+          ]
+        }
+      },
+      {
+        "section": "The Cookbooks",
+        "title": "Claude Quickstarts",
+        "what": "Complete apps you can run: a support agent, a financial analyst, a computer-use demo.",
+        "start": "Start with the customer support agent. It runs locally in about ten minutes.",
+        "page": {
+          "kind": "repo",
+          "url": "github.com/anthropics/claude-quickstarts",
+          "org": "anthropics",
+          "name": "claude-quickstarts",
+          "vis": "Public",
+          "branch": "main",
+          "branches": "9 Branches",
+          "tags": "0 Tags",
+          "tabs": [
+            [
+              "Code"
+            ],
+            [
+              "Issues",
+              "41"
+            ],
+            [
+              "Pull requests",
+              "18"
+            ],
+            [
+              "Actions"
+            ],
+            [
+              "Security"
+            ],
+            [
+              "Insights"
+            ]
+          ],
+          "files": [
+            {
+              "kind": "dir",
+              "name": "agents",
+              "msg": "Update for the Agent SDK",
+              "age": "2 months ago"
+            },
+            {
+              "kind": "dir",
+              "name": "computer-use-demo",
+              "msg": "Bump container base image",
+              "age": "3 months ago"
+            },
+            {
+              "kind": "dir",
+              "name": "customer-support-agent",
+              "msg": "Add streaming to the chat route",
+              "age": "5 months ago"
+            },
+            {
+              "kind": "dir",
+              "name": "financial-data-analyst",
+              "msg": "Add chart rendering examples",
+              "age": "6 months ago"
+            },
+            {
+              "kind": "file",
+              "name": "README.md",
+              "msg": "Document each quickstart",
+              "age": "last month"
+            }
+          ]
+        }
+      },
+      {
+        "section": "Claude Code",
+        "badge": "The default",
+        "title": "Claude Code docs",
+        "what": "The full manual for the version of Claude that runs in your terminal.",
+        "start": "Skim the overview, then run /init inside a project folder and read what it writes.",
+        "page": {
+          "kind": "docs",
+          "url": "code.claude.com/docs/en/overview",
+          "crumb": "Claude Code / Getting started",
+          "title": "Overview",
+          "blurb": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster through natural language commands.",
+          "nav": [
+            "Guides",
+            "Reference",
+            "Configuration",
+            "Resources"
+          ],
+          "paras": [
+            "Claude Code can run one-shot commands, hold an interactive session, or run unattended in CI. It reads the files it needs, runs the commands you allow, and shows you a diff before anything changes on disk.",
+            "Install it once and use it in any project folder. There is no per-repository setup beyond an optional CLAUDE.md."
+          ],
+          "sub": "Get started",
+          "subParas": [
+            "Install with npm, or with the native installer for macOS, Linux and Windows."
+          ]
+        }
+      },
+      {
+        "section": "Claude Code",
+        "title": "Claude Code best practices",
+        "what": "Verify-your-work loops, plan mode, CLAUDE.md, subagents and parallel sessions.",
+        "start": "Copy the CLAUDE.md pattern into your own project first. It changes every session after it.",
+        "page": {
+          "kind": "article",
+          "url": "anthropic.com/engineering/claude-code-best-practices",
+          "brand": "ANTHROPIC",
+          "kicker": "Engineering at Anthropic",
+          "title": "Claude Code: Best practices for agentic coding",
+          "date": "Published Apr 18 2025",
+          "paras": [
+            "Claude Code is intentionally low-level and unopinionated. That flexibility makes it a blank slate, which can be hard to pick up.",
+            "This post covers the patterns that have proven effective across Anthropic's internal teams and the wider community: tuning your setup, giving Claude more tools, and common workflows.",
+            "The single highest-leverage change is a CLAUDE.md checked into the repository root. Claude pulls it into context automatically at the start of every session."
+          ]
+        }
+      },
+      {
+        "section": "Claude Code",
+        "title": "Agent SDK",
+        "what": "Build your own agents on the same harness Claude Code runs on.",
+        "start": "Read the overview to see what an agent actually needs before you try to build one.",
+        "page": {
+          "kind": "docs",
+          "url": "code.claude.com/docs/en/agent-sdk/overview",
+          "crumb": "Agent SDK / Overview",
+          "title": "Agent SDK overview",
+          "blurb": "Build custom AI agents on the same agent harness that powers Claude Code.",
+          "nav": [
+            "Guides",
+            "Reference",
+            "Agent SDK",
+            "Resources"
+          ],
+          "paras": [
+            "An agent is an application that completes a task by planning its own steps and calling tools that read files, run commands, or edit code. The SDK gives you the same loop, agent management, and context management that power Claude Code.",
+            "It is available in TypeScript and Python, and it exposes the same permission and hook system the CLI uses."
+          ],
+          "callout": "If you only need to script Claude rather than build a product around it, the CLI's --print mode is usually enough and takes minutes instead of days.",
+          "sub": "Compare the Agent SDK to other Claude tools"
+        }
+      },
+      {
+        "section": "The Protocol",
+        "badge": "Most reused",
+        "title": "MCP docs",
+        "what": "Wire Claude into your own tools and data, so it reads live instead of guessing.",
+        "start": "Connect one tool you already live in — Notion or Drive — and stop there for a week.",
+        "page": {
+          "kind": "docs",
+          "url": "modelcontextprotocol.io",
+          "crumb": "Get started / Introduction",
+          "title": "What is the Model Context Protocol?",
+          "blurb": "MCP is an open standard for connecting AI applications to external systems.",
+          "nav": [
+            "Docs",
+            "SDKs",
+            "Specification",
+            "Community"
+          ],
+          "paras": [
+            "Using MCP, AI applications like Claude or ChatGPT can connect to data sources, tools and workflows — letting them access key information and get things done.",
+            "Think of MCP like a USB-C port for AI applications. It provides a standardised way to connect AI applications to external systems."
+          ],
+          "callout": "Servers expose three things: resources to read, tools to call, and prompts to reuse. Most useful servers start with one tool.",
+          "sub": "Why does MCP matter?"
+        }
+      },
+      {
+        "section": "The Write-ups",
+        "title": "Building effective agents",
+        "what": "The seven agent patterns, named and drawn, with when each one is worth it.",
+        "start": "Read the seven patterns and name the one your current workflow already is.",
+        "page": {
+          "kind": "article",
+          "url": "anthropic.com/engineering/building-effective-agents",
+          "brand": "ANTHROPIC",
+          "kicker": "Engineering at Anthropic",
+          "title": "Building effective agents",
+          "date": "Published Dec 19 2024",
+          "paras": [
+            "Over the past year, we have worked with dozens of teams building LLM agents across industries. Consistently, the most successful implementations were not using complex frameworks or specialised libraries. They were building with simple, composable patterns.",
+            "In this post, we share what we have learned from working with our customers and building agents ourselves, and give practical advice for developers.",
+            "The most important distinction is between workflows, where LLMs and tools are orchestrated through predefined code paths, and agents, where the model directs its own process."
+          ]
+        }
+      }
+    ]
+  },
+  "slides": [
+    {
+      "type": "hook",
+      "kicker": "The manual you never opened",
+      "headline": "8 Claude pages\nthat put you ahead\nof *95%* of users",
+      "deck": "Every cookbook, doc and engineering write-up worth your afternoon."
+    },
+    {
+      "type": "guide",
+      "upto": 1
+    },
+    {
+      "type": "guide",
+      "upto": 2
+    },
+    {
+      "type": "guide",
+      "upto": 3
+    },
+    {
+      "type": "guide",
+      "upto": 4
+    },
+    {
+      "type": "guide",
+      "upto": 5
+    },
+    {
+      "type": "guide",
+      "upto": 6
+    },
+    {
+      "type": "guide",
+      "upto": 7
+    },
+    {
+      "type": "guide",
+      "upto": 8
+    },
+    {
+      "type": "cta",
+      "headline": "All 8 links,\nin one *place*",
+      "deck": "Every page here, free to read, no sign-up.",
+      "action": "Comment [MANUAL] and I'll send it over."
+    }
+  ]
+}

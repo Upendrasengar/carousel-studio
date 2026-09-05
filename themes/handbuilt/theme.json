@@ -1,0 +1,190 @@
+{
+  "name": "handbuilt",
+  "label": "Handbuilt",
+  "description": "Warm cream zine. Condensed caps headline in two tones with a hand-drawn underline, the pixel character working at a desk, white mono note cards, and handwritten margin annotations with arrows. Built for 'I made this myself' build logs. Derived from the DctuYs3FK0r reference deck.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 135,
+    "safeBottom": 135,
+    "margin": 72
+  },
+  "color": {
+    "bg": "#F5F0E8",
+    "surface": "#FFFFFF",
+    "panel": "#FBF8F2",
+    "ink": "#171410",
+    "inkSoft": "#59524A",
+    "inkFaint": "#9A9086",
+    "rule": "#E2DACE",
+    "accent": "#E85615",
+    "accentInk": "#FFFFFF",
+    "chipTints": [
+      "#FDEBE1",
+      "#EAF0E4",
+      "#E5EAF2",
+      "#F5E8DC",
+      "#EFE6F2"
+    ],
+    "chipInks": [
+      "#B8410E",
+      "#43603A",
+      "#38507A",
+      "#7A5A20",
+      "#5C3F73"
+    ]
+  },
+  "accentRotation": [
+    "#E85615"
+  ],
+  "mascotPalette": {
+    "O": "#E85615",
+    "L": "#FF7A3D",
+    "D": "#B8410E"
+  },
+  "font": {
+    "display": {
+      "file": "condensed-700.woff2",
+      "weight": 700
+    },
+    "hand": {
+      "file": "hand-700.woff2",
+      "weight": 700
+    },
+    "mono": {
+      "file": "mono-400.woff2",
+      "weight": 400
+    },
+    "body": {
+      "file": "sans-400.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "sans-600.woff2",
+      "weight": 600
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 20,
+      "tracking": 0.18,
+      "weight": 600,
+      "caps": true
+    },
+    "headline": {
+      "size": 92,
+      "leading": 0.94,
+      "tracking": 0.0,
+      "min": 46
+    },
+    "deck": {
+      "size": 27,
+      "leading": 1.4,
+      "min": 20
+    },
+    "body": {
+      "size": 25,
+      "leading": 1.48,
+      "min": 19
+    },
+    "note": {
+      "size": 24,
+      "leading": 1.52,
+      "min": 16
+    },
+    "hand": {
+      "size": 31,
+      "leading": 1.18,
+      "min": 22
+    },
+    "rowTitle": {
+      "size": 27,
+      "leading": 1.26,
+      "min": 20
+    },
+    "rowBody": {
+      "size": 23,
+      "leading": 1.36,
+      "min": 18
+    },
+    "statValue": {
+      "size": 92,
+      "leading": 1,
+      "min": 48
+    },
+    "statLabel": {
+      "size": 21,
+      "leading": 1.25,
+      "min": 16
+    },
+    "quote": {
+      "size": 58,
+      "leading": 1.14,
+      "min": 34
+    },
+    "caption": {
+      "size": 20,
+      "leading": 1.35,
+      "min": 16
+    },
+    "footer": {
+      "size": 19,
+      "tracking": 0.04
+    }
+  },
+  "rowStyle": "rule",
+  "fill": {
+    "min": 0.7,
+    "maxGrow": 1.35
+  },
+  "objectSize": 0.2,
+  "space": {
+    "xs": 8,
+    "sm": 14,
+    "md": 24,
+    "lg": 38,
+    "xl": 58
+  },
+  "radius": {
+    "sm": 10,
+    "md": 18,
+    "lg": 26
+  },
+  "mascot": {
+    "px": 14,
+    "scenePx": 12,
+    "defaultPose": "working",
+    "poseByType": {
+      "hook": "celebrate",
+      "problem": "confused",
+      "point": "working",
+      "steps": "laptop",
+      "stat": "idea",
+      "quote": "idle",
+      "cta": "pointing",
+      "build": "working"
+    }
+  },
+  "texture": {
+    "grain": 0.11,
+    "blotch": 0.05
+  },
+  "budgets": {
+    "eyebrow": 26,
+    "headline": 40,
+    "deck": 110,
+    "body": 200,
+    "note": 130,
+    "hand": 40,
+    "rowTitle": 30,
+    "rowBody": 84,
+    "statValue": 6,
+    "statLabel": 26,
+    "quote": 130,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5
+  },
+  "noteNoWrap": true
+}

@@ -1,0 +1,162 @@
+{
+  "name": "stat-card",
+  "label": "Stat Card",
+  "description": "Each slide is a collectible card with a rarity colour, a stat block and a flavour line. A deck reads as a set, which is what makes people screenshot the whole thing.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 135,
+    "safeBottom": 135,
+    "margin": 84
+  },
+  "color": {
+    "bg": "#171A21",
+    "surface": "#20242D",
+    "ink": "#F4F2ED",
+    "inkSoft": "#A9B0BC",
+    "inkFaint": "#6C7480",
+    "rule": "#2C3240",
+    "accent": "#E4B44C",
+    "accentInk": "#171A21",
+    "rarity": {
+      "common": "#8B93A1",
+      "rare": "#4D96FF",
+      "epic": "#A96BE8",
+      "legendary": "#E4B44C"
+    },
+    "chipTints": [
+      "#2A2620",
+      "#1F2A2C",
+      "#252030",
+      "#202A24",
+      "#2A2028"
+    ],
+    "chipInks": [
+      "#E4C78A",
+      "#8FD6D6",
+      "#C4A8E8",
+      "#A8E0B4",
+      "#E8A8B8"
+    ]
+  },
+  "accentRotation": [
+    "#E4B44C"
+  ],
+  "font": {
+    "display": {
+      "file": "geo-700.woff2",
+      "weight": 700
+    },
+    "body": {
+      "file": "sans-400.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "sans-600.woff2",
+      "weight": 600
+    },
+    "mono": {
+      "file": "mono-400.woff2",
+      "weight": 400
+    },
+    "condensed": {
+      "file": "condensed-700.woff2",
+      "weight": 700
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 20,
+      "tracking": 0.16,
+      "weight": 600,
+      "caps": true
+    },
+    "headline": {
+      "size": 78,
+      "leading": 1.0,
+      "tracking": -0.022,
+      "min": 42
+    },
+    "deck": {
+      "size": 27,
+      "leading": 1.42,
+      "min": 20
+    },
+    "body": {
+      "size": 25,
+      "leading": 1.48,
+      "min": 19
+    },
+    "rowTitle": {
+      "size": 26,
+      "leading": 1.26,
+      "min": 20
+    },
+    "rowBody": {
+      "size": 23,
+      "leading": 1.38,
+      "min": 18
+    },
+    "statValue": {
+      "size": 90,
+      "leading": 1,
+      "min": 48
+    },
+    "statLabel": {
+      "size": 21,
+      "leading": 1.25,
+      "min": 16
+    },
+    "quote": {
+      "size": 56,
+      "leading": 1.18,
+      "min": 32
+    },
+    "caption": {
+      "size": 20,
+      "leading": 1.35,
+      "min": 16
+    },
+    "footer": {
+      "size": 18,
+      "tracking": 0.1
+    }
+  },
+  "rowStyle": "rule",
+  "fill": {
+    "min": 0.66,
+    "maxGrow": 1.5
+  },
+  "objectSize": 0.2,
+  "space": {
+    "xs": 8,
+    "sm": 14,
+    "md": 24,
+    "lg": 38,
+    "xl": 58
+  },
+  "radius": {
+    "sm": 6,
+    "md": 12,
+    "lg": 18
+  },
+  "texture": {
+    "grain": 0.07,
+    "blotch": 0.03
+  },
+  "budgets": {
+    "eyebrow": 24,
+    "headline": 36,
+    "deck": 110,
+    "body": 200,
+    "rowTitle": 30,
+    "rowBody": 84,
+    "statValue": 6,
+    "statLabel": 26,
+    "quote": 120,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5
+  }
+}

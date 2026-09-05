@@ -1,0 +1,191 @@
+{
+  "name": "killlist",
+  "label": "Kill List",
+  "description": "Navy editorial on a faint grid. Every row is a pair: the thing on the left, and the specific bad thing it kills on the right. Built for 'N things that fix X' decks \u2014 each row carries its own before, which argues harder than a plain list. Derived from the DckWPXnCDGK reference deck.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 118,
+    "safeBottom": 118,
+    "margin": 56
+  },
+  "color": {
+    "bg": "#0A1728",
+    "surface": "#0E2138",
+    "panel": "#122a45",
+    "inset": "#132741",
+    "ink": "#EEF4FB",
+    "inkSoft": "#8DA4C0",
+    "inkFaint": "#5C7A9E",
+    "rule": "#1B3552",
+    "accent": "#4A9EFF",
+    "accentInk": "#0A1728",
+    "kill": "#F1626A",
+    "killTint": "#2A1A24",
+    "grid": "#122A44",
+    "chipTints": [
+      "#16324F",
+      "#1A3A2C",
+      "#2A1F3F",
+      "#3A2A18",
+      "#1E2E4A"
+    ],
+    "chipInks": [
+      "#7FBFFF",
+      "#8FE0B0",
+      "#C8A8F0",
+      "#F0C88A",
+      "#A8C4E8"
+    ]
+  },
+  "accentRotation": [
+    "#4A9EFF"
+  ],
+  "font": {
+    "display": {
+      "file": "geo-700.woff2",
+      "weight": 700
+    },
+    "body": {
+      "file": "sans-400.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "sans-600.woff2",
+      "weight": 600
+    },
+    "mono": {
+      "file": "mono-400.woff2",
+      "weight": 400
+    },
+    "monoBold": {
+      "file": "mono-700.woff2",
+      "weight": 700
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 18,
+      "tracking": 0.16,
+      "weight": 600,
+      "caps": true
+    },
+    "headline": {
+      "size": 62,
+      "leading": 1.04,
+      "tracking": -0.026,
+      "min": 34
+    },
+    "deck": {
+      "size": 25,
+      "leading": 1.38,
+      "min": 18
+    },
+    "body": {
+      "size": 24,
+      "leading": 1.46,
+      "min": 18
+    },
+    "itemName": {
+      "size": 30,
+      "leading": 1.12,
+      "min": 20
+    },
+    "itemSlug": {
+      "size": 17,
+      "tracking": 0.02,
+      "min": 13
+    },
+    "itemBody": {
+      "size": 21,
+      "leading": 1.34,
+      "min": 16
+    },
+    "killLabel": {
+      "size": 15,
+      "tracking": 0.18,
+      "min": 12
+    },
+    "killBody": {
+      "size": 20,
+      "leading": 1.32,
+      "min": 15
+    },
+    "rowTitle": {
+      "size": 26,
+      "leading": 1.26,
+      "min": 19
+    },
+    "rowBody": {
+      "size": 22,
+      "leading": 1.36,
+      "min": 17
+    },
+    "statValue": {
+      "size": 88,
+      "leading": 1,
+      "min": 46
+    },
+    "statLabel": {
+      "size": 20,
+      "leading": 1.25,
+      "min": 16
+    },
+    "quote": {
+      "size": 54,
+      "leading": 1.18,
+      "min": 32
+    },
+    "caption": {
+      "size": 19,
+      "leading": 1.35,
+      "min": 15
+    },
+    "footer": {
+      "size": 17,
+      "tracking": 0.08
+    }
+  },
+  "rowStyle": "rule",
+  "fill": {
+    "min": 0.68,
+    "maxGrow": 1.2
+  },
+  "objectSize": 0.18,
+  "space": {
+    "xs": 6,
+    "sm": 11,
+    "md": 18,
+    "lg": 28,
+    "xl": 44
+  },
+  "radius": {
+    "sm": 8,
+    "md": 14,
+    "lg": 20
+  },
+  "texture": {
+    "grain": 0.04,
+    "blotch": 0.02
+  },
+  "budgets": {
+    "eyebrow": 34,
+    "headline": 30,
+    "deck": 90,
+    "body": 200,
+    "itemName": 20,
+    "itemSlug": 30,
+    "itemBody": 60,
+    "killBody": 56,
+    "rowTitle": 30,
+    "rowBody": 84,
+    "statValue": 6,
+    "statLabel": 26,
+    "quote": 120,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5,
+    "maxItems": 5
+  }
+}

@@ -1,0 +1,22 @@
+# Rendered output. Every PNG here is reproducible from decks/ with one command,
+# and committing them once put 900MB of binaries in a repo whose source is under
+# 2MB. Render, do not store.
+out/
+
+# Post-ready JPEG/MP4 exports, wherever they land.
+_post/
+
+node_modules/
+.DS_Store
+*.log
+
+# Personal decks. `decks/` ships a few neutral examples; anything with your own
+# handle, blog content or client work goes here and stays out of the repo.
+# Still renders normally: node scripts/render.js decks/.local/<slug>.json out/<slug>
+decks/.local/
+
+# Original 3dicons SVG downloads. `ingest-3dicons.js` rasterises these into
+# assets/objects-3d/ at 512px; nothing reads the SVGs at render time. They are
+# 279MB against 50MB for the PNGs actually used. Keep them locally if you want
+# to re-export at another size — do not ship them.
+assets/3dicons - */

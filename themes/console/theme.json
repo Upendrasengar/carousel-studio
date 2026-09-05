@@ -1,0 +1,163 @@
+{
+  "name": "console",
+  "label": "Console",
+  "description": "Near-black with an amber glow, a two-tone serif headline, a wireframe node graph as the standard visual, and a labelled capability bar that advances along the bottom. Derived from the Dcu8rJxiRdR reference deck.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 135,
+    "safeBottom": 135,
+    "margin": 78
+  },
+  "color": {
+    "bg": "#08090C",
+    "surface": "#101319",
+    "panel": "#0C0F14",
+    "ink": "#F3EFE7",
+    "inkSoft": "#9A958B",
+    "inkFaint": "#615D56",
+    "rule": "#241E17",
+    "accent": "#F0821E",
+    "accentInk": "#08090C",
+    "glow": "#F0821E",
+    "chipTints": [
+      "#1F1710",
+      "#131A16",
+      "#151A22",
+      "#1C1520",
+      "#1E1A12"
+    ],
+    "chipInks": [
+      "#F0A85E",
+      "#8FD6AE",
+      "#9FBCE8",
+      "#C9A2E8",
+      "#E8CE8A"
+    ]
+  },
+  "accentRotation": [
+    "#F0821E"
+  ],
+  "font": {
+    "display": {
+      "file": "serif-700.woff2",
+      "weight": 700
+    },
+    "displayItalic": {
+      "file": "serif-italic.woff2",
+      "weight": 700
+    },
+    "body": {
+      "file": "sans-400.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "sans-600.woff2",
+      "weight": 600
+    },
+    "mono": {
+      "file": "mono-400.woff2",
+      "weight": 400
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 18,
+      "tracking": 0.26,
+      "weight": 600,
+      "caps": true
+    },
+    "headline": {
+      "size": 76,
+      "leading": 1.04,
+      "tracking": -0.012,
+      "min": 40
+    },
+    "deck": {
+      "size": 25,
+      "leading": 1.44,
+      "min": 19
+    },
+    "body": {
+      "size": 24,
+      "leading": 1.5,
+      "min": 18
+    },
+    "rowTitle": {
+      "size": 25,
+      "leading": 1.26,
+      "min": 19
+    },
+    "rowBody": {
+      "size": 22,
+      "leading": 1.38,
+      "min": 17
+    },
+    "node": {
+      "size": 24,
+      "leading": 1.2,
+      "min": 15
+    },
+    "statValue": {
+      "size": 88,
+      "leading": 1,
+      "min": 48
+    },
+    "statLabel": {
+      "size": 20,
+      "leading": 1.25,
+      "min": 16
+    },
+    "quote": {
+      "size": 54,
+      "leading": 1.2,
+      "min": 32
+    },
+    "caption": {
+      "size": 19,
+      "leading": 1.35,
+      "min": 15
+    },
+    "footer": {
+      "size": 17,
+      "tracking": 0.12
+    }
+  },
+  "rowStyle": "rule",
+  "fill": {
+    "min": 0.6,
+    "maxGrow": 1.5
+  },
+  "objectSize": 0.2,
+  "space": {
+    "xs": 8,
+    "sm": 14,
+    "md": 24,
+    "lg": 38,
+    "xl": 58
+  },
+  "radius": {
+    "sm": 5,
+    "md": 10,
+    "lg": 16
+  },
+  "texture": {
+    "grain": 0.05,
+    "blotch": 0.03
+  },
+  "budgets": {
+    "eyebrow": 26,
+    "headline": 40,
+    "deck": 110,
+    "body": 200,
+    "rowTitle": 30,
+    "rowBody": 84,
+    "statValue": 6,
+    "statLabel": 26,
+    "quote": 120,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "name": "vintage-print",
+  "label": "Vintage Print",
+  "description": "Aged-paper broadside. Condensed slab caps, sepia halftone, a corner sunburst, and a progressive-reveal mechanic that repeats one diagram across slides with a different step lit each time. Derived from the DcgjCLukmDp reference deck.",
+
+  "canvas": {
+    "width": 1080, "height": 1350, "scale": 2,
+    "safeTop": 135, "safeBottom": 135, "margin": 78
+  },
+
+  "color": {
+    "bg": "#EFE7D6",
+    "surface": "#F7F1E4",
+    "ink": "#241C14",
+    "inkSoft": "#5B4C39",
+    "inkFaint": "#93826A",
+    "rule": "#CFC0A3",
+    "accent": "#B03A12",
+    "accentInk": "#F7F1E4",
+    "chipTints": ["#DDE4DA", "#E7DCC6", "#EBD9CE", "#D9DEE6", "#E4DCEA"],
+    "chipInks":  ["#3D5442", "#7A5F27", "#8A422A", "#3B4A63", "#4C3E63"]
+  },
+
+  "accentRotation": ["#B03A12", "#9C3210", "#A8461B"],
+
+  "font": {
+    "display":    { "file": "display.woff2",     "weight": 400 },
+    "label":      { "file": "label.woff2",       "weight": 600 },
+    "labelLight": { "file": "label-light.woff2", "weight": 400 },
+    "body":       { "file": "body.woff2",        "weight": 400 },
+    "bodyMid":    { "file": "body-medium.woff2", "weight": 700 }
+  },
+
+  "type": {
+    "brand":     { "size": 34, "tracking": -0.01, "weight": 600 },
+    "eyebrow":   { "size": 22, "tracking": 0.20, "weight": 600, "caps": true },
+    "headline":  { "size": 84, "leading": 0.92, "tracking": 0.005, "min": 48 },
+    "deck":      { "size": 30, "leading": 1.35, "min": 21 },
+    "body":      { "size": 26, "leading": 1.55, "min": 19 },
+    "rowTitle":  { "size": 30, "leading": 1.20, "min": 22 },
+    "rowBody":   { "size": 22, "leading": 1.35, "min": 17 },
+    "statValue": { "size": 104, "leading": 1.0, "min": 56 },
+    "statLabel": { "size": 23, "leading": 1.25, "min": 18 },
+    "quote":     { "size": 58, "leading": 1.14, "min": 34 },
+    "caption":   { "size": 21, "leading": 1.35, "min": 16 },
+    "footer":    { "size": 20, "tracking": 0.12 }
+  },
+
+  "rowStyle": "rule",
+  "fill": { "min": 0.62, "maxGrow": 1.30 },
+
+  "objectSize": 0.28,
+
+  "space": { "xs": 9, "sm": 16, "md": 26, "lg": 40, "xl": 62 },
+  "radius": { "sm": 4, "md": 6, "lg": 8 },
+
+  "texture": { "grain": 0.16, "blotch": 0.09 },
+
+  "budgets": {
+    "eyebrow": 30, "headline": 32, "deck": 110, "body": 240,
+    "rowTitle": 38, "rowBody": 78, "statValue": 7, "statLabel": 28,
+    "quote": 130, "caption": 80, "maxRows": 6, "maxSteps": 6
+  }
+}

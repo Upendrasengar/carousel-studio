@@ -1,0 +1,49 @@
+{
+  "name": "kinetic",
+  "label": "Kinetic",
+  "description": "A motion-first poster. Near-black with a drifting gradient, huge condensed caps that stagger up behind a mask, and an accent bar that sweeps the emphasis word. The hook renders as a seamless looping MP4; every other slide is the same design held still. Render with --animate.",
+  "canvas": { "width": 1080, "height": 1350, "scale": 2, "safeTop": 135, "safeBottom": 135, "margin": 74 },
+  "animate": { "seconds": 4, "fps": 30 },
+  "color": {
+    "bg": "#0A0A0D", "surface": "#15161B", "panel": "#101116",
+    "ink": "#F7F5F0", "inkSoft": "#A19D96", "inkFaint": "#635F59", "rule": "#22242B",
+    "accent": "#FF5C1A", "accentInk": "#0A0A0D", "accent2": "#4EE0C0",
+    "chipTints": ["#241710", "#12241F", "#151C28", "#201526", "#241F10"],
+    "chipInks": ["#FF9466", "#7FE6CE", "#9FBCE8", "#C9A2E8", "#E8CE8A"]
+  },
+  "accentRotation": ["#FF5C1A"],
+  "mascotPalette": { "O": "#FF5C1A", "L": "#FF8A55", "D": "#C43F0E" },
+  "font": {
+    "display": { "file": "condensed-700.woff2", "weight": 700 },
+    "body": { "file": "sans-400.woff2", "weight": 400 },
+    "bodyMid": { "file": "sans-600.woff2", "weight": 600 },
+    "mono": { "file": "mono-400.woff2", "weight": 400 }
+  },
+  "type": {
+    "eyebrow": { "size": 19, "tracking": 0.26, "weight": 600, "caps": true },
+    "headline": { "size": 108, "leading": 0.92, "tracking": 0.0, "min": 52 },
+    "deck": { "size": 27, "leading": 1.4, "min": 20 },
+    "body": { "size": 25, "leading": 1.46, "min": 19 },
+    "rowTitle": { "size": 27, "leading": 1.24, "min": 20 },
+    "rowBody": { "size": 23, "leading": 1.36, "min": 18 },
+    "statValue": { "size": 104, "leading": 1, "min": 52 },
+    "statLabel": { "size": 20, "leading": 1.25, "min": 16 },
+    "quote": { "size": 58, "leading": 1.14, "min": 34 },
+    "caption": { "size": 19, "leading": 1.35, "min": 15 },
+    "footer": { "size": 18, "tracking": 0.12 }
+  },
+  "rowStyle": "rule",
+  "fill": { "min": 0.66, "maxGrow": 1.3 },
+  "objectSize": 0.24,
+  "space": { "xs": 8, "sm": 14, "md": 24, "lg": 38, "xl": 58 },
+  "radius": { "sm": 8, "md": 14, "lg": 22 },
+  "mascot": { "px": 12, "scenePx": 10, "defaultPose": "idle",
+    "poseByType": { "hook": "pointing", "problem": "confused", "point": "idle",
+                    "steps": "laptop", "stat": "idea", "quote": "idle", "cta": "celebrate" } },
+  "texture": { "grain": 0.05, "blotch": 0.03 },
+  "budgets": {
+    "eyebrow": 26, "headline": 40, "deck": 110, "body": 200,
+    "rowTitle": 30, "rowBody": 84, "statValue": 6, "statLabel": 26,
+    "quote": 130, "caption": 90, "maxRows": 5, "maxSteps": 5
+  }
+}

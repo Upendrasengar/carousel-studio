@@ -1,0 +1,212 @@
+{
+  "slug": "studio-handoff",
+  "theme": "briefing",
+  "handle": "@yourhandle",
+  "mark": "CS",
+  "brand": "CS",
+  "slides": [
+    {
+      "type": "hook",
+      "kicker": "Carousel Studio · 2026",
+      "headline": "Hand the whole\nthing to an agent.",
+      "deck": "Twenty-five design systems, one JSON file, and a validator that argues with you before anything renders."
+    },
+    {
+      "type": "exhibit",
+      "kicker": "How it works",
+      "headline": "One file in,\na finished deck out.",
+      "deck": "You never open a design tool. The deck is JSON, the theme is a folder, the render is deterministic.",
+      "exhibit": {
+        "kind": "fan",
+        "leftLabel": "What goes in",
+        "rightLabel": "What comes out",
+        "hub": "Carousel\nStudio",
+        "left": [
+          "A topic",
+          "A blog post",
+          "A reference deck",
+          "Your own notes"
+        ],
+        "right": [
+          "10 PNGs at 2160×2700",
+          "An animated cover",
+          "A caption",
+          "A validation report"
+        ]
+      }
+    },
+    {
+      "type": "stat",
+      "kicker": "What is in the box",
+      "headline": "Not a template.\nA design system.",
+      "stats": [
+        {
+          "value": "25",
+          "label": "theme packs, each with its own rules"
+        },
+        {
+          "value": "7",
+          "label": "slide types every theme implements"
+        },
+        {
+          "value": "586",
+          "label": "3D objects, all licence-cleared"
+        },
+        {
+          "value": "5",
+          "label": "drawn exhibits you can put on a slide"
+        }
+      ],
+      "source": "Counted from the repo, not estimated."
+    },
+    {
+      "type": "exhibit",
+      "kicker": "Step one",
+      "headline": "The agent picks\nthe theme, not you.",
+      "deck": "Every theme ships a rules.md saying what it is for. The agent reads one file.",
+      "exhibit": {
+        "kind": "chat",
+        "app": "claude code",
+        "turns": [
+          {
+            "who": "you",
+            "text": "Make a carousel from my post on context engineering."
+          },
+          {
+            "who": "claude",
+            "subject": "Reading themes, then writing the deck",
+            "paras": [
+              "This is an explainer with a system in it, not a ranking — so briefing, which carries one drawn exhibit per slide."
+            ]
+          }
+        ],
+        "caption": "themes/briefing/rules.md · 1 file read, 0 guesses"
+      }
+    },
+    {
+      "type": "exhibit",
+      "kicker": "Step two",
+      "headline": "The deck is data,\nnot a document.",
+      "deck": "Copy, structure and layout live in one file an agent writes and a human reads.",
+      "exhibit": {
+        "kind": "record",
+        "app": "decks/studio-handoff.json",
+        "title": "studio-handoff",
+        "sub": "Deck record · 9 slides",
+        "price": "0 s",
+        "priceNote": "to re-render",
+        "fields": [
+          {
+            "k": "theme",
+            "v": "briefing"
+          },
+          {
+            "k": "slides",
+            "v": "hook · exhibit ×5 · stat · quote · cta"
+          },
+          {
+            "k": "exhibits",
+            "v": "fan, chat, record, table, loop"
+          },
+          {
+            "k": "seed",
+            "v": "studio-handoff"
+          }
+        ],
+        "warn": "Rename the slug and every seeded choice reshuffles. That is the point."
+      }
+    },
+    {
+      "type": "exhibit",
+      "kicker": "Step three",
+      "headline": "The validator\nargues first.",
+      "deck": "check.js runs before anything renders. It knows each theme's budgets and required fields.",
+      "exhibit": {
+        "kind": "table",
+        "head": [
+          "What it checks",
+          "Level",
+          "Why"
+        ],
+        "widths": [
+          "1.5fr",
+          "0.7fr",
+          "1.6fr"
+        ],
+        "rows": [
+          [
+            "Copy over budget",
+            {
+              "v": "Error",
+              "status": "bad"
+            },
+            "Auto-fit cannot save it — cut the line"
+          ],
+          [
+            "Missing section",
+            {
+              "v": "Warn",
+              "status": "warn"
+            },
+            "The colour key stops carrying structure"
+          ],
+          [
+            "Accent on body copy",
+            {
+              "v": "Warn",
+              "status": "warn"
+            },
+            "3.9:1 is a headline, not a paragraph"
+          ],
+          [
+            "Deck under 8 slides",
+            {
+              "v": "Warn",
+              "status": "idle"
+            },
+            "Below the engagement band"
+          ]
+        ]
+      }
+    },
+    {
+      "type": "exhibit",
+      "kicker": "The part nobody warns you about",
+      "headline": "Rendering clean\nis not the same as good.",
+      "deck": "A deck can pass every check and still read wrong. The safety net firing is a signal, not a pass.",
+      "exhibit": {
+        "kind": "loop",
+        "label": "The loop",
+        "nodes": [
+          {
+            "title": "1 · Check",
+            "note": "budgets, fields, contrast"
+          },
+          {
+            "title": "2 · Render",
+            "note": "deterministic, ~40s"
+          },
+          {
+            "title": "3 · Look at it",
+            "note": "the step that is skipped"
+          }
+        ]
+      },
+      "body": "Every real bug in this pack was found by opening the PNG, not by reading the log."
+    },
+    {
+      "type": "quote",
+      "kicker": "The rule",
+      "quote": "A *success: true* from a publish API means accepted, not correct.",
+      "attribution": "Learned the expensive way, twice"
+    },
+    {
+      "type": "cta",
+      "kicker": "Your move",
+      "headline": "Give it a topic.\nGet a deck back.",
+      "deck": "One prompt, nine slides, posted to Instagram and Threads.",
+      "action": "Comment [STUDIO] and I'll show you.",
+      "follow": "Follow for more on building agents that finish the job."
+    }
+  ]
+}

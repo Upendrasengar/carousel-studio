@@ -1,0 +1,90 @@
+{
+  "name": "pixel-mascot",
+  "label": "Pixel Mascot Explainer",
+  "description": "Near-white editorial explainer. Heavy sans headline with one accent word, a numbered eyebrow, soft cards, and a pixel mascot that changes pose per slide. Derived from the DaYFGZukjyH and DcTqPvUEq4v reference decks.",
+
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 135,
+    "safeBottom": 135,
+    "margin": 84
+  },
+
+  "color": {
+    "bg": "#F8F6F2",
+    "surface": "#FFFFFF",
+    "ink": "#14120F",
+    "inkSoft": "#5A544C",
+    "inkFaint": "#8E877D",
+    "rule": "#E4DFD6",
+    "accent": "#DC4E19",
+    "accentInk": "#FFFFFF",
+    "chipTints": ["#FDEDE7", "#EAF0FB", "#FBF2DC", "#EDF5EC", "#F2EDFA"],
+    "chipInks":  ["#C2481F", "#2F5FC4", "#9A7513", "#2F6B3A", "#5B3BB5"]
+  },
+
+  "accentRotation": ["#DC4E19", "#CE4211", "#D9531C"],
+
+  "font": {
+    "display": { "file": "display.woff2", "weight": 800 },
+    "displayMid": { "file": "display-regular.woff2", "weight": 500 },
+    "body": { "file": "body.woff2", "weight": 400 },
+    "bodyMid": { "file": "body-medium.woff2", "weight": 600 }
+  },
+
+  "type": {
+    "eyebrow":   { "size": 26, "tracking": 0.14, "weight": 600, "caps": true },
+    "headline":  { "size": 104, "leading": 0.96, "tracking": -0.028, "min": 58 },
+    "deck":      { "size": 38, "leading": 1.30, "min": 26 },
+    "body":      { "size": 30, "leading": 1.45, "min": 22 },
+    "rowTitle":  { "size": 30, "leading": 1.30, "min": 23 },
+    "rowBody":   { "size": 27, "leading": 1.38, "min": 21 },
+    "statValue": { "size": 118, "leading": 1.0, "min": 64 },
+    "statLabel": { "size": 26, "leading": 1.25, "min": 20 },
+    "quote":     { "size": 62, "leading": 1.16, "min": 38 },
+    "caption":   { "size": 23, "leading": 1.35, "min": 18 },
+    "footer":    { "size": 22, "tracking": 0.02 }
+  },
+
+  "rowStyle": "rule",
+  "fill": { "min": 0.64, "maxGrow": 1.38 },
+
+  "objectSize": 0.3,
+
+  "space": { "xs": 10, "sm": 18, "md": 28, "lg": 44, "xl": 68 },
+  "radius": { "sm": 12, "md": 20, "lg": 28 },
+
+  "mascot": {
+    "px": 15,
+    "scenePx": 15,
+    "defaultPose": "idle",
+    "poseByType": {
+      "hook": "pointing",
+      "problem": "confused",
+      "point": "idle",
+      "steps": "laptop",
+      "stat": "detective",
+      "quote": "idea",
+      "cta": "celebrate"
+    }
+  },
+
+  "texture": { "grain": 0.09, "blotch": 0.045 },
+
+  "budgets": {
+    "eyebrow": 26,
+    "headline": 42,
+    "deck": 120,
+    "body": 260,
+    "rowTitle": 34,
+    "rowBody": 96,
+    "statValue": 7,
+    "statLabel": 30,
+    "quote": 140,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "name": "case-file",
+  "label": "Case File",
+  "description": "A manila dossier in typewriter type, with redaction bars that lift as you swipe. The mechanic is withholding \u2014 use it only when what's under the bar earns the wait.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 135,
+    "safeBottom": 135,
+    "margin": 84
+  },
+  "color": {
+    "bg": "#D9CDA9",
+    "surface": "#EDE3C8",
+    "ink": "#201C14",
+    "inkSoft": "#544B38",
+    "inkFaint": "#8C7F62",
+    "rule": "#B9AA83",
+    "accent": "#A32617",
+    "accentInk": "#EDE3C8",
+    "chipTints": [
+      "#E3D6B4",
+      "#DCE0CC",
+      "#E8D9CE",
+      "#D6DCE2",
+      "#E0D8E2"
+    ],
+    "chipInks": [
+      "#6B5A24",
+      "#3F5237",
+      "#8A422A",
+      "#37506B",
+      "#4E3F63"
+    ]
+  },
+  "accentRotation": [
+    "#A32617"
+  ],
+  "font": {
+    "display": {
+      "file": "typewriter-700.woff2",
+      "weight": 700
+    },
+    "body": {
+      "file": "typewriter-400.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "typewriter-700.woff2",
+      "weight": 700
+    },
+    "stamp": {
+      "file": "condensed-700.woff2",
+      "weight": 700
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 20,
+      "tracking": 0.16,
+      "weight": 600,
+      "caps": true
+    },
+    "headline": {
+      "size": 62,
+      "leading": 1.14,
+      "tracking": 0,
+      "min": 34
+    },
+    "deck": {
+      "size": 27,
+      "leading": 1.42,
+      "min": 20
+    },
+    "body": {
+      "size": 24,
+      "leading": 1.62,
+      "min": 18
+    },
+    "rowTitle": {
+      "size": 26,
+      "leading": 1.26,
+      "min": 20
+    },
+    "rowBody": {
+      "size": 23,
+      "leading": 1.38,
+      "min": 18
+    },
+    "statValue": {
+      "size": 90,
+      "leading": 1,
+      "min": 48
+    },
+    "statLabel": {
+      "size": 21,
+      "leading": 1.25,
+      "min": 16
+    },
+    "quote": {
+      "size": 56,
+      "leading": 1.18,
+      "min": 32
+    },
+    "caption": {
+      "size": 20,
+      "leading": 1.35,
+      "min": 16
+    },
+    "footer": {
+      "size": 18,
+      "tracking": 0.1
+    }
+  },
+  "rowStyle": "rule",
+  "fill": {
+    "min": 0.66,
+    "maxGrow": 1.5
+  },
+  "objectSize": 0.22,
+  "space": {
+    "xs": 8,
+    "sm": 14,
+    "md": 24,
+    "lg": 38,
+    "xl": 58
+  },
+  "radius": {
+    "sm": 6,
+    "md": 12,
+    "lg": 18
+  },
+  "texture": {
+    "grain": 0.2,
+    "blotch": 0.11
+  },
+  "budgets": {
+    "eyebrow": 24,
+    "headline": 44,
+    "deck": 110,
+    "body": 200,
+    "rowTitle": 30,
+    "rowBody": 84,
+    "statValue": 6,
+    "statLabel": 26,
+    "quote": 120,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5
+  }
+}

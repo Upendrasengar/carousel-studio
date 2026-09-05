@@ -1,0 +1,164 @@
+{
+  "name": "thread",
+  "label": "Thread",
+  "description": "A dark terminal session that builds up line by line. Each slide replays everything so far dimmed and lights one new block. The only dark pack \u2014 use it when the subject is a tool, a command or a log.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 135,
+    "safeBottom": 135,
+    "margin": 78
+  },
+  "color": {
+    "bg": "#0D1117",
+    "surface": "#161B22",
+    "ink": "#E8E3DA",
+    "inkSoft": "#9DA5B0",
+    "inkFaint": "#5C6672",
+    "rule": "#232B35",
+    "accent": "#4EE08A",
+    "accentInk": "#0D1117",
+    "chipTints": [
+      "#1B2A22",
+      "#22252F",
+      "#2A2320",
+      "#1E2733",
+      "#26202F"
+    ],
+    "chipInks": [
+      "#7FE6A6",
+      "#9FB4E8",
+      "#E8A87F",
+      "#8FC4E8",
+      "#C4A8E8"
+    ]
+  },
+  "accentRotation": [
+    "#4EE08A",
+    "#3FD3F0",
+    "#F0C74E"
+  ],
+  "font": {
+    "display": {
+      "file": "geo-700.woff2",
+      "weight": 700
+    },
+    "body": {
+      "file": "sans-400.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "sans-600.woff2",
+      "weight": 600
+    },
+    "mono": {
+      "file": "mono-400.woff2",
+      "weight": 400
+    },
+    "monoBold": {
+      "file": "mono-700.woff2",
+      "weight": 700
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 20,
+      "tracking": 0.16,
+      "weight": 600,
+      "caps": true
+    },
+    "headline": {
+      "size": 80,
+      "leading": 1.0,
+      "tracking": -0.024,
+      "min": 42
+    },
+    "deck": {
+      "size": 27,
+      "leading": 1.44,
+      "min": 20
+    },
+    "body": {
+      "size": 25,
+      "leading": 1.5,
+      "min": 19
+    },
+    "line": {
+      "size": 26,
+      "leading": 1.5,
+      "min": 17
+    },
+    "rowTitle": {
+      "size": 26,
+      "leading": 1.26,
+      "min": 20
+    },
+    "rowBody": {
+      "size": 23,
+      "leading": 1.38,
+      "min": 18
+    },
+    "statValue": {
+      "size": 92,
+      "leading": 1,
+      "min": 50
+    },
+    "statLabel": {
+      "size": 21,
+      "leading": 1.25,
+      "min": 16
+    },
+    "quote": {
+      "size": 56,
+      "leading": 1.2,
+      "min": 32
+    },
+    "caption": {
+      "size": 20,
+      "leading": 1.35,
+      "min": 16
+    },
+    "footer": {
+      "size": 18,
+      "tracking": 0.1
+    }
+  },
+  "rowStyle": "rule",
+  "fill": {
+    "min": 0.66,
+    "maxGrow": 1.5
+  },
+  "objectSize": 0.22,
+  "space": {
+    "xs": 8,
+    "sm": 14,
+    "md": 24,
+    "lg": 38,
+    "xl": 58
+  },
+  "radius": {
+    "sm": 6,
+    "md": 12,
+    "lg": 18
+  },
+  "texture": {
+    "grain": 0.05,
+    "blotch": 0.03
+  },
+  "budgets": {
+    "eyebrow": 24,
+    "headline": 36,
+    "deck": 110,
+    "body": 200,
+    "line": 62,
+    "rowTitle": 30,
+    "rowBody": 84,
+    "statValue": 6,
+    "statLabel": 26,
+    "quote": 120,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5
+  }
+}

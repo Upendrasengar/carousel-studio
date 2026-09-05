@@ -1,0 +1,163 @@
+{
+  "name": "tierlist",
+  "label": "Tier List",
+  "description": "A ranking board that fills in one item per slide, S down to D. Built to be argued with \u2014 tier lists travel by DM, which is the most heavily weighted share there is.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 135,
+    "safeBottom": 135,
+    "margin": 84
+  },
+  "color": {
+    "bg": "#111318",
+    "surface": "#1A1E26",
+    "ink": "#F2EFE9",
+    "inkSoft": "#A6ADB8",
+    "inkFaint": "#6B7482",
+    "rule": "#272D37",
+    "accent": "#FF5B4A",
+    "accentInk": "#111318",
+    "tiers": {
+      "S": "#FF4D4D",
+      "A": "#FF9F43",
+      "B": "#FFD93D",
+      "C": "#6BCB77",
+      "D": "#4D96FF"
+    },
+    "chipTints": [
+      "#2A1F1E",
+      "#2A251C",
+      "#1E2A20",
+      "#1C2430",
+      "#26202E"
+    ],
+    "chipInks": [
+      "#FFA79E",
+      "#FFD9A0",
+      "#A8E5B4",
+      "#A3C9F5",
+      "#CBB0F0"
+    ]
+  },
+  "accentRotation": [
+    "#FF5B4A"
+  ],
+  "font": {
+    "display": {
+      "file": "geo-700.woff2",
+      "weight": 700
+    },
+    "body": {
+      "file": "sans-400.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "sans-600.woff2",
+      "weight": 600
+    },
+    "mono": {
+      "file": "mono-400.woff2",
+      "weight": 400
+    },
+    "impact": {
+      "file": "impact-400.woff2",
+      "weight": 400
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 20,
+      "tracking": 0.16,
+      "weight": 600,
+      "caps": true
+    },
+    "headline": {
+      "size": 74,
+      "leading": 0.98,
+      "tracking": -0.028,
+      "min": 40
+    },
+    "deck": {
+      "size": 27,
+      "leading": 1.42,
+      "min": 20
+    },
+    "body": {
+      "size": 25,
+      "leading": 1.48,
+      "min": 19
+    },
+    "rowTitle": {
+      "size": 26,
+      "leading": 1.26,
+      "min": 20
+    },
+    "rowBody": {
+      "size": 23,
+      "leading": 1.38,
+      "min": 18
+    },
+    "statValue": {
+      "size": 90,
+      "leading": 1,
+      "min": 48
+    },
+    "statLabel": {
+      "size": 21,
+      "leading": 1.25,
+      "min": 16
+    },
+    "quote": {
+      "size": 56,
+      "leading": 1.18,
+      "min": 32
+    },
+    "caption": {
+      "size": 20,
+      "leading": 1.35,
+      "min": 16
+    },
+    "footer": {
+      "size": 18,
+      "tracking": 0.1
+    }
+  },
+  "rowStyle": "rule",
+  "fill": {
+    "min": 0.66,
+    "maxGrow": 1.5
+  },
+  "objectSize": 0.2,
+  "space": {
+    "xs": 8,
+    "sm": 14,
+    "md": 24,
+    "lg": 38,
+    "xl": 58
+  },
+  "radius": {
+    "sm": 6,
+    "md": 12,
+    "lg": 18
+  },
+  "texture": {
+    "grain": 0.07,
+    "blotch": 0.03
+  },
+  "budgets": {
+    "eyebrow": 24,
+    "headline": 36,
+    "deck": 110,
+    "body": 200,
+    "rowTitle": 30,
+    "rowBody": 84,
+    "statValue": 6,
+    "statLabel": 26,
+    "quote": 120,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5
+  }
+}

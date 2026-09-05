@@ -1,0 +1,67 @@
+{
+  "name": "scrapbook-editorial",
+  "label": "Scrapbook Editorial",
+  "description": "Cream paper with a serif display headline, one orange keyword, taped kraft margin notes in typewriter caps, and hand-drawn arrows. Derived from the DYkNONFkvkc reference deck.",
+
+  "canvas": {
+    "width": 1080, "height": 1350, "scale": 2,
+    "safeTop": 135, "safeBottom": 135, "margin": 80
+  },
+
+  "color": {
+    "bg": "#F3EEE2",
+    "surface": "#FBF8F0",
+    "kraft": "#E4D6B6",
+    "kraftInk": "#4A3D26",
+    "ink": "#1D1913",
+    "inkSoft": "#5A5040",
+    "inkFaint": "#948872",
+    "rule": "#D9CFB8",
+    "accent": "#B4400E",
+    "accentInk": "#FBF8F0",
+    "chipTints": ["#EFE3C9", "#E6E9DC", "#F0DFD5", "#E1E5EC", "#EAE2EF"],
+    "chipInks":  ["#7A5F1F", "#41573C", "#8C3E1E", "#3A4C68", "#4E4069"]
+  },
+
+  "accentRotation": ["#B4400E", "#A2380C", "#AC4715"],
+
+  "font": {
+    "display":      { "file": "display.woff2",       "weight": 700 },
+    "displayBlack": { "file": "display-black.woff2", "weight": 900 },
+    "note":         { "file": "note.woff2",          "weight": 700 },
+    "body":         { "file": "body.woff2",          "weight": 400 },
+    "bodyMid":      { "file": "body-medium.woff2",   "weight": 600 }
+  },
+
+  "type": {
+    "brand":     { "size": 24, "tracking": 0.03, "weight": 600 },
+    "eyebrow":   { "size": 22, "tracking": 0.18, "weight": 600, "caps": true },
+    "headline":  { "size": 108, "leading": 0.94, "tracking": -0.018, "min": 54 },
+    "deck":      { "size": 34, "leading": 1.36, "min": 24 },
+    "body":      { "size": 29, "leading": 1.52, "min": 21 },
+    "rowTitle":  { "size": 30, "leading": 1.26, "min": 22 },
+    "rowBody":   { "size": 26, "leading": 1.40, "min": 20 },
+    "statValue": { "size": 108, "leading": 1.0, "min": 58 },
+    "statLabel": { "size": 24, "leading": 1.28, "min": 19 },
+    "quote":     { "size": 66, "leading": 1.14, "min": 38 },
+    "note":      { "size": 23, "leading": 1.45, "min": 17 },
+    "caption":   { "size": 22, "leading": 1.35, "min": 17 },
+    "footer":    { "size": 19, "tracking": 0.14 }
+  },
+
+  "rowStyle": "rule",
+  "fill": { "min": 0.64, "maxGrow": 1.36 },
+
+  "objectSize": 0.28,
+
+  "space": { "xs": 10, "sm": 18, "md": 28, "lg": 44, "xl": 66 },
+  "radius": { "sm": 3, "md": 5, "lg": 8 },
+
+  "texture": { "grain": 0.15, "blotch": 0.07 },
+
+  "budgets": {
+    "eyebrow": 26, "headline": 38, "deck": 120, "body": 250,
+    "rowTitle": 34, "rowBody": 92, "statValue": 7, "statLabel": 30,
+    "quote": 140, "note": 90, "caption": 80, "maxRows": 5, "maxSteps": 5
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "slug": "carousel-defaults-that-kill",
+  "title": "The defaults that kill a carousel",
+  "theme": "killlist",
+  "brand": "the defaults",
+  "handle": "@yourhandle",
+  "footnote": "Save for later",
+  "slides": [
+    {
+      "type": "hook",
+      "eyebrow": "The real problem",
+      "headline": "Templated is a *defaults* problem.",
+      "deck": "The tool is not the issue. Nobody ever told it what to stop doing."
+    },
+    {
+      "type": "problem",
+      "eyebrow": "Why it happens",
+      "headline": "Every generator ships the *same* taste.",
+      "body": "Rotate the palette, swap the font, and the layout underneath has not moved. Readers clock it by the third post because the structure never changes.",
+      "rows": [
+        {
+          "icon": "copy",
+          "title": "One layout, many colours",
+          "body": "variety that is only skin deep"
+        },
+        {
+          "icon": "eye-off",
+          "title": "No rule about what to avoid",
+          "body": "so the defaults win every time"
+        }
+      ]
+    },
+    {
+      "type": "kills",
+      "n": 1,
+      "of": 2,
+      "category": "5 defaults in the layout",
+      "headline": "Fix the *layout* first.",
+      "deck": "Each of these is a rule that removes one specific bad habit.",
+      "items": [
+        {
+          "name": "fill-the-frame",
+          "slug": "rule/min-fill",
+          "body": "Grows type until content reaches the fill target.",
+          "kills": "The slide that is two thirds empty paper."
+        },
+        {
+          "name": "one-loud-thing",
+          "slug": "rule/single-accent",
+          "body": "Accent touches exactly one span per slide.",
+          "kills": "Three highlighted phrases and no emphasis."
+        },
+        {
+          "name": "hairline-rows",
+          "slug": "token/rowStyle",
+          "body": "Rules instead of a white card per row.",
+          "kills": "The stack of cards that screams generated."
+        },
+        {
+          "name": "safe-band",
+          "slug": "rule/grid-crop",
+          "body": "Keeps content out of the top and bottom 135px.",
+          "kills": "Headlines sliced off in the profile grid."
+        },
+        {
+          "name": "decor-loses",
+          "slug": "fit/collision",
+          "body": "Drops the illustration when copy needs the room.",
+          "kills": "Half a mascot behind a terminal window."
+        }
+      ]
+    },
+    {
+      "type": "kills",
+      "n": 2,
+      "of": 2,
+      "category": "5 defaults in the copy",
+      "headline": "Then fix the *copy*.",
+      "deck": "Budgets are layout constraints, not style preferences.",
+      "items": [
+        {
+          "name": "char-budgets",
+          "slug": "check/budgets",
+          "body": "Errors when a headline cannot fit at any size.",
+          "kills": "Type shrunk to 43% to hide a long line."
+        },
+        {
+          "name": "second-hook",
+          "slug": "check/slide-2",
+          "body": "Slide 2 must stand alone, not continue slide 1.",
+          "kills": "A deck re-served from a slide that makes no sense."
+        },
+        {
+          "name": "no-hype",
+          "slug": "voice/plain",
+          "body": "Plain declaratives. Headlines end with a period.",
+          "kills": "Unlock, supercharge, game-changer, in today's."
+        },
+        {
+          "name": "concede-once",
+          "slug": "check/free-wins",
+          "body": "Warns when your side wins every comparison.",
+          "kills": "The roundup that reads as an advert."
+        },
+        {
+          "name": "real-numbers",
+          "slug": "rule/no-invention",
+          "body": "Figures come from the source or get cut.",
+          "kills": "A confident statistic nobody can check."
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "eyebrow": "What it cost",
+      "headline": "Rules found by *breaking* things.",
+      "stats": [
+        {
+          "value": "22",
+          "label": "Themes, each with its own rules"
+        },
+        {
+          "value": "10",
+          "label": "Rules written after a bug"
+        }
+      ],
+      "body": "Every one of these started as something that shipped wrong and got caught by looking at the render rather than the log."
+    },
+    {
+      "type": "quote",
+      "eyebrow": "The line",
+      "quote": "A template is only templated when nobody wrote down what to avoid.",
+      "attribution": "the whole argument"
+    },
+    {
+      "type": "cta",
+      "eyebrow": "Get it",
+      "headline": "The full *rule set*.",
+      "action": "Comment RULES",
+      "body": "all ten, what each one kills, and the checker that enforces them."
+    }
+  ]
+}

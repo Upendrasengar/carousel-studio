@@ -1,0 +1,157 @@
+{
+  "name": "schematic",
+  "label": "Schematic",
+  "description": "Cyan-on-navy technical drawing with a plotted grid, numbered callouts and dimension lines. Each slide zooms into the part the last one pointed at.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 135,
+    "safeBottom": 135,
+    "margin": 84
+  },
+  "color": {
+    "bg": "#0B2136",
+    "surface": "#0E2A44",
+    "ink": "#DCEEF7",
+    "inkSoft": "#8FB6CE",
+    "inkFaint": "#5C88A6",
+    "grid": "#143A5A",
+    "rule": "#1B4560",
+    "accent": "#4FD1E0",
+    "accentInk": "#0B2136",
+    "chipTints": [
+      "#123A4E",
+      "#14324A",
+      "#1A3446",
+      "#0F3A44",
+      "#1A2E4A"
+    ],
+    "chipInks": [
+      "#8FE3EE",
+      "#A8C8F0",
+      "#C8D6F0",
+      "#8FE0C8",
+      "#B0C0F0"
+    ]
+  },
+  "accentRotation": [
+    "#4FD1E0"
+  ],
+  "font": {
+    "display": {
+      "file": "geo-700.woff2",
+      "weight": 700
+    },
+    "body": {
+      "file": "sans-400.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "sans-600.woff2",
+      "weight": 600
+    },
+    "mono": {
+      "file": "mono-400.woff2",
+      "weight": 400
+    },
+    "monoBold": {
+      "file": "mono-700.woff2",
+      "weight": 700
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 20,
+      "tracking": 0.16,
+      "weight": 600,
+      "caps": true
+    },
+    "headline": {
+      "size": 78,
+      "leading": 1.0,
+      "tracking": -0.022,
+      "min": 42
+    },
+    "deck": {
+      "size": 27,
+      "leading": 1.42,
+      "min": 20
+    },
+    "body": {
+      "size": 25,
+      "leading": 1.48,
+      "min": 19
+    },
+    "rowTitle": {
+      "size": 26,
+      "leading": 1.26,
+      "min": 20
+    },
+    "rowBody": {
+      "size": 23,
+      "leading": 1.38,
+      "min": 18
+    },
+    "statValue": {
+      "size": 90,
+      "leading": 1,
+      "min": 48
+    },
+    "statLabel": {
+      "size": 21,
+      "leading": 1.25,
+      "min": 16
+    },
+    "quote": {
+      "size": 56,
+      "leading": 1.18,
+      "min": 32
+    },
+    "caption": {
+      "size": 20,
+      "leading": 1.35,
+      "min": 16
+    },
+    "footer": {
+      "size": 18,
+      "tracking": 0.1
+    }
+  },
+  "rowStyle": "rule",
+  "fill": {
+    "min": 0.66,
+    "maxGrow": 1.5
+  },
+  "objectSize": 0.2,
+  "space": {
+    "xs": 8,
+    "sm": 14,
+    "md": 24,
+    "lg": 38,
+    "xl": 58
+  },
+  "radius": {
+    "sm": 6,
+    "md": 12,
+    "lg": 18
+  },
+  "texture": {
+    "grain": 0.07,
+    "blotch": 0.03
+  },
+  "budgets": {
+    "eyebrow": 24,
+    "headline": 36,
+    "deck": 110,
+    "body": 200,
+    "rowTitle": 30,
+    "rowBody": 84,
+    "statValue": 6,
+    "statLabel": 26,
+    "quote": 120,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5
+  }
+}

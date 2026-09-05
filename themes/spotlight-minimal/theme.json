@@ -1,0 +1,75 @@
+{
+  "name": "spotlight-minimal",
+  "label": "Spotlight Minimal",
+  "description": "Warm off-white with a coloured light beam from above, a small pixel creature standing in it, and a centred Didone headline. Almost nothing on the slide. Derived from the DcGy2xAEhTy reference deck.",
+
+  "canvas": {
+    "width": 1080, "height": 1350, "scale": 2,
+    "safeTop": 135, "safeBottom": 135, "margin": 96
+  },
+
+  "color": {
+    "bg": "#F4F0E8",
+    "surface": "#FBF9F4",
+    "ink": "#1A1712",
+    "inkSoft": "#57503F",
+    "inkFaint": "#9A9080",
+    "rule": "#DED6C6",
+    "accent": "#8A5A2B",
+    "accentInk": "#FBF9F4",
+    "chipTints": ["#E8E4D8", "#E2E6DE", "#EDE2DA", "#E0E4EA", "#E6E1EA"],
+    "chipInks":  ["#6B5B34", "#3F5442", "#7A4630", "#3C4A60", "#4B3F62"]
+  },
+
+  "accentRotation": ["#8A5A2B", "#7A5030", "#8A4E32"],
+
+  "beams": [
+    { "name": "moss",   "light": "#9DBE5A", "body": "#8CAF4A" },
+    { "name": "sky",    "light": "#6FB6DE", "body": "#5AA6D2" },
+    { "name": "ember",  "light": "#E06A4E", "body": "#D45A3E" },
+    { "name": "iris",   "light": "#9C7BD8", "body": "#8A66CE" },
+    { "name": "clay",   "light": "#C98A5E", "body": "#BC7A4E" }
+  ],
+
+  "font": {
+    "display":     { "file": "display.woff2",      "weight": 500 },
+    "displayBold": { "file": "display-bold.woff2", "weight": 700 },
+    "body":        { "file": "body.woff2",         "weight": 400 },
+    "bodyMid":     { "file": "body-medium.woff2",  "weight": 600 }
+  },
+
+  "type": {
+    "eyebrow":   { "size": 21, "tracking": 0.22, "weight": 600, "caps": true },
+    "headline":  { "size": 78, "leading": 1.06, "tracking": -0.012, "min": 42 },
+    "deck":      { "size": 29, "leading": 1.44, "min": 21 },
+    "body":      { "size": 26, "leading": 1.58, "min": 19 },
+    "rowTitle":  { "size": 27, "leading": 1.28, "min": 21 },
+    "rowBody":   { "size": 24, "leading": 1.42, "min": 18 },
+    "statValue": { "size": 96, "leading": 1.0, "min": 52 },
+    "statLabel": { "size": 22, "leading": 1.28, "min": 17 },
+    "quote":     { "size": 58, "leading": 1.20, "min": 34 },
+    "caption":   { "size": 20, "leading": 1.35, "min": 16 },
+    "footer":    { "size": 19, "tracking": 0.12 }
+  },
+
+  "rowStyle": "rule",
+  "fill": { "min": 0.56, "maxGrow": 1.20 },
+
+  "objectSize": 0.3,
+
+  "space": { "xs": 10, "sm": 18, "md": 30, "lg": 48, "xl": 76 },
+  "radius": { "sm": 8, "md": 14, "lg": 20 },
+
+  "mascot": { "px": 8,
+    "scenePx": 9, "defaultPose": "idle",
+    "poseByType": { "hook": "idle", "problem": "confused", "point": "pointing",
+                    "steps": "laptop", "stat": "detective", "quote": "idea", "cta": "celebrate" } },
+
+  "texture": { "grain": 0.08, "blotch": 0.04 },
+
+  "budgets": {
+    "eyebrow": 24, "headline": 40, "deck": 110, "body": 200,
+    "rowTitle": 30, "rowBody": 80, "statValue": 6, "statLabel": 26,
+    "quote": 120, "caption": 70, "maxRows": 4, "maxSteps": 4
+  }
+}
