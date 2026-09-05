@@ -47,18 +47,51 @@ function embedShots(node, baseDir, seen = new Set()) {
   }
 }
 
+const USAGE = `Usage: node scripts/render.js <deck.json> [outDir] [options]
+
+  --theme <name>      override the deck's theme
+  --platform <name>   override the theme's canvas (${Object.keys(PLATFORMS).join(', ')})
+  --panorama <n>      stitch n slides into one wide image
+  --animate           render slides marked "animate": true as video
+  --themes            list theme packs and exit`;
+
+/**
+ * Unknown flags are an error, not a positional.
+ *
+ * The output directory is positional #2, so a mistyped flag used to be
+ * silently adopted as the destination: `render.js deck.json --out /tmp/x`
+ * wrote to a directory literally named `--out` and then died inside ffmpeg
+ * with `Unrecognized option '-out/01-hook.mp4'` — an error that blames ffmpeg
+ * for a mistake made on this command line. Anything leading with `-` is
+ * therefore matched against the known set and rejected by name.
+ */
 function parseArgs(argv) {
   const a = argv.slice(2);
   const out = { input: null, outDir: 'out', theme: null, platform: null, list: false, panorama: 0, animate: false };
   const pos = [];
+  const fail = (msg) => { console.error(`${msg}\n\n${USAGE}`); process.exit(1); };
+
+  // A flag's value is taken positionally, so a missing one would otherwise eat
+  // the next flag: `--theme --animate` would set the theme to "--animate".
+  const value = (flag, i) => {
+    if (i + 1 >= a.length || a[i + 1].startsWith('-')) fail(`${flag} expects a value.`);
+    return a[i + 1];
+  };
+
   for (let i = 0; i < a.length; i++) {
-    if (a[i] === '--theme' && a[i + 1]) out.theme = a[++i];
-    else if (a[i] === '--platform' && a[i + 1]) out.platform = a[++i];
-    else if (a[i] === '--panorama' && a[i + 1]) out.panorama = parseInt(a[++i], 10);
-    else if (a[i] === '--animate') out.animate = true;
+    if (a[i] === '--theme') out.theme = value('--theme', i++);
+    else if (a[i] === '--platform') out.platform = value('--platform', i++);
+    else if (a[i] === '--panorama') {
+      const n = parseInt(value('--panorama', i++), 10);
+      if (!Number.isInteger(n) || n < 0) fail('--panorama expects a whole number.');
+      out.panorama = n;
+    } else if (a[i] === '--animate') out.animate = true;
     else if (a[i] === '--themes') out.list = true;
+    else if (a[i].startsWith('-')) fail(`Unknown option "${a[i]}".`);
     else pos.push(a[i]);
   }
+
+  if (pos.length > 2) fail(`Unexpected argument "${pos[2]}" — this takes at most a deck and an output directory.`);
   if (pos[0]) out.input = pos[0];
   if (pos[1]) out.outDir = pos[1];
   return out;
@@ -78,7 +111,7 @@ async function main() {
     return;
   }
   if (!args.input) {
-    console.error('Usage: node scripts/render.js <deck.json> [outDir] [--theme name] [--platform name]');
+    console.error(USAGE);
     process.exit(1);
   }
 
@@ -294,8 +327,14 @@ async function main() {
     if (animateThis) {
       file = `${stem}.mp4`;
       vid = await renderAnimated(slide, i, ctx, html, theme.templates.css(ctx), file);
-      // A still of the same slide is always written too: the publish path
-      // cannot mix video into a carousel, so the PNG is the fallback.
+      // A still of the same slide is always written too, and it is mandatory
+      // rather than a leftover. Instagram and Threads accept a carousel that
+      // mixes video and images; Facebook and LinkedIn take images only, and
+      // LinkedIn takes no video at all. So one deck ships as video to two
+      // platforms and as stills to two others, from the same render.
+      //
+      // (An earlier version of this comment said the publish path cannot mix
+      // video into a carousel. That is true of Facebook and LinkedIn only.)
       await pg.screenshot({ path: `${stem}.png`, type: 'png' });
     } else {
       await pg.screenshot({ path: file, type: 'png' });

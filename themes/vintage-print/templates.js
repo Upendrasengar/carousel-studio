@@ -103,10 +103,18 @@ function revealList(slide, ctx) {
 
 // ── slide types ─────────────────────────────────────────────────────
 
+/**
+ * Motion is opt-in per slide. The marker rides in on the body's extra class
+ * rather than through `fitFrame`, whose signature twenty-three themes share
+ * and none of the others need changed. Every keyframe in this theme is scoped
+ * under `.is-anim`, so an unmarked slide carries no animation at all.
+ */
+const anim = (s, base) => (s.animate ? `${base} is-anim` : base);
+
 const TYPES = {
   hook(s, ctx) {
     const hl = `<h1 class="hl hl-xl" ${fitAttr(ctx.t.type.headline, 1.18)}>${rich(s.headline)}</h1>`;
-    return fitFrame(`${hl}${deckLine(s, ctx)}`, 'body-hook');
+    return fitFrame(`${hl}${deckLine(s, ctx)}`, anim(s, 'body-hook'));
   },
 
   // The star. Identical layout every time, one step lit.
@@ -116,19 +124,19 @@ const TYPES = {
       ? `<h1 class="hl hl-sm" ${fitAttr(ctx.t.type.headline, 0.62)}>${rich(text)}</h1>` : '';
     const sub = ctx.deck.reveal?.subtitle
       ? `<p class="rv-sub" ${fitAttr(ctx.t.type.deck, 0.85)}>${rich(ctx.deck.reveal.subtitle)}</p>` : '';
-    return fitFrame(`${title}${sub}${revealList(s, ctx)}`, 'body-reveal');
+    return fitFrame(`${title}${sub}${revealList(s, ctx)}`, anim(s, 'body-reveal'));
   },
 
   problem(s, ctx) {
-    return fitFrame(`${headline(s, ctx)}${para(s, ctx)}${rowList(s.rows, ctx, false)}${mediaCard(s, ctx.accent)}`);
+    return fitFrame(`${headline(s, ctx)}${para(s, ctx)}${rowList(s.rows, ctx, false)}${mediaCard(s, ctx.accent)}`, anim(s, ''));
   },
 
   point(s, ctx) {
-    return fitFrame(`${headline(s, ctx)}${deckLine(s, ctx)}${mediaCard(s, ctx.accent)}${para(s, ctx)}${rowList(s.rows, ctx, false)}`);
+    return fitFrame(`${headline(s, ctx)}${deckLine(s, ctx)}${mediaCard(s, ctx.accent)}${para(s, ctx)}${rowList(s.rows, ctx, false)}`, anim(s, ''));
   },
 
   steps(s, ctx) {
-    return fitFrame(`${headline(s, ctx)}${para(s, ctx)}${rowList(s.steps || s.rows, ctx, true)}${mediaCard(s, ctx.accent)}`);
+    return fitFrame(`${headline(s, ctx)}${para(s, ctx)}${rowList(s.steps || s.rows, ctx, true)}${mediaCard(s, ctx.accent)}`, anim(s, ''));
   },
 
   stat(s, ctx) {
@@ -138,7 +146,7 @@ const TYPES = {
       <span class="stat-l" ${fitAttr(t.type.statLabel)}>${rich(v.label)}</span>
     </div>`).join('');
     const grid = cells ? `<div class="stats stats-${Math.min(2, (s.stats || []).length)}">${cells}</div>` : '';
-    return fitFrame(`${headline(s, ctx)}${grid}${para(s, ctx)}`);
+    return fitFrame(`${headline(s, ctx)}${grid}${para(s, ctx)}`, anim(s, ''));
   },
 
   quote(s, ctx) {
@@ -146,7 +154,7 @@ const TYPES = {
     const q = `<blockquote class="quote" ${fitAttr(t.type.quote)}>${rich(s.quote || s.headline)}</blockquote>`;
     const a = s.attribution ? `<p class="attrib" ${fitAttr(t.type.caption)}>${esc(s.attribution)}</p>` : '';
     const br = `<span class="mk mk-bracket">${marks.bracket(rng, 40, 250, { color: accent, weight: 6 })}</span>`;
-    return fitFrame(`<div class="quote-wrap">${br}${q}${a}</div>`, 'body-quote');
+    return fitFrame(`<div class="quote-wrap">${br}${q}${a}</div>`, anim(s, 'body-quote'));
   },
 
   cta(s, ctx) {
@@ -155,7 +163,7 @@ const TYPES = {
     const act = s.action
       ? `<p class="action" ${fitAttr(t.type.deck)}>${rich(s.action)}
            <span class="mk mk-circle">${marks.circle(rng, 400, 120, { color: accent, weight: 6 })}</span></p>` : '';
-    return fitFrame(`${hl}${act}${para(s, ctx)}`, 'body-cta');
+    return fitFrame(`${hl}${act}${para(s, ctx)}`, anim(s, 'body-cta'));
   },
 };
 
@@ -172,6 +180,10 @@ export function slideHTML(slide, ctx) {
 export function css(ctx) {
   const { t, accent, fontFaces, textureCSS } = ctx;
   const c = t.color, sp = t.space, ty = t.type, r = t.radius, cv = t.canvas;
+
+  // Loop length drives every duration in the motion block, so retiming the
+  // theme is one number in theme.json rather than a sweep through keyframes.
+  const D = t.animate?.seconds || 4;
 
   return `${fontFaces}
 ${baseCSS(t)}
@@ -316,6 +328,76 @@ body { background:${c.bg}; color:${c.ink}; font-family:Body, ui-monospace, monos
 .shot-bar i { background:${c.rule}; }
 
 .object { right:${Math.round(cv.margin * 0.5)}px; bottom:${Math.round(cv.safeBottom * 0.75)}px; }
+
+/* ── motion ─────────────────────────────────────────────────────────
+   Scoped to .is-anim, which only appears on a slide marked "animate": true.
+
+   The reveal is the one mechanic in this pack that was already animation
+   pretending to be stills: five slides showing the same diagram with a
+   different step lit is a hand-cranked flipbook. So the video does not
+   invent a new gesture — it plays the transition the still deck implies.
+   The lit row starts wearing the dim treatment every other row has and
+   arrives at the lit one, which is why every keyframe below begins at a
+   value taken from the .rv-off rules rather than at zero or transparent.
+
+   That also means no frame of this loop is ever blank: frame 0 is a
+   legible slide with nothing yet highlighted, which is exactly the state
+   the previous slide left the reader in. The loop seam reads as the step
+   advancing rather than as a flash. Everything settles by a third of the
+   cycle and holds, so the still the renderer writes beside the MP4 is the
+   lit design the unanimated deck produces. */
+
+@keyframes vp-light {
+  0%        { opacity:.34; background:transparent;
+              border-color:transparent; box-shadow:0 0 0 transparent; }
+  34%, 100% { opacity:1; background:${c.surface};
+              border-color:${c.rule}; box-shadow:3px 3px 0 ${c.rule}; }
+}
+@keyframes vp-badge {
+  0%        { background:transparent; color:${c.inkFaint}; border-color:${c.rule}; }
+  34%, 100% { background:${c.ink}; color:${c.surface}; border-color:transparent; }
+}
+@keyframes vp-title { 0% { color:${c.inkSoft}; } 34%, 100% { color:${accent}; } }
+@keyframes vp-bodytext { 0% { color:${c.inkFaint}; } 34%, 100% { color:${c.inkSoft}; } }
+/* The bracket is chrome for the whole run, so it wakes before the step does. */
+@keyframes vp-loop { 0% { opacity:.3; } 22%, 100% { opacity:1; } }
+@keyframes vp-rise {
+  0%        { opacity:.25; transform:translateY(18px); }
+  28%, 100% { opacity:1; transform:none; }
+}
+@keyframes vp-fade {
+  0%,  8%   { opacity:.2; transform:translateY(10px); }
+  36%, 100% { opacity:1; transform:none; }
+}
+
+/* The off rows hold still. Dimming something that is already dim is noise,
+   and moving them would pull the eye away from the row that is arriving. */
+.is-anim .rv-on { animation:vp-light ${D}s cubic-bezier(.2,.8,.2,1) infinite both; }
+/* .rv-num carries no border in the lit state, so it needs one declared here
+   for border-color to have something to animate against. */
+.is-anim .rv-on .rv-num { border:2px solid transparent;
+  animation:vp-badge ${D}s cubic-bezier(.2,.8,.2,1) infinite both; }
+.is-anim .rv-on .rv-t { animation:vp-title ${D}s ease-out infinite both; }
+.is-anim .rv-on .rv-b { animation:vp-bodytext ${D}s ease-out infinite both; }
+.is-anim .rv-loop { animation:vp-loop ${D}s ease-out infinite both; }
+.is-anim .hl, .is-anim .quote {
+  animation:vp-rise ${D}s cubic-bezier(.2,.8,.2,1) infinite both; }
+.is-anim .rv-sub, .is-anim .deck, .is-anim .para,
+.is-anim .action, .is-anim .attrib {
+  animation:vp-fade ${D}s ease-out infinite both; }
+
+/* Rows and stat cells arrive in reading order. vintage-print's row markup is
+   shared with three other slide types and carries no index, so the stagger is
+   spelled out per position rather than driven by a custom property — six
+   covers the theme's maxRows budget with one to spare. */
+.is-anim .rows .row, .is-anim .stat {
+  animation:vp-fade ${D}s ease-out infinite both; }
+.is-anim .rows .row:nth-child(1), .is-anim .stat:nth-child(1) { animation-delay:.06s; }
+.is-anim .rows .row:nth-child(2), .is-anim .stat:nth-child(2) { animation-delay:.14s; }
+.is-anim .rows .row:nth-child(3) { animation-delay:.22s; }
+.is-anim .rows .row:nth-child(4) { animation-delay:.30s; }
+.is-anim .rows .row:nth-child(5) { animation-delay:.38s; }
+.is-anim .rows .row:nth-child(6) { animation-delay:.46s; }
 
 ${textureCSS}
 `;

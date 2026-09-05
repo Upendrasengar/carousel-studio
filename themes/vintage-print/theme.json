@@ -8,6 +8,8 @@
     "safeTop": 135, "safeBottom": 135, "margin": 78
   },
 
+  "animate": { "seconds": 4, "fps": 30 },
+
   "color": {
     "bg": "#EFE7D6",
     "surface": "#F7F1E4",

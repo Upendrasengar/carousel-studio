@@ -12,6 +12,8 @@
     "margin": 84
   },
 
+  "animate": { "seconds": 4, "fps": 30 },
+
   "color": {
     "bg": "#F8F6F2",
     "surface": "#FFFFFF",

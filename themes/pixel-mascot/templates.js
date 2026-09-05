@@ -172,9 +172,19 @@ function media(slide, ctx) {
 // Every type returns the same skeleton: header, a .body clipping box with a
 // .fit wrapper inside it, mascot, footer. Only what goes in .fit differs.
 
+/**
+ * Motion is opt-in per slide, and the marker goes on the content box rather
+ * than the document. Every keyframe in this theme is scoped under `.is-anim`,
+ * so a slide without `"animate": true` has no animation attached at all and
+ * its still is bit-for-bit what it was before the theme learned to move.
+ *
+ * The mascot is a sibling of `.body`, not a child, so it is reached with
+ * `.is-anim ~ .mascot` — a plain sibling combinator, no `:has()` needed.
+ */
 function frame(slide, ctx, inner, extraClass = '') {
+  const anim = slide.animate ? ' is-anim' : '';
   return `${header(slide, ctx)}
-    <main class="body ${extraClass}">
+    <main class="body ${extraClass}${anim}">
       <div class="fit">${inner}</div>
     </main>
     ${mascot(slide, ctx)}
@@ -211,7 +221,9 @@ const TYPES = {
   // Numbers grid. Values are the loud element, so no accent word in the headline.
   stat(slide, ctx) {
     const { t } = ctx;
-    const cells = (slide.stats || []).map((s) => `<div class="stat">
+    // --i carries the cell's position to the stagger in the motion block. It
+    // is inert on a still slide; the CSS only reads it under .is-anim.
+    const cells = (slide.stats || []).map((s, i) => `<div class="stat" style="--i:${i}">
       <span class="stat-v" ${fitAttr(t.type.statValue)}>${rich(s.value)}</span>
       <span class="stat-l" ${fitAttr(t.type.statLabel)}>${rich(s.label)}</span>
     </div>`).join('');
@@ -262,6 +274,10 @@ export function slideHTML(slide, ctx) {
 export function css(ctx) {
   const { t, accent, fontFaces, textureCSS } = ctx;
   const c = t.color, sp = t.space, ty = t.type, r = t.radius, cv = t.canvas;
+
+  // Loop length drives every duration below, so retiming the theme is one
+  // number in theme.json rather than a sweep through the keyframes.
+  const D = t.animate?.seconds || 4;
 
   // Rows are hairline-ruled unless the theme asks for cards. Putting every
   // row in its own white card is the strongest "generated deck" tell there
@@ -404,6 +420,75 @@ ${rowCSS}
 .mascot-left  { left:${Math.round(cv.margin * 0.55)}px; }
 
 .object { right:${Math.round(cv.margin * 0.55)}px; bottom:${Math.round(cv.safeBottom * 0.66)}px; }
+
+/* ── motion ─────────────────────────────────────────────────────────
+   Everything here is scoped to .is-anim, which only appears on a slide
+   marked "animate": true. Two rules keep it honest:
+
+   1. Every keyframe reaches its final state inside the first third of the
+      cycle and holds it to 100%. The renderer seeks each animation to one
+      millisecond short of the iteration end before it screenshots, so the
+      held state IS the still. A loop that eases back out would make the
+      PNG a random midpoint and flash once a cycle in the video.
+   2. The final keyframe is the theme's resting design — opacity 1, no
+      transform — not an approximation of it. That is what lets the still
+      fallback stay interchangeable with the unanimated render.
+
+   Motion earns its place on the hook and the stat grid: one stops the
+   scroll, the other gives a number a reason to arrive. The dense body
+   slides stay still, because movement there competes with reading. */
+
+/* No keyframe here starts at opacity 0, and that is deliberate. The clip
+   loops, so frame 0 is what the viewer sees immediately after the held final
+   frame. Starting from nothing makes the slide blank itself once per cycle —
+   a hard flash, not a re-reveal. Coming up from a fifth of full instead reads
+   as the slide re-asserting itself, which is the same choice swap made. */
+@keyframes pm-rise {
+  0%        { opacity:.22; transform:translateY(22px); }
+  24%, 100% { opacity:1; transform:none; }
+}
+@keyframes pm-fade {
+  0%,  8%   { opacity:.18; transform:translateY(11px); }
+  34%, 100% { opacity:1; transform:none; }
+}
+/* The underline is drawn, not faded — it reads as a hand marking the line.
+   Scale from zero is fine here: one growing rule is a gesture, not a gap. */
+@keyframes pm-underline {
+  0%,  10%  { transform:scaleX(0); }
+  36%, 100% { transform:scaleX(1); }
+}
+/* Card lands, then the number arrives inside it. */
+@keyframes pm-pop {
+  0%        { opacity:.28; transform:translateY(16px) scale(0.975); }
+  26%, 100% { opacity:1; transform:none; }
+}
+@keyframes pm-value {
+  0%,  14%  { opacity:.20; transform:scale(0.86); }
+  40%, 100% { opacity:1; transform:none; }
+}
+/* The character drops in and settles with one bounce. It ends flat and
+   holds — a perpetual bob would never resolve, so the still would catch it
+   mid-air and the loop would jump at the seam. */
+@keyframes pm-land {
+  0%        { opacity:.35; transform:translateY(-20px); }
+  16%       { opacity:1; transform:translateY(0); }
+  22%       { transform:translateY(-7px); }
+  30%, 100% { transform:translateY(0); }
+}
+
+.is-anim .hl { animation:pm-rise ${D}s cubic-bezier(.2,.8,.2,1) infinite both; }
+.is-anim .mk-under { display:block; transform-origin:left center;
+  animation:pm-underline ${D}s cubic-bezier(.2,.8,.2,1) infinite both; }
+.is-anim .deck, .is-anim .para, .is-anim .action {
+  animation:pm-fade ${D}s ease-out infinite both; }
+.is-anim .stat { animation:pm-pop ${D}s cubic-bezier(.2,.85,.25,1) infinite both;
+  animation-delay:calc(var(--i, 0) * 0.09s); }
+.is-anim .stat-v { display:inline-block; transform-origin:left center;
+  animation:pm-value ${D}s cubic-bezier(.2,.85,.25,1) infinite both;
+  animation-delay:calc(var(--i, 0) * 0.09s); }
+.is-anim .stat-l { animation:pm-fade ${D}s ease-out infinite both;
+  animation-delay:calc(0.1s + var(--i, 0) * 0.09s); }
+.is-anim ~ .mascot { animation:pm-land ${D}s cubic-bezier(.25,.9,.3,1) infinite both; }
 
 ${textureCSS}
 `;
