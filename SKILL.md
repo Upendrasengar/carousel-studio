@@ -198,6 +198,26 @@ A theme pack is a directory under `themes/` with `theme.json`,
 `templates.js`, `rules.md` and `assets/`. Nothing outside it knows what a
 theme looks like. See `references/building-a-theme.md`.
 
+Themes are discovered by scanning `themes/`, so `render.js --themes` picks up
+a new pack with no registration. **The table above does not** — it is
+hand-maintained. Add the row when you add a pack, or the pack is invisible to
+anyone reading this file.
+
+## Cloning a reference post
+
+Fourteen of these packs end their `theme.json` description with `Derived from
+the <shortcode> reference deck.` That is the convention: when a pack is
+modelled on a real post, record which one.
+
+Working from a post someone shared? Follow the `clone-reference-post` skill.
+The short version: fetch it with `ig-inspect` and **look** at it, name its
+mechanic in one sentence, then match that mechanic against the table above —
+never against its palette. Reuse a pack when it already owns that signature
+element; build one only when no pack does.
+
+Reproduce the mechanic, never the artwork or the copy. The result is a
+sibling, not a forgery.
+
 ## Publishing
 
 The pipeline stops at PNGs on disk. If the user has a social publishing MCP
