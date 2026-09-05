@@ -29,6 +29,7 @@ theme pack, not in the deck.
    | `killlist` | "N things that stop X" — every row names what it kills. **Dark.** |
    | `kinetic` | a hook that loops as video. Render with `--animate`. **Dark.** |
    | `ledger` | per-item data with figures — "N tools and what each is worth" |
+   | `manifest` | a counted taxonomy — "30 things, 5 categories", a metric on every row. **Dark.** Animates. |
    | `notebook-tabs` | a list deck — "12 folders". Inset card, tab strip. |
    | `parchment-vault` | a system or method; archival rather than urgent |
    | `pixel-mascot` | general explainer, a friendly walkthrough. **The default.** Animates. |
@@ -46,8 +47,8 @@ theme pack, not in the deck.
 
    `node scripts/render.js --themes` lists them with descriptions.
 
-   **Four themes render video**: `kinetic`, `swap`, `pixel-mascot`,
-   `vintage-print`. Mark a slide `"animate": true` and pass `--animate`; that
+   **Five themes render video**: `kinetic`, `swap`, `pixel-mascot`,
+   `vintage-print`, `manifest`. Mark a slide `"animate": true` and pass `--animate`; that
    slide writes an MP4 *and* a PNG. See "Animated slides" below. The other 21
    themes have no motion and ignore the flag.
 2. **Read the theme's rules** — `themes/<name>/rules.md`. Read only the one
@@ -148,8 +149,9 @@ Platforms: `instagram-portrait` (default), `instagram-square`,
 
 ## Animated slides
 
-Four themes declare motion: `kinetic`, `swap`, `pixel-mascot`,
-`vintage-print`. Mark the slides that should move and pass `--animate`:
+Five themes declare motion: `kinetic`, `swap`, `pixel-mascot`,
+`vintage-print`, `manifest`. Mark the slides that should move and pass
+`--animate`:
 
 ```json
 { "type": "hook", "headline": "…", "animate": true }

@@ -1,0 +1,107 @@
+{
+  "slug": "manifest-demo",
+  "title": "26 theme packs, five jobs",
+  "theme": "manifest",
+  "brand": "the pack index",
+  "handle": "carousel-studio",
+  "unit": "packs",
+  "taxonomy": [
+    { "label": "reference", "count": 5 },
+    { "label": "argument", "count": 5 },
+    { "label": "sequence", "count": 5 },
+    { "label": "diagram", "count": 5 },
+    { "label": "voice", "count": 6 }
+  ],
+  "slides": [
+    {
+      "type": "hook",
+      "eyebrow": "The pack index",
+      "headline": "26 theme packs.\n*Five jobs.*",
+      "deck": "Grouped by the job each pack does, not the way it looks. The figure on every row is the slide types it handles.",
+      "animate": true
+    },
+    {
+      "type": "group",
+      "n": 1,
+      "category": "Reference",
+      "icon": "list",
+      "deck": "Built to be *saved and returned to*, not read once.",
+      "animate": true,
+      "items": [
+        { "name": "catalogue", "body": "*Ten to a page*, numbered across the deck.", "metric": "8 types" },
+        { "name": "audit", "body": "One whole system on *one dense card*.", "metric": "9 types" },
+        { "name": "ledger", "body": "Each slide is *a database row*.", "metric": "9 types" },
+        { "name": "index-rail", "body": "A link roundup with *a numbered rail*.", "metric": "8 types" },
+        { "name": "manifest", "body": "A counted taxonomy, *a metric per row*.", "metric": "8 types" }
+      ]
+    },
+    {
+      "type": "group",
+      "n": 2,
+      "category": "Argument",
+      "icon": "compare",
+      "deck": "Decks that *take a position* and invite a reply.",
+      "animate": true,
+      "items": [
+        { "name": "versus", "body": "A real before and after. *The split moves.*", "metric": "8 types" },
+        { "name": "swap", "body": "Paid versus free, *one row at a time*.", "metric": "10 types" },
+        { "name": "killlist", "body": "Every row names *what it kills*.", "metric": "8 types" },
+        { "name": "tierlist", "body": "A ranking *built to be argued with*.", "metric": "8 types" },
+        { "name": "decision", "body": "A branching should-you. *Heavily saved.*", "metric": "8 types" }
+      ]
+    },
+    {
+      "type": "group",
+      "n": 3,
+      "category": "Sequence",
+      "icon": "steps",
+      "deck": "For content that only makes sense *in order*.",
+      "animate": true,
+      "items": [
+        { "name": "vintage-print", "body": "The *reveal* — one step lit per slide.", "metric": "8 types" },
+        { "name": "spine", "body": "A chronology; *the rail crosses joins*.", "metric": "8 types" },
+        { "name": "thread", "body": "A session that *builds up line by line*.", "metric": "8 types" },
+        { "name": "case-file", "body": "Redactions that *lift as you swipe*.", "metric": "8 types" },
+        { "name": "wide-cut", "body": "One idea as *a 3-slide panorama*.", "metric": "8 types" }
+      ]
+    },
+    {
+      "type": "group",
+      "n": 4,
+      "category": "Diagram",
+      "icon": "chart",
+      "deck": "When the honest answer to *what does it look like* is a drawing.",
+      "animate": true,
+      "items": [
+        { "name": "briefing", "body": "*One exhibit per slide*, drawn from data.", "metric": "8 types" },
+        { "name": "schematic", "body": "A structure worth drawing, *zoomed in*.", "metric": "8 types" },
+        { "name": "console", "body": "A stack or a build, *diagrammed*.", "metric": "8 types" },
+        { "name": "stat-card", "body": "A comparable set as *collectible cards*.", "metric": "8 types" },
+        { "name": "kinetic", "body": "A hook *that loops as video*.", "metric": "7 types" }
+      ]
+    },
+    {
+      "type": "group",
+      "n": 5,
+      "category": "Voice",
+      "icon": "pen",
+      "deck": "Packs that sound like *a person made them*.",
+      "animate": true,
+      "items": [
+        { "name": "handbuilt", "body": "A build log *in your own voice*.", "metric": "8 types" },
+        { "name": "scrapbook", "body": "An opinion *with marginalia and craft*.", "metric": "7 types" },
+        { "name": "notebook-tabs", "body": "An inset card and *a file-tab strip*.", "metric": "7 types" },
+        { "name": "parchment-vault", "body": "A method, *archival rather than urgent*.", "metric": "7 types" },
+        { "name": "spotlight-minimal", "body": "One idea a slide. *Sparse, considered.*", "metric": "7 types" },
+        { "name": "pixel-mascot", "body": "A friendly walkthrough. *The default.*", "metric": "7 types" }
+      ]
+    },
+    {
+      "type": "cta",
+      "headline": "Pick the *shape*,\nnot the palette.",
+      "action": "node scripts/render.js --themes",
+      "body": "Match a pack to what the content is doing. Colour is the last decision, and the one that matters least.",
+      "animate": true
+    }
+  ]
+}

@@ -345,9 +345,19 @@ under about 56 characters. Numbered deck-wide like `page`.
 **`wire`** (console) — a `graph` of nodes and edges, plus `railAt` pointing at
 one of `deck.rail.items`.
 
+**`group`** (manifest) — one category: `n` (its position, which picks the hue),
+`category`, `icon` or `logo`, `deck`, and five or six `items` of
+`{ name, body, metric }`. `metric` is the point of the row — a figure worth
+comparing against the row above, under about 9 characters. Numbering restarts
+inside each group, unlike `page` and `kills`. The deck also carries
+`taxonomy: [{ label, count }]`, rendered as chips on both the hook and the CTA,
+and `unit` for the header count ("6 repos").
+
 **Animation.** Any slide can set `"animate": true`; render with `--animate` and
-it becomes a looping MP4 with a PNG fallback beside it. Only `kinetic` has
-keyframes written for it today.
+it becomes a looping MP4 with a PNG fallback beside it. Five themes have
+keyframes written for them: `kinetic`, `swap`, `pixel-mascot`, `vintage-print`
+and `manifest`. On the other 21 the flag is not an error — it produces a
+perfectly valid MP4 of a motionless image, which on Instagram looks broken.
 
 ## Emphasis
 

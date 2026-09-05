@@ -61,6 +61,34 @@ overflows *upward* as well as down, which `scrollHeight` cannot see — this is
 the bug that ships a headline running off the top edge while the checker
 reports success. Do not replace the wrapper with a scrollHeight check.
 
+### Never put a second `style` attribute beside `fitAttr`
+
+`fitAttr()` emits `style="font-size:…"` along with its data attributes. Adding
+your own `style` to the same element produces two `style` attributes, and HTML
+keeps the first and **silently drops the rest** — no warning, no error, the
+element just renders in the wrong colour.
+
+Put per-element values on an ancestor that carries no fit attributes, as a
+custom property, and read them from the stylesheet:
+
+```js
+`<li class="row" style="--hue:${hue}">
+   <span class="name" ${fitAttr(t.type.itemName)}>${esc(it.name)}</span></li>`
+```
+
+```css
+.name { color:var(--hue); }
+```
+
+One source for the value, and it lands somewhere nothing else writes.
+`manifest` is the worked example.
+
+### No backticks inside `css()`
+
+The stylesheet is a template literal, so a backtick anywhere in it — including
+in a comment naming a class — ends the string. The failure is a confusing
+`X is not a function` at render time, not a syntax error where you typed it.
+
 ## Shared libraries
 
 Available to any theme, in `scripts/lib/`:

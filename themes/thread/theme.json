@@ -1,7 +1,7 @@
 {
   "name": "thread",
   "label": "Thread",
-  "description": "A dark terminal session that builds up line by line. Each slide replays everything so far dimmed and lights one new block. Use it when the subject is genuinely a tool, a command or a log — the replay is a transcript, not a decoration. One of six dark packs; console, killlist, kinetic, schematic and wide-cut are the others.",
+  "description": "A dark terminal session that builds up line by line. Each slide replays everything so far dimmed and lights one new block. Use it when the subject is genuinely a tool, a command or a log — the replay is a transcript, not a decoration.",
   "canvas": {
     "width": 1080,
     "height": 1350,

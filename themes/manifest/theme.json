@@ -1,0 +1,217 @@
+{
+  "name": "manifest",
+  "label": "Manifest",
+  "description": "A counted taxonomy on near-black. A total splits into colour-coded categories, one slide each, and every row carries a hard metric on the right. Numbering restarts inside each category and the category chips bookend the hook and the CTA, so the deck states its own shape twice. Built for 'N things, M categories' decks where each entry has a number worth showing. Animates: rows cascade in. Derived from the Db_wLYMCHjL reference deck.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 112,
+    "safeBottom": 112,
+    "margin": 54
+  },
+  "color": {
+    "bg": "#0B0E14",
+    "surface": "#141A26",
+    "panel": "#1B2231",
+    "ink": "#EDF1F8",
+    "inkSoft": "#98A4B6",
+    "inkFaint": "#5F6B7D",
+    "rule": "#212A3B",
+    "accent": "#F0862E",
+    "accentInk": "#0B0E14",
+    "accentTint": "#2A1D12",
+    "catHues": [
+      "#4C8DF6",
+      "#A874F0",
+      "#38C08A",
+      "#E8B23A",
+      "#F0862E"
+    ],
+    "catTints": [
+      "#131E33",
+      "#1E1630",
+      "#0F2620",
+      "#2A2110",
+      "#2A1D12"
+    ],
+    "chipTints": [
+      "#131E33",
+      "#1E1630",
+      "#0F2620",
+      "#2A2110",
+      "#2A1D12"
+    ],
+    "chipInks": [
+      "#4C8DF6",
+      "#A874F0",
+      "#38C08A",
+      "#E8B23A",
+      "#F0862E"
+    ]
+  },
+  "accentRotation": [
+    "#F0862E"
+  ],
+  "font": {
+    "display": {
+      "file": "grotesque-800.woff2",
+      "weight": 800
+    },
+    "body": {
+      "file": "sans-400.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "sans-600.woff2",
+      "weight": 600
+    },
+    "mono": {
+      "file": "mono-400.woff2",
+      "weight": 400
+    },
+    "monoBold": {
+      "file": "mono-700.woff2",
+      "weight": 700
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 18,
+      "tracking": 0.2,
+      "weight": 600,
+      "caps": true
+    },
+    "headline": {
+      "size": 66,
+      "leading": 1.04,
+      "tracking": -0.03,
+      "min": 34
+    },
+    "deck": {
+      "size": 25,
+      "leading": 1.4,
+      "min": 18
+    },
+    "body": {
+      "size": 24,
+      "leading": 1.46,
+      "min": 18
+    },
+    "category": {
+      "size": 58,
+      "leading": 1.02,
+      "tracking": -0.028,
+      "min": 32
+    },
+    "itemName": {
+      "size": 25,
+      "leading": 1.16,
+      "min": 18
+    },
+    "itemBody": {
+      "size": 20,
+      "leading": 1.34,
+      "min": 15
+    },
+    "itemMeta": {
+      "size": 15,
+      "tracking": 0.1,
+      "min": 12
+    },
+    "metric": {
+      "size": 17,
+      "tracking": 0.04,
+      "min": 13
+    },
+    "tag": {
+      "size": 15,
+      "tracking": 0.1,
+      "min": 12
+    },
+    "rowTitle": {
+      "size": 26,
+      "leading": 1.26,
+      "min": 19
+    },
+    "rowBody": {
+      "size": 22,
+      "leading": 1.36,
+      "min": 17
+    },
+    "statValue": {
+      "size": 88,
+      "leading": 1,
+      "min": 46
+    },
+    "statLabel": {
+      "size": 20,
+      "leading": 1.25,
+      "min": 16
+    },
+    "quote": {
+      "size": 52,
+      "leading": 1.2,
+      "min": 32
+    },
+    "caption": {
+      "size": 19,
+      "leading": 1.35,
+      "min": 15
+    },
+    "footer": {
+      "size": 17,
+      "tracking": 0.08
+    }
+  },
+  "rowStyle": "card",
+  "fill": {
+    "min": 0.68,
+    "maxGrow": 1.22
+  },
+  "objectSize": 0.16,
+  "space": {
+    "xs": 6,
+    "sm": 11,
+    "md": 18,
+    "lg": 28,
+    "xl": 44
+  },
+  "radius": {
+    "sm": 9,
+    "md": 14,
+    "lg": 22
+  },
+  "grid": {
+    "cols": 1,
+    "rows": 6
+  },
+  "texture": {
+    "grain": 0.02,
+    "blotch": 0
+  },
+  "animate": {
+    "seconds": 4,
+    "fps": 30
+  },
+  "budgets": {
+    "eyebrow": 30,
+    "headline": 34,
+    "deck": 118,
+    "body": 200,
+    "category": 18,
+    "itemName": 22,
+    "itemBody": 46,
+    "itemMeta": 24,
+    "metric": 9,
+    "tag": 14,
+    "rowTitle": 30,
+    "rowBody": 84,
+    "statValue": 6,
+    "statLabel": 26,
+    "quote": 120,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5
+  }
+}

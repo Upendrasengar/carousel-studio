@@ -403,14 +403,18 @@ export function checkDeck(deck, theme) {
   // deck-wide numbering. They are the two an agent is most likely to get wrong
   // — a missing field there does not error, it renders a card visibly shorter
   // than its neighbours and the grid stops reading as a table.
-  for (const [type, need, cap10] of [['page', ['name'], 10], ['kills', ['name', 'kills'], 5]]) {
+  // The third entry is the item count the layout is built for: a number when
+  // the grid is fixed, or a [min, max] band when the pack holds across a range.
+  for (const [type, need, want] of [['page', ['name'], 10], ['kills', ['name', 'kills'], 5], ['group', ['name'], [5, 6]]]) {
     const pages = deck.slides.filter((x) => x.type === type);
+    const [lo, hi] = Array.isArray(want) ? want : [want, want];
     for (const s2 of pages) {
       const w = `slide ${deck.slides.indexOf(s2) + 1} (${type})`;
       const items = s2.items || [];
       if (!items.length) { add(ERR, w, `A "${type}" slide needs items.`); continue; }
-      if (items.length !== cap10) {
-        add(WARN, w, `${items.length} items against a layout built for ${cap10}. Fewer looks padded against the height floor; more will not fit.`);
+      if (items.length < lo || items.length > hi) {
+        const built = lo === hi ? `${lo}` : `${lo}-${hi}`;
+        add(WARN, w, `${items.length} items against a layout built for ${built}. Fewer looks padded against the height floor; more will not fit.`);
       }
       items.forEach((it, j) => {
         const iw = `${w} item ${j + 1}`;
@@ -423,6 +427,7 @@ export function checkDeck(deck, theme) {
         cap(iw, 'tag', it.tag, B.tag);
         cap(iw, 'bestFor', it.bestFor, B.itemMeta);
         cap(iw, 'slug', it.slug, B.itemSlug);
+        cap(iw, 'metric', it.metric, B.metric);
         if (it.logo && !LOGO_NAMES().includes(it.logo) && !hasBrandFallback(it.logo)) {
           add(WARN, iw, `logo "${it.logo}" resolves to an initial tile. One tile among real marks is what makes a directory look unfinished — fetch it with scripts/get-brands.js.`);
         }
