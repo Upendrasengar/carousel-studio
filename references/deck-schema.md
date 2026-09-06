@@ -386,11 +386,24 @@ inside each group, unlike `page` and `kills`. The deck also carries
 `taxonomy: [{ label, count }]`, rendered as chips on both the hook and the CTA,
 and `unit` for the header count ("6 repos").
 
+**`assemble`** (assembly) — the whole post. Three to six `slots` of
+`{ title, icon, tag, body, try }`, plus `headline`, `deck`, `eyebrow` and an
+optional `source` line. The `try` line is the payload — the instruction
+someone would retype — and a slot without one is a label; `check.js` warns.
+The deck is **exactly one slide** and the theme errors on any other count.
+`check.js` also computes whether the last slot lands inside the take from the
+theme's `animate` spec and errors if it would be caught mid-rise.
+
 **Animation.** Any slide can set `"animate": true`; render with `--animate` and
-it becomes a looping MP4 with a PNG fallback beside it. Five themes have
-keyframes written for them: `kinetic`, `swap`, `pixel-mascot`, `vintage-print`
-and `manifest`. On the other 21 the flag is not an error — it produces a
-perfectly valid MP4 of a motionless image, which on Instagram looks broken.
+it becomes an MP4 with a PNG fallback beside it. Eight themes have keyframes
+written for them: `kinetic`, `swap`, `pixel-mascot`, `vintage-print`,
+`manifest`, `datasheet`, `ladder` and `assembly`. On the other 22 the flag is
+not an error — it produces a perfectly valid MP4 of a motionless image, which
+on Instagram looks broken.
+
+Seven of the eight are 4-second seamless loops. `assembly` is not: it is a
+14-second one-shot build that holds on its final state, and for it the video
+is the post rather than a moving version of the still.
 
 ## Emphasis
 

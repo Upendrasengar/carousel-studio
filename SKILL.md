@@ -18,6 +18,7 @@ theme pack, not in the deck.
 
    | Theme | Reach for it when |
    |---|---|
+   | `assembly` | a capability round-up as **one animated frame** — empty numbered slots fill in one at a time, ending as a finished card. Not a carousel: exactly one slide. **Dark.** Animates. |
    | `audit` | one whole system on one dense reference card |
    | `briefing` | a system worth drawing — one exhibit per slide, flow/cycle/record |
    | `case-file` | something worth withholding; redactions lift |
@@ -50,10 +51,15 @@ theme pack, not in the deck.
 
    `node scripts/render.js --themes` lists them with descriptions.
 
-   **Seven themes render video**: `kinetic`, `swap`, `pixel-mascot`,
-   `vintage-print`, `manifest`, `datasheet`, `ladder`. Mark a slide `"animate": true` and pass
+   **Eight themes render video**: `kinetic`, `swap`, `pixel-mascot`,
+   `vintage-print`, `manifest`, `datasheet`, `ladder`, `assembly`. Mark a slide `"animate": true` and pass
    `--animate`; that slide writes an MP4 *and* a PNG. See "Animated slides" below. The other 22
    themes have no motion and ignore the flag.
+
+   `assembly` is the odd one out and the only **single-frame** theme: its deck is
+   exactly one slide, it runs 14s rather than a 4s loop, and the video *is* the
+   post — the PNG is a fallback. A theme declares this with `singleFrame: true`
+   in `theme.json`, which makes `check.js` stop applying carousel rules to it.
 2. **Read the theme's rules** — `themes/<name>/rules.md`. Read only the one
    theme you are using. Read `references/slide-grammar.md` if you are unsure
    which slide type fits a beat.
@@ -171,8 +177,8 @@ Platforms: `instagram-portrait` (default), `instagram-square`,
 
 ## Animated slides
 
-Seven themes declare motion: `kinetic`, `swap`, `pixel-mascot`,
-`vintage-print`, `manifest`, `datasheet`, `ladder`. Mark the slides that should move and pass
+Eight themes declare motion: `kinetic`, `swap`, `pixel-mascot`,
+`vintage-print`, `manifest`, `datasheet`, `ladder`, `assembly`. Mark the slides that should move and pass
 `--animate`:
 
 ```json
@@ -203,6 +209,20 @@ settles animations before it screenshots the still:
 3. **Never start a keyframe at `opacity:0`.** The clip loops, so frame 0
    follows the held final frame; starting from nothing blanks the slide once
    per cycle. Come up from ~0.2 instead.
+
+Rules 1 and 3 assume a **seamless loop**, which is what a slide inside a
+carousel is. A single-frame theme (`singleFrame: true`) is a one-shot build
+that resets visibly, and `assembly` deliberately breaks both: its cards do
+start at `opacity:0`, and they land on a stagger that runs to ~97% of the take
+rather than 30%. Rule 2 still binds for every theme — the held end state must
+be the resting design, because that is what the still fallback screenshots.
+
+What replaces rule 3 for a one-shot build: **the frame must never be blank.**
+Something structural — a rail, a header, empty placeholders — is on screen at
+frame 0, so the reset reads as an empty form rather than a dropped frame.
+
+Cost scales with the take, not the slide count: `assembly` at 14s is 420
+screenshots, about 3 minutes for the one frame.
 
 Prove it the way the existing themes were proven: render a deck with no
 `animate` flags before and after your change and diff the PNG checksums. If a

@@ -53,22 +53,37 @@ export function checkDeck(deck, theme) {
     add(ERR, 'deck', 'No slides.');
     return issues;
   }
-  if (deck.slides.length < 4) add(WARN, 'deck', `${deck.slides.length} slides. Carousels under 4 rarely earn the swipe.`);
-  if (deck.slides.length > 12) add(WARN, 'deck', `${deck.slides.length} slides. Past ~10 the completion rate falls off a cliff.`);
+  // A single-frame theme is not a carousel and must not be measured as one.
+  // Every length, opener, CTA and slide-2 rule below is about the swipe, and
+  // on a one-slide motion post they fire as a block of warnings that say
+  // nothing — which is how a checker teaches people to ignore it.
+  const single = t.singleFrame === true;
+
+  if (single) {
+    if (deck.slides.length !== 1) {
+      add(ERR, 'deck', `Theme "${t.name}" is single-frame and this deck has ${deck.slides.length} slides. One frame, or use a carousel theme.`);
+    }
+    if (!deck.slides[0].animate) {
+      add(WARN, 'slide 1', 'Single-frame deck without "animate": true. It will render as one still, which is the fallback, not the post.');
+    }
+  } else {
+    if (deck.slides.length < 4) add(WARN, 'deck', `${deck.slides.length} slides. Carousels under 4 rarely earn the swipe.`);
+    if (deck.slides.length > 12) add(WARN, 'deck', `${deck.slides.length} slides. Past ~10 the completion rate falls off a cliff.`);
+  }
   if (!deck.slug && !deck.seed) add(WARN, 'deck', 'No slug or seed. Layout variation will key off the title, so renaming the deck reshuffles it.');
 
   const first = deck.slides[0].type;
   const last = deck.slides[deck.slides.length - 1].type;
   const OPENERS = ['hook', 'cover', 'strip'];
-  if (!OPENERS.includes(first)) {
+  if (!single && !OPENERS.includes(first)) {
     add(WARN, 'slide 1', `First slide is "${first}". A deck opens on a hook — or on this theme's equivalent (${OPENERS.slice(1).join(', ')}).`);
   }
-  if (last !== 'cta') add(WARN, `slide ${deck.slides.length}`, `Last slide is "${last}". Without a cta the deck has no ask.`);
+  if (!single && last !== 'cta') add(WARN, `slide ${deck.slides.length}`, `Last slide is "${last}". Without a cta the deck has no ask.`);
 
   // Instagram re-serves a carousel starting from slide 2, so slide 2 is a
   // second hook, not a continuation. A slide that only makes sense after
   // slide 1 is a slide most viewers will meet cold.
-  const second = deck.slides[1];
+  const second = single ? null : deck.slides[1];
   if (second) {
     const text = textOf(second.headline || second.quote || '');
     if (/^(and|but|so|then|that|this means|which)\b/i.test(text.trim())) {
@@ -79,7 +94,7 @@ export function checkDeck(deck, theme) {
     }
   }
 
-  if (deck.slides.length < 8) {
+  if (!single && deck.slides.length < 8) {
     add(WARN, 'deck', `${deck.slides.length} slides. The current engagement band is 8-10; under 8 tends to underperform.`);
   }
 
@@ -268,6 +283,47 @@ export function checkDeck(deck, theme) {
     // stylistic: nodes are absolutely positioned at their own centre and never
     // wrap, so an over-long label does not shrink — it grows the box until it
     // overlaps its neighbour, on the one slide that happens to have it.
+    if (s.type === 'assemble') {
+      const slots = s.slots;
+      const min = B.minRows || 3;
+      const max = B.maxRows || 6;
+      if (!Array.isArray(slots) || !slots.length) {
+        add(ERR, where, 'Assemble slide with no slots. The whole frame is the rail filling up; with nothing to fill it is a title card.');
+      } else {
+        if (slots.length < min) {
+          add(ERR, where, `${slots.length} slot(s) against a minimum of ${min}. Under ${min} the build finishes before anyone has decided to stay.`);
+        } else if (slots.length > max) {
+          add(ERR, where, `${slots.length} slots against a max of ${max}. Past ${max} the cards shrink below reading size at feed scale.`);
+        }
+        slots.forEach((it, j) => {
+          const w = `${where} slot ${j + 1}`;
+          if (!it.title) add(ERR, w, 'no title.');
+          cap(w, 'title', it.title, B.slotTitle);
+          cap(w, 'body', it.body, B.slotBody);
+          cap(w, 'try', it.try, B.slotTry);
+          cap(w, 'tag', it.tag, B.tag);
+          // The try line is the reason this format gets saved. A slot without
+          // one is a bullet point wearing a card.
+          if (!it.try) add(WARN, w, 'no try line. The instruction is the payload — a slot without one is a label.');
+        });
+
+        // Does the last slot actually land inside the take? The delays are
+        // computed from the theme's animate spec, so a deck that adds slots
+        // without lengthening `seconds` silently truncates the final card
+        // mid-rise — and the clip still encodes, and the still fallback still
+        // looks right, so nothing else would catch it.
+        const A = t.animate || {};
+        const end = (A.lead ?? 1.1) + (slots.length - 1) * (A.step ?? 2.3) + (A.build ?? 0.95);
+        const secs = A.seconds || 4;
+        if (end > secs) {
+          add(ERR, where, `${slots.length} slots need ${end.toFixed(2)}s to finish but the theme runs ${secs}s. The last card would be caught mid-rise. Raise animate.seconds or cut a slot.`);
+        } else if (secs - end < 0.4) {
+          add(WARN, where, `The last slot lands at ${end.toFixed(2)}s of ${secs}s. Under ~0.4s of hold the finished card is gone before it can be read.`);
+        }
+      }
+      cap(where, 'source', s.source, B.source);
+    }
+
     if (s.type === 'wire') {
       const g = s.graph;
       if (!g || !Array.isArray(g.nodes) || !g.nodes.length) {
