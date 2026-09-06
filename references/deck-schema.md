@@ -325,6 +325,7 @@ once and cannot drift out of step. `check.js` validates every one of these.
 | `schematic` | `detail` | — | `callouts[]`, `zoom` |
 | `wide-cut` | `strip` | — | `beats[]`, `panorama: true` |
 | `console` | `wire` | `rail.items` | `graph`, `railAt` |
+| `ladder` | `ladder` | `grades` | `task`, `rungs[3]`, `rungs[2].parts` |
 | `index-rail` | `guide` | `index.items` | `upto` |
 | `briefing` | `exhibit` | — | `exhibit{kind,...}` |
 
@@ -368,6 +369,14 @@ under about 56 characters. Numbered deck-wide like `page`.
 
 **`wire`** (console) — a `graph` of nodes and edges, plus `railAt` pointing at
 one of `deck.rail.items`.
+
+**`ladder`** (ladder) — one `task` and exactly three `rungs`, graded `weak`,
+`better`, `best` in that order. Each rung is `{ grade, text }`; `text` keeps
+its newlines, because the shape of the best prompt is the thing being praised.
+The `best` rung may carry `parts` — two to five `{ key, text }` pairs naming
+what each clause of it is doing. Keep the keys identical across the deck.
+`deck.grades` renames the three rungs once. Anything other than three rungs
+throws.
 
 **`group`** (manifest) — one category: `n` (its position, which picks the hue),
 `category`, `icon` or `logo`, `deck`, and five or six `items` of

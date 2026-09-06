@@ -210,6 +210,60 @@ export function checkDeck(deck, theme) {
       }
     }
 
+    // A `ladder` slide is a climb, and the climb is the argument. The template
+    // already throws on the wrong number of rungs or an unknown grade, because
+    // there is no sane thing to draw; the checks here are the ones that render
+    // perfectly well and quietly say nothing — a rung out of order, a middle
+    // rung that is barely different from the first, keys that drift between
+    // slides so the closing summary names four parts the deck never showed.
+    if (s.type === 'ladder') {
+      const GR = ['weak', 'better', 'best'];
+      const rungs = s.rungs;
+      if (!Array.isArray(rungs) || rungs.length !== 3) {
+        add(ERR, where, `A ladder needs exactly three rungs, got ${Array.isArray(rungs) ? rungs.length : 0}. Two is a comparison and belongs in "versus"; four is a list.`);
+      } else {
+        rungs.forEach((r, j) => {
+          const w = `${where} rung ${j + 1}`;
+          if (r.grade !== GR[j]) {
+            add(ERR, w, `grade is "${r.grade}", expected "${GR[j]}". The rungs read worst-first and the colour ramp is the argument — reordering them inverts it.`);
+          }
+          if (!r.text) add(ERR, w, 'no text. An empty rung is a card the reader will try to read.');
+          else if (B.prompt && r.text.length > B.prompt) {
+            add(ERR, w, `${r.text.length} characters against a ${B.prompt} budget. Over this the fit pass shrinks the whole slide, which makes the two rungs above it smaller for no reason.`);
+          }
+        });
+        // The middle rung is where this pack fails silently: a "better" that is
+        // only a few words longer than the "weak" renders as three cards and
+        // reads as two.
+        const weak = rungs[0]?.text || '', better = rungs[1]?.text || '';
+        if (better && weak && better.length < weak.length * 1.5) {
+          add(WARN, where, 'The better rung is barely longer than the weak one. If it makes no new commitment, this is two rungs with a step painted on.');
+        }
+        const parts = rungs[2]?.parts;
+        if (parts) {
+          const items = parts.items;
+          if (!Array.isArray(items) || items.length < 2) {
+            add(ERR, where, 'A parts box needs at least two items. One part is a caption.');
+          } else {
+            if (B.maxParts && items.length > B.maxParts) {
+              add(ERR, where, `${items.length} parts against a max of ${B.maxParts}. Past that it is a second prompt, not a key to the first.`);
+            }
+            items.forEach((p, j) => {
+              const w = `${where} part ${j + 1}`;
+              if (!p.key) add(ERR, w, 'no key. The part has nothing naming it.');
+              else if (B.partKey && p.key.length > B.partKey) {
+                add(WARN, w, `key "${p.key}" is ${p.key.length} characters against a ${B.partKey} budget.`);
+              }
+              if (!p.text) add(ERR, w, 'no text. A named part with nothing under it is a label.');
+              else if (B.partText && p.text.length > B.partText) {
+                add(WARN, w, `${p.text.length} characters against a ${B.partText} budget.`);
+              }
+            });
+          }
+        }
+      }
+    }
+
     // A `wire` slide promises a diagram. Its budgets are geometric rather than
     // stylistic: nodes are absolutely positioned at their own centre and never
     // wrap, so an over-long label does not shrink — it grows the box until it

@@ -29,6 +29,7 @@ theme pack, not in the deck.
    | `index-rail` | a link roundup — "N pages worth your afternoon". Numbered rail, browser cards. |
    | `killlist` | "N things that stop X" — every row names what it kills. **Dark.** |
    | `kinetic` | a hook that loops as video. Render with `--animate`. **Dark.** |
+   | `ladder` | a teardown where the improvement is the content — one task written weak/better/best, the best one taken apart. Animates. |
    | `ledger` | per-item data with figures — "N tools and what each is worth" |
    | `manifest` | a counted taxonomy — "30 things, 5 categories", a metric on every row. **Dark.** Animates. |
    | `notebook-tabs` | a list deck — "12 folders". Inset card, tab strip. |
@@ -49,9 +50,9 @@ theme pack, not in the deck.
 
    `node scripts/render.js --themes` lists them with descriptions.
 
-   **Six themes render video**: `kinetic`, `swap`, `pixel-mascot`,
-   `vintage-print`, `manifest`, `datasheet`. Mark a slide `"animate": true` and pass `--animate`; that
-   slide writes an MP4 *and* a PNG. See "Animated slides" below. The other 21
+   **Seven themes render video**: `kinetic`, `swap`, `pixel-mascot`,
+   `vintage-print`, `manifest`, `datasheet`, `ladder`. Mark a slide `"animate": true` and pass
+   `--animate`; that slide writes an MP4 *and* a PNG. See "Animated slides" below. The other 22
    themes have no motion and ignore the flag.
 2. **Read the theme's rules** — `themes/<name>/rules.md`. Read only the one
    theme you are using. Read `references/slide-grammar.md` if you are unsure
@@ -105,6 +106,13 @@ a dashed wire naming both ends, a brand tile, then `does`, `why` and a numbered
 `how` recipe of 2-4 steps. Every entry fills the same fields — `check.js`
 errors on a blank one, because a hole in a run of identical layouts reads as an
 omission rather than as brevity.
+
+`ladder` — `ladder` only. One `task` and exactly three `rungs` graded `weak`,
+`better`, `best` in that order, each a prompt card; the best one may carry a
+`parts` box naming what each clause of it is doing. Anything other than three
+rungs throws. The middle rung is where the pack fails — if it is only
+cosmetically better than the first, `check.js` warns, because three cards that
+read as two is the one way this slide type disappoints silently.
 
 `guide` — `index-rail` only. One entry from `deck.index.items`, with a rail
 down the left edge showing how far through the list the reader is. The entry
@@ -163,8 +171,8 @@ Platforms: `instagram-portrait` (default), `instagram-square`,
 
 ## Animated slides
 
-Six themes declare motion: `kinetic`, `swap`, `pixel-mascot`,
-`vintage-print`, `manifest`, `datasheet`. Mark the slides that should move and pass
+Seven themes declare motion: `kinetic`, `swap`, `pixel-mascot`,
+`vintage-print`, `manifest`, `datasheet`, `ladder`. Mark the slides that should move and pass
 `--animate`:
 
 ```json
