@@ -47,14 +47,14 @@ theme pack, not in the deck.
    | `versus` | a genuine before/after; the split line moves |
    | `vintage-print` | a process with sequential steps. Has the **reveal** mechanic. Animates. |
    | `wide-cut` | one big idea as a 3-slide panorama. **Dark.** |
-   | `workbench` | a setup guide the reader will **type** — kraft paper, taped code cards, a mark circling one token |
+   | `workbench` | a setup guide the reader will **type** — kraft paper, taped code cards, a mark circling one token. Animates: a band of light crosses the card left to right and the diagram lights up as it passes. |
 
    `node scripts/render.js --themes` lists them with descriptions.
 
-   **Eight themes render video**: `kinetic`, `swap`, `pixel-mascot`,
-   `vintage-print`, `manifest`, `datasheet`, `ladder`, `assembly`. Mark a slide `"animate": true` and pass
-   `--animate`; that slide writes an MP4 *and* a PNG. See "Animated slides" below. The other 22
-   themes have no motion and ignore the flag.
+   **Nine themes render video**: `kinetic`, `swap`, `pixel-mascot`,
+   `vintage-print`, `manifest`, `datasheet`, `ladder`, `assembly`, `workbench`. Mark a slide
+   `"animate": true` and pass `--animate`; that slide writes an MP4 *and* a PNG. See
+   "Animated slides" below. The other 21 themes have no motion and ignore the flag.
 
    `assembly` is the odd one out and the only **single-frame** theme: its deck is
    exactly one slide, it runs 14s rather than a 4s loop, and the video *is* the
@@ -214,9 +214,9 @@ store.
 
 ## Animated slides
 
-Eight themes declare motion: `kinetic`, `swap`, `pixel-mascot`,
-`vintage-print`, `manifest`, `datasheet`, `ladder`, `assembly`. Mark the slides that should move and pass
-`--animate`:
+Nine themes declare motion: `kinetic`, `swap`, `pixel-mascot`,
+`vintage-print`, `manifest`, `datasheet`, `ladder`, `assembly`, `workbench`. Mark the slides that
+should move and pass `--animate`:
 
 ```json
 { "type": "hook", "headline": "…", "animate": true }
@@ -264,6 +264,32 @@ screenshots, about 3 minutes for the one frame.
 Prove it the way the existing themes were proven: render a deck with no
 `animate` flags before and after your change and diff the PNG checksums. If a
 still moved, the scoping leaked.
+
+### A sweep, and the two ways it goes wrong
+
+`workbench` is the one theme whose motion is a **light travelling across the
+slide** rather than parts arriving. Two traps, both found by rendering:
+
+**Stagger with negative delays only.** To make the diagram answer the light,
+each part is delayed by its own horizontal position. A *positive*
+`animation-delay` on an infinite animation puts the clip's last frame somewhere
+other than frame 0, and the loop visibly jumps. A negative delay is a pure
+phase shift, so the seam disappears. Put the flare near the END of the keyframe
+timeline (~90%) and every delay you need comes out negative. `nodeGraph` stamps
+`--nx` — the 0-100 horizontal position — on every node, wire and pin, so the
+delay is arithmetic on that number and a re-laid-out graph still lights in the
+right order.
+
+**Tilt the band with `skewX`, not with an angled gradient.** An angled
+gradient inside an upright box puts its zero stop on a *corner*, so alpha is
+non-zero along the box's own left edge and the "light" arrives as a hard
+vertical seam sliding across the card. Keep the gradient at `90deg` and skew
+the element.
+
+Also: the sweep's travel is stated in percentages of its own width, so the
+start and end offsets must be **derived from the band width**, not typed. Narrow
+the band with a hardcoded end offset and the light parks half-on the card — in
+every still.
 
 ## Determinism
 

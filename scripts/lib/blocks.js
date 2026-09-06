@@ -143,15 +143,21 @@ export function nodeGraph(graph, { iconFn, logoFn, height = 460 } = {}) {
       : `M${a.x},${a.y} L${a.x},${a.y + dy / 2} L${b.x},${a.y + dy / 2} L${b.x},${b.y}`;
   };
 
+  // Every part of the graph carries `--nx`, its horizontal position as a bare
+  // 0-100 number. Nothing here reads it: it exists so a theme can key motion
+  // to where a thing sits on the page — `animation-delay: calc(var(--nx) *
+  // Ns)` is a light crossing the diagram left to right, with no theme needing
+  // to know the node order or hardcode nth-child. A wire's is its midpoint,
+  // which for elbow routing is where its horizontal run happens.
   const wires = (graph.edges || []).map((e) => {
     const a = at[e.from], b = at[e.to];
     if (!a || !b) throw new Error(`Graph edge ${e.from} -> ${e.to} names a node that does not exist.`);
     return `<path d="${path(a, b)}" class="ng-wire${e.dashed ? ' ng-wire-dash' : ''}${e.live ? ' ng-wire-live' : ''}"
-      vector-effect="non-scaling-stroke" fill="none"/>`;
+      style="--nx:${(a.x + b.x) / 2}" vector-effect="non-scaling-stroke" fill="none"/>`;
   }).join('');
 
   const pins = graph.nodes.map((n) =>
-    `<circle cx="${n.x}" cy="${n.y}" r="0.7" class="ng-pin" vector-effect="non-scaling-stroke"/>`).join('');
+    `<circle cx="${n.x}" cy="${n.y}" r="0.7" class="ng-pin" style="--nx:${n.x}" vector-effect="non-scaling-stroke"/>`).join('');
 
   const labels = (graph.edges || []).filter((e) => e.label).map((e) => {
     const a = at[e.from], b = at[e.to];
@@ -161,7 +167,7 @@ export function nodeGraph(graph, { iconFn, logoFn, height = 460 } = {}) {
   const boxes = graph.nodes.map((n) => {
     const badge = n.logo && logoFn ? `<i class="ng-logo">${logoFn(n.logo) || ''}</i>`
       : n.icon && iconFn ? `<i class="ng-ico">${iconFn(n.icon)}</i>` : '';
-    return `<span class="ng-node ng-${n.kind || 'default'}" style="left:${n.x}%; top:${n.y}%">
+    return `<span class="ng-node ng-${n.kind || 'default'}" style="left:${n.x}%; top:${n.y}%; --nx:${n.x}">
       ${badge}<span class="ng-txt">
         <b>${esc(n.label)}</b>${n.note ? `<em>${esc(n.note)}</em>` : ''}
       </span></span>`;

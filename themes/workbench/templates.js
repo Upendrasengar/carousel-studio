@@ -32,6 +32,13 @@ import { logo } from '../../scripts/lib/assets.js';
 const T = (c) => c.t.type;
 
 /**
+ * Motion is opt-in per slide. Every keyframe is scoped under `.is-anim`, so a
+ * slide without the flag carries no animation at all and its still is what the
+ * pack rendered before it could move.
+ */
+const anim = (s, base) => (s.animate ? `${base} is-anim` : base);
+
+/**
  * The two-line headline. Line one is ink in the heavy grotesque, line two is
  * the accent in serif italic — the pack's signature, and it only works on two
  * lines. One line loses the turn entirely; three makes the italic a colour
@@ -137,23 +144,23 @@ const TYPES = {
   /** The cover. Title, one line under it, and the card that sets the subject. */
   hook: (s, ctx) => fitFrame(
     `${chip(s, ctx)}${headline(s, ctx)}${deckLine(s, ctx)}${subject(s, ctx)}`,
-    'body-hook',
+    anim(s, 'body-hook'),
   ),
 
   /** The signature slide: caption, then the taped card it is captioning. */
   build: (s, ctx) => fitFrame(
     `${chip(s, ctx)}${headline(s, ctx)}${para(s, ctx)}${rowList(s.rows, ctx, false)}${aside(s, ctx)}
      ${traits(s, ctx)}${subject(s, ctx)}`,
-    'body-build',
+    anim(s, 'body-build'),
   ),
 
   point: (s, ctx) => fitFrame(
     `${chip(s, ctx)}${headline(s, ctx)}${para(s, ctx)}${rowList(s.rows, ctx, false)}${aside(s, ctx)}${subject(s, ctx)}`,
-    'body-build',
+    anim(s, 'body-build'),
   ),
   steps: (s, ctx) => fitFrame(
     `${chip(s, ctx)}${headline(s, ctx)}${para(s, ctx)}${rowList(s.steps || s.rows, ctx, true)}${subject(s, ctx)}`,
-    'body-build',
+    anim(s, 'body-build'),
   ),
   stat(s, ctx) {
     const cells = (s.stats || []).map((v) =>
@@ -161,7 +168,7 @@ const TYPES = {
         <span class="stat-v" ${fitAttr(T(ctx).statValue)}>${rich(v.value)}</span>
         <span class="stat-l" ${fitAttr(T(ctx).statLabel)}>${rich(v.label)}</span></div>`).join('');
     const grid = cells ? `<div class="stats">${cells}</div>` : '';
-    return fitFrame(`${chip(s, ctx)}${headline(s, ctx)}${grid}${para(s, ctx)}`, 'body-build');
+    return fitFrame(`${chip(s, ctx)}${headline(s, ctx)}${grid}${para(s, ctx)}`, anim(s, 'body-build'));
   },
   quote: (s, ctx) => fitFrame(`${chip(s, ctx)}
     <blockquote class="quote" ${fitAttr(T(ctx).quote)}>${rich(s.quote || s.headline)}</blockquote>
@@ -170,7 +177,7 @@ const TYPES = {
 
   cta: (s, ctx) => fitFrame(`${chip(s, ctx)}${headline(s, ctx)}
     ${s.action ? `<p class="action" ${fitAttr(T(ctx).deck)}>${rich(s.action)}</p>` : ''}
-    ${para(s, ctx)}${subject(s, ctx)}`, 'body-cta'),
+    ${para(s, ctx)}${subject(s, ctx)}`, anim(s, 'body-cta')),
 };
 
 export const SLIDE_TYPES = Object.keys(TYPES);
@@ -196,6 +203,87 @@ export function slideHTML(slide, ctx) {
   const build = TYPES[slide.type];
   if (!build) throw new Error(`Unknown slide type "${slide.type}". This theme has: ${SLIDE_TYPES.join(', ')}`);
   return `${header(ctx)}${build(slide, ctx)}${objectVisual(slide, ctx.t, ctx.deck)}${footer(ctx)}`;
+}
+
+/**
+ * The motion: one band of light crossing the taped card, left to right.
+ *
+ * The band is a `::after` on the card, so a still slide has no extra DOM. What
+ * makes it read as light rather than as a moving rectangle is that the diagram
+ * answers it — each node and each wire flares as the band reaches its own x,
+ * which is why `nodeGraph` stamps `--nx` on every part. The delay is arithmetic
+ * on that number, so a graph can be re-laid-out and the light still arrives in
+ * the right order with nothing to update here.
+ *
+ * All three delays are NEGATIVE, and that is the whole reason the flare sits at
+ * 90% of the keyframe timeline rather than in the middle. A positive delay on
+ * an infinite animation puts the last frame of the clip somewhere other than
+ * frame 0 — the loop visibly jumps. A negative delay is a phase shift: frame 0
+ * and the frame after the last are the same picture, so the seam disappears.
+ */
+function motionCSS(t, c) {
+  const spec = t.animate || {};
+  const D = spec.seconds || 4;
+  const s0 = spec.sweepStart ?? 0.04;   // band clears the left edge
+  const s1 = spec.sweepEnd ?? 0.62;     // band clears the right edge
+  const pk = spec.peak ?? 0.9;          // where in the keyframes a part flares
+
+  // Geometry of the band, in card widths, so "when does the light reach x"
+  // is a solved equation rather than four numbers tuned by eye.
+  // FROM and TO are derived from the band width rather than typed, because
+  // they are translate percentages of the band's OWN width: narrow the band
+  // and a hardcoded end offset stops short, leaving the light parked half on
+  // the card in every still.
+  const BAND = 0.34, SKEW = 10;
+  const FROM = -140, TO = Math.round(100 / BAND + 30);
+  const c0 = BAND * (0.5 + FROM / 100), c1 = BAND * (0.5 + TO / 100);
+  const perX = (D * (s1 - s0)) / (c1 - c0) / 100;          // seconds per 1% of x
+  const base = D * (s0 - pk) - perX * 100 * c0;            // seconds at x = 0
+  const delay = `calc(var(--nx, 50) * ${perX.toFixed(5)}s - ${(-base).toFixed(3)}s)`;
+
+  return `
+@keyframes wb-sheen {
+  0%, ${(s0 * 100).toFixed(1)}%   { transform:translateX(${FROM}%) skewX(-${SKEW}deg); }
+  ${(s1 * 100).toFixed(1)}%, 100% { transform:translateX(${TO}%) skewX(-${SKEW}deg); }
+}
+/* The flare returns to base at both 0% and 100%. Anything that does not is a
+   visible cut once per cycle, whatever the delay. */
+@keyframes wb-lit {
+  0%, ${((pk - 0.12) * 100).toFixed(1)}% { border-color:${c.codeFn}; box-shadow:none; color:${c.cardInk}; }
+  ${(pk * 100).toFixed(1)}% { border-color:#F0DDB0; color:#FFF6E2;
+    box-shadow:0 0 0 1px rgba(255,240,205,.42), 0 0 26px rgba(255,229,180,.42); }
+  100% { border-color:${c.codeFn}; box-shadow:none; color:${c.cardInk}; }
+}
+@keyframes wb-wire-lit {
+  0%, ${((pk - 0.13) * 100).toFixed(1)}% { stroke:${c.gutter}; stroke-width:1.6; }
+  ${(pk * 100).toFixed(1)}% { stroke:#F5E4B8; stroke-width:2.6; }
+  100% { stroke:${c.gutter}; stroke-width:1.6; }
+}
+
+/* The band lives inside the card, which already clips, so it never spills onto
+   the paper. It is above the card's contents and below nothing — light falls
+   on the whole surface, mark included. */
+.is-anim .gcard::after, .is-anim .code::after, .is-anim .term::after {
+  content:""; position:absolute; top:-8%; bottom:-8%; left:0;
+  width:${(BAND * 100).toFixed(0)}%; z-index:6; pointer-events:none;
+  transform:translateX(${FROM}%) skewX(-${SKEW}deg);
+  /* The tilt is a skew on the element, NOT an angled gradient. An angled
+     gradient inside an upright box has its zero stop on a corner, so alpha is
+     non-zero along the box's own left edge and the band arrives as a hard
+     vertical seam sliding across the card. Skewing keeps the gradient
+     horizontal — zero at both edges, on every row. */
+  background:linear-gradient(90deg,
+    rgba(255,246,222,0) 0%,   rgba(255,246,222,.03) 26%,
+    rgba(255,248,228,.10) 43%, rgba(255,251,238,.28) 50%,
+    rgba(255,248,228,.10) 57%, rgba(255,246,222,.03) 74%,
+    rgba(255,246,222,0) 100%);
+  animation:wb-sheen ${D}s linear infinite both; }
+
+.is-anim .ng-node { animation:wb-lit ${D}s ease-out infinite both;
+  animation-delay:${delay}; }
+.is-anim .ng-wire:not(.ng-wire-dash) { animation:wb-wire-lit ${D}s ease-out infinite both;
+  animation-delay:${delay}; }
+`;
 }
 
 export function css(ctx) {
@@ -348,6 +436,13 @@ body::before { content:""; position:absolute; inset:0; z-index:0; pointer-events
 .ng-node { font-family:Mono; font-size:19px; color:${c.cardInk};
   background:${c.cardBar}; border:1.5px solid ${c.codeFn}; border-radius:8px;
   padding:8px 14px; }
+/* Badge sizing has to be stated here. Simple Icons marks ship with a viewBox
+   and no width, so an unsized one lays out at the SVG default 300x150 and
+   throws the whole diagram off the card. */
+.ng-logo, .ng-ico { flex:0 0 auto; width:24px; height:24px; line-height:0; }
+.ng-logo svg, .ng-ico svg { width:24px; height:24px; }
+.ng-hub { border-color:${c.codeDec}; }
+.ng-hub .ng-ico { color:${c.codeDec}; }
 .ng-txt b { font-family:MonoBold; }
 .ng-txt em { color:${c.gutter}; font-size:15px; }
 .ng-wire { stroke:${c.gutter}; stroke-width:1.6; }
@@ -385,6 +480,7 @@ body::before { content:""; position:absolute; inset:0; z-index:0; pointer-events
 
 .object { right:${Math.round(cv.margin * 0.6)}px; bottom:${Math.round(cv.safeBottom * 1.1)}px; }
 
+${motionCSS(t, c)}
 ${textureCSS}
 `;
 }

@@ -70,6 +70,29 @@ Cards pad out to `codeMinLines` with empty numbered rows. That is not
 decoration: the trailing numbers are what make the card read as a file rather
 than a crop, and they are how it earns its half of the page.
 
+## Motion: light crosses the card
+
+Mark a slide `"animate": true` and render with `--animate`. One band of light
+travels across the taped card, left to right, in the first ~2.4s of a 4s loop
+and is gone for the rest. Nothing arrives, nothing rises: the slide is fully
+drawn at frame 0 and stays drawn, which is why it survives being the first
+thing in a feed.
+
+What makes it read as light rather than as a moving rectangle is that the
+diagram answers it — each node and each wire flares as the band reaches its own
+horizontal position. That comes from `--nx`, which `nodeGraph` stamps on every
+part, so a graph can be re-laid-out and the light still arrives in the right
+order with nothing to update in the theme.
+
+**Use it on the hook.** A card the reader is meant to *read* — a code listing,
+a terminal session — does not want a light moving over the line they are on.
+The graph card is the one that gains from it, because the light is travelling
+the same direction as the wiring.
+
+Six nodes at one x flare together, not one by one. That is correct: they are
+the same distance along the light's path. If you want them to arrive in
+sequence, stagger their `x`, not the CSS.
+
 ## The aside
 
 One quiet italic line that must say something the paragraph deliberately does

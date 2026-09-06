@@ -41,6 +41,13 @@
   "accentRotation": [
     "#A8341E"
   ],
+  "animate": {
+    "seconds": 4,
+    "fps": 30,
+    "sweepStart": 0.04,
+    "sweepEnd": 0.62,
+    "peak": 0.9
+  },
   "font": {
     "display": {
       "file": "grotesque-800.woff2",
