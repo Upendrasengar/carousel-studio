@@ -66,6 +66,22 @@ Lines starting with `$`, `/` or `>` render in the accent colour as commands.
 Max 8 lines.
 
 ```json
+{ "kind": "code", "title": "publish.py", "lang": "python",
+  "lines": ["mcp.post_to_social(", "    media_urls=slides)"],
+  "minLines": 9,
+  "mark": { "line": 2, "token": "media_urls", "kind": "circle",
+            "label": "plural = carousel" } }
+```
+A line-numbered source card with shallow syntax colour — `workbench` renders
+it. `lang` is `python`, `javascript`, `json` or `bash`. `mark` circles one
+token: `token` must match a whole token as the highlighter sees it, so a
+quoted key is `'id'` including the quotes, and a token that is not found
+throws rather than dropping the annotation. `label` is a handwritten note set
+below the card. **Code does not wrap** — an over-long line is clipped by the
+card edge, so the theme's `codeLine` budget is a hard limit `check.js` errors
+on. `minLines` pads the card with empty numbered rows.
+
+```json
 { "kind": "image", "src": "../shots/dashboard.png", "title": "app.example.com" }
 ```
 `src` is relative to the deck JSON. Embedded as a data URI inside a browser
@@ -294,6 +310,7 @@ once and cannot drift out of step. `check.js` validates every one of these.
 | `ledger` | `entry` / `tally` | `entries.items` | `n` |
 | `swap` | `swap` / `cover` / `receipt` | — | `paid`, `free`, `features` |
 | `handbuilt` | `build` | — | `note[]`, `aside`, `prop` |
+| `workbench` | `build` | — | `media` (`code`/`terminal`/`graph`), `aside`, `traits[]` |
 | `audit` | `flow` / `compare` | — | `left`/`mid`/`right`, `bad`/`good` |
 | `catalogue` | `page` | — | `items[]`, numbered deck-wide |
 | `killlist` | `kills` | — | `items[]` with `kills`, numbered deck-wide |
@@ -328,6 +345,13 @@ itemises the paid side into a total.
 card, and they **do not wrap**, so keep each under about 40 characters.
 `aside` is a handwritten margin line with an arrow; `prop` puts the character
 in a scene.
+
+**`build`** (workbench) — a caption above a taped card. `headline` splits on a
+newline into an ink line and a red italic line, and there is no asterisk
+markup for it. `aside` is one quiet italic line that must say something the
+body does not. `traits[]` is the icon strip. A build slide with no `media`,
+`rows`, `traits` or `note` is a caption with nothing to caption, and
+`check.js` errors on it.
 
 **`flow`** (audit) — three columns read *across*, not down: `left.items[n]`,
 `mid.steps[n]` and `right.items[n]` are the same problem, its fix and its

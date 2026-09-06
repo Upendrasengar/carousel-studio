@@ -199,6 +199,47 @@ export function checkDeck(deck, theme) {
       }
     }
 
+    // A `build` slide is a caption above a subject — a card, a row list, a
+    // trait strip or a note. With none of them it is a caption captioning
+    // nothing, which is the one way this slide type fails silently: it renders
+    // perfectly well and says nothing.
+    if (s.type === 'build') {
+      const subject = s.media || s.rows || s.steps || s.traits || s.note || s.stats;
+      if (!subject) {
+        add(ERR, where, 'Build slide with no subject — no media, rows, traits or note. The copy above one of those is a caption; on its own it is a headline on a blank page.');
+      }
+    }
+
+    // A code card sets its lines `white-space: pre`, so an over-long line is
+    // clipped by the card edge rather than wrapped — silently, and only on the
+    // one slide that happens to have it. The budget is the number of monospace
+    // characters that fit the card, so it is a hard limit, not a preference.
+    if (s.media && s.media.kind === 'code') {
+      const lines = s.media.lines;
+      if (!Array.isArray(lines) || !lines.length) {
+        add(ERR, where, 'Code card with no lines.');
+      } else {
+        if (B.maxCodeLines && lines.length > B.maxCodeLines) {
+          add(ERR, where, `${lines.length} code lines against a max of ${B.maxCodeLines}. The card does not scroll.`);
+        }
+        lines.forEach((l, j) => {
+          if (B.codeLine && String(l).length > B.codeLine) {
+            add(ERR, `${where} code line ${j + 1}`, `${String(l).length} characters against a ${B.codeLine} budget. Code does not wrap — the overflow is clipped by the card edge and nothing warns you.`);
+          }
+        });
+        const mk = s.media.mark;
+        if (mk) {
+          if (!Number.isInteger(mk.line) || mk.line < 1 || mk.line > lines.length) {
+            add(ERR, where, `Code mark is on line ${mk.line}, but the card has ${lines.length} lines.`);
+          } else if (!mk.token) {
+            add(ERR, where, 'Code mark with no token. The mark has to name what it circles.');
+          } else if (!String(lines[mk.line - 1]).includes(mk.token)) {
+            add(ERR, where, `Code mark token "${mk.token}" does not appear on line ${mk.line}: ${lines[mk.line - 1]}`);
+          }
+        }
+      }
+    }
+
     if (s.type === 'quote' && !s.quote && !s.headline) add(ERR, where, 'Quote slide with no quote.');
 
     if (s.mascot && s.mascot !== false && !POSE_NAMES.includes(s.mascot)) {

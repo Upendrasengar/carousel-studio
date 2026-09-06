@@ -45,6 +45,7 @@ theme pack, not in the deck.
    | `versus` | a genuine before/after; the split line moves |
    | `vintage-print` | a process with sequential steps. Has the **reveal** mechanic. Animates. |
    | `wide-cut` | one big idea as a 3-slide panorama. **Dark.** |
+   | `workbench` | a setup guide the reader will **type** — kraft paper, taped code cards, a mark circling one token |
 
    `node scripts/render.js --themes` lists them with descriptions.
 
@@ -92,6 +93,12 @@ sequence; it is the strongest mechanic in the pack.
 subject: a `fan`, a `loop`, a `chat`, a `record` or a `table`, all built from
 data rather than screenshots. Reach for the theme when the honest answer to
 "what does this look like" is a diagram.
+
+`build` — `workbench` only. A caption — label chip, two-line headline, body,
+one italic aside — above a dark card taped to the kraft: a line-numbered
+`code` file, a `terminal` session or a `graph`. A code card takes one
+`mark` naming the line and the token to circle, and an unmatched token throws
+rather than rendering a slide whose copy points at nothing.
 
 `entry` — `datasheet` only. One connector as a filled-in form: a counter chip,
 a dashed wire naming both ends, a brand tile, then `does`, `why` and a numbered
