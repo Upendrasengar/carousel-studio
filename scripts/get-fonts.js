@@ -40,6 +40,12 @@ const SHARED = [
 ];
 
 const FACES = {
+  promptcard: [
+    { file: 'display.woff2',     family: 'Figtree:wght@800' },
+    { file: 'displayMid.woff2',  family: 'Figtree:wght@600' },
+    { file: 'body.woff2',        family: 'Figtree:wght@400' },
+    { file: 'serifItalic.woff2', family: 'Playfair+Display:ital,wght@1,700' },
+  ],
   briefing: [
     { file: 'display.woff2',    family: 'Figtree:wght@800' },
     { file: 'body.woff2',       family: 'Figtree:wght@400' },

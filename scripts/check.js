@@ -131,8 +131,16 @@ export function checkDeck(deck, theme) {
     }
 
     // One loud element per slide. Two accent spans is two loud elements.
+    //
+    // A pack may raise its own ceiling with `budgets.maxAccents` — promptcard
+    // alternates accented words down a four-line cover, which is a rhythm
+    // rather than two competing emphases. Raising it is a design decision the
+    // theme has to state out loud, which is the point of putting it in tokens.
+    const maxAccents = B.maxAccents || 1;
     const accents = (String(s.headline || s.quote || '').match(/\*[^*]+\*/g) || []).length;
-    if (accents > 1) add(WARN, where, `${accents} accent spans in the headline. The accent should touch exactly one thing.`);
+    if (accents > maxAccents) {
+      add(WARN, where, `${accents} accent spans in the headline against this theme's ceiling of ${maxAccents}. The accent should touch exactly one thing.`);
+    }
     if (s.type === 'stat' && accents > 0) add(WARN, where, 'Accent in a stat headline competes with the stat values, which are already the loud element.');
 
     const list = s.steps || s.rows;
