@@ -210,6 +210,57 @@ export function checkDeck(deck, theme) {
       }
     }
 
+    // A `wire` slide promises a diagram. Its budgets are geometric rather than
+    // stylistic: nodes are absolutely positioned at their own centre and never
+    // wrap, so an over-long label does not shrink — it grows the box until it
+    // overlaps its neighbour, on the one slide that happens to have it.
+    if (s.type === 'wire') {
+      const g = s.graph;
+      if (!g || !Array.isArray(g.nodes) || !g.nodes.length) {
+        add(ERR, where, 'Wire slide with no graph. The pack promises a diagram on every wire slide, and an empty one is a promise the reader can see.');
+      } else {
+        if (g.nodes.length < 3) {
+          add(ERR, where, `${g.nodes.length} node(s). Under three there is no structure to read — say it in prose instead.`);
+        } else if (g.nodes.length > 6) {
+          add(ERR, where, `${g.nodes.length} nodes against a max of 6. Past six the labels collide at feed scale.`);
+        }
+        const hubs = g.nodes.filter((n) => n.kind === 'hub');
+        if (hubs.length > 1) {
+          add(ERR, where, `${hubs.length} hub nodes. Two hubs and neither one is the centre.`);
+        } else if (!hubs.length) {
+          add(WARN, where, 'No hub node. Nothing in the graph reads as the subject.');
+        }
+        const ids = new Set();
+        g.nodes.forEach((n, j) => {
+          const w = `${where} node ${j + 1}`;
+          if (!n.id) add(ERR, w, 'no id — edges name nodes by id.');
+          else if (ids.has(n.id)) add(ERR, w, `duplicate id "${n.id}".`);
+          else ids.add(n.id);
+          // The pack's label budgets are guidance, not geometry — 17 and 18
+          // characters both render clean. They warn rather than error because
+          // where the box actually collides depends on its neighbour, which
+          // only the rendered slide knows.
+          if (!n.label) add(ERR, w, 'no label.');
+          else if (n.label.length > 16) {
+            add(WARN, w, `label "${n.label}" is ${n.label.length} characters against a 16 budget. Nodes do not wrap, they get wider — check it against its neighbour.`);
+          }
+          if (n.note && n.note.length > 22) {
+            add(WARN, w, `note "${n.note}" is ${n.note.length} characters against a 22 budget.`);
+          }
+          ['x', 'y'].forEach((k) => {
+            if (typeof n[k] !== 'number' || n[k] < 0 || n[k] > 100) {
+              add(ERR, w, `${k} is ${n[k]} — it is a percentage of the graph box and must be 0-100.`);
+            }
+          });
+        });
+        (g.edges || []).forEach((e, j) => {
+          const w = `${where} edge ${j + 1}`;
+          if (!ids.has(e.from)) add(ERR, w, `from "${e.from}" names no node in this graph.`);
+          if (!ids.has(e.to)) add(ERR, w, `to "${e.to}" names no node in this graph.`);
+        });
+      }
+    }
+
     // A code card sets its lines `white-space: pre`, so an over-long line is
     // clipped by the card edge rather than wrapped — silently, and only on the
     // one slide that happens to have it. The budget is the number of monospace

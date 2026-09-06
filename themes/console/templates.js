@@ -165,7 +165,13 @@ body { background:${c.bg}; color:${c.ink}; font-family:Body, system-ui, sans-ser
   padding:11px 15px; box-shadow:0 0 24px -10px ${accent}66, inset 0 1px 0 #ffffff08; }
 .ng-hub { border-color:${accent}; background:${c.surface};
   box-shadow:0 0 46px -8px ${accent}88, inset 0 1px 0 #ffffff10; }
-.ng-ghost { opacity:.42; border-color:${c.rule}; box-shadow:none; }
+/* Dim the ghost's own parts rather than the element. Element opacity makes
+   the panel translucent, and the pin and the wire that terminate at the
+   node's centre then show through its label. */
+.ng-ghost { background:${c.panel}; border-color:${c.rule}; box-shadow:none; }
+.ng-ghost .ng-txt b { color:${c.inkFaint}; }
+.ng-ghost .ng-txt em { color:${c.rule}; }
+.ng-ghost .ng-ico, .ng-ghost .ng-logo { opacity:.45; }
 .ng-ico { color:${accent}; }
 .ng-ico svg { width:20px; height:20px; }
 .ng-logo { color:${c.inkSoft}; }
