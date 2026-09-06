@@ -24,6 +24,7 @@ theme pack, not in the deck.
    | `catalogue` | a directory — "N tools, M categories", numbered throughout |
    | `console` | a stack or build, diagrammed. **Dark.** |
    | `decision` | a branching "should you…" — heavily saved |
+   | `datasheet` | a connector or integration round-up where each entry ends in setup **steps**. Fixed 3-field form. Animates. |
    | `handbuilt` | a build log in your own voice — "I made this" |
    | `index-rail` | a link roundup — "N pages worth your afternoon". Numbered rail, browser cards. |
    | `killlist` | "N things that stop X" — every row names what it kills. **Dark.** |
@@ -47,8 +48,8 @@ theme pack, not in the deck.
 
    `node scripts/render.js --themes` lists them with descriptions.
 
-   **Five themes render video**: `kinetic`, `swap`, `pixel-mascot`,
-   `vintage-print`, `manifest`. Mark a slide `"animate": true` and pass `--animate`; that
+   **Six themes render video**: `kinetic`, `swap`, `pixel-mascot`,
+   `vintage-print`, `manifest`, `datasheet`. Mark a slide `"animate": true` and pass `--animate`; that
    slide writes an MP4 *and* a PNG. See "Animated slides" below. The other 21
    themes have no motion and ignore the flag.
 2. **Read the theme's rules** — `themes/<name>/rules.md`. Read only the one
@@ -91,6 +92,12 @@ sequence; it is the strongest mechanic in the pack.
 subject: a `fan`, a `loop`, a `chat`, a `record` or a `table`, all built from
 data rather than screenshots. Reach for the theme when the honest answer to
 "what does this look like" is a diagram.
+
+`entry` — `datasheet` only. One connector as a filled-in form: a counter chip,
+a dashed wire naming both ends, a brand tile, then `does`, `why` and a numbered
+`how` recipe of 2-4 steps. Every entry fills the same fields — `check.js`
+errors on a blank one, because a hole in a run of identical layouts reads as an
+omission rather than as brevity.
 
 `guide` — `index-rail` only. One entry from `deck.index.items`, with a rail
 down the left edge showing how far through the list the reader is. The entry
@@ -149,8 +156,8 @@ Platforms: `instagram-portrait` (default), `instagram-square`,
 
 ## Animated slides
 
-Five themes declare motion: `kinetic`, `swap`, `pixel-mascot`,
-`vintage-print`, `manifest`. Mark the slides that should move and pass
+Six themes declare motion: `kinetic`, `swap`, `pixel-mascot`,
+`vintage-print`, `manifest`, `datasheet`. Mark the slides that should move and pass
 `--animate`:
 
 ```json

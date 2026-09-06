@@ -1,0 +1,197 @@
+{
+  "name": "datasheet",
+  "label": "Datasheet",
+  "description": "Warm technical paper with an ink-blue rule. Every entry slide is the same form filled in: a counter chip, a dashed wire from your tool to the thing it reaches, a brand tile, then three fixed fields \u2014 what it does, why it's useful, and a numbered setup recipe in a dashed box. The recipe is the payload, so the deck is a save rather than a scroll. Built for integration and connector round-ups where each entry needs instructions, not a statistic. Animates: the fields land in reading order and the recipe steps type in. Derived from the DcSlXDIE2WD reference deck.",
+  "canvas": {
+    "width": 1080,
+    "height": 1350,
+    "scale": 2,
+    "safeTop": 104,
+    "safeBottom": 128,
+    "margin": 56
+  },
+  "color": {
+    "bg": "#F2EFE8",
+    "surface": "#FFFFFF",
+    "fieldA": "#E6DFD0",
+    "fieldB": "#F8F5EE",
+    "chrome": "#E8E2D6",
+    "ink": "#171614",
+    "inkSoft": "#4E4A42",
+    "inkFaint": "#6F685A",
+    "rule": "#D8D0BF",
+    "wire": "#BDB4A0",
+    "accent": "#2F5BD2",
+    "accentInk": "#FFFFFF",
+    "accentTint": "#DEE5FA",
+    "tile": "#171614",
+    "tileInk": "#F8F5EE"
+  },
+  "accentRotation": [
+    "#2F5BD2"
+  ],
+  "font": {
+    "display": {
+      "file": "grotesque-800.woff2",
+      "weight": 800
+    },
+    "body": {
+      "file": "sans-400.woff2",
+      "weight": 400
+    },
+    "bodyMid": {
+      "file": "sans-600.woff2",
+      "weight": 600
+    },
+    "mono": {
+      "file": "mono-400.woff2",
+      "weight": 400
+    },
+    "monoBold": {
+      "file": "mono-700.woff2",
+      "weight": 700
+    }
+  },
+  "type": {
+    "eyebrow": {
+      "size": 18,
+      "tracking": 0.16,
+      "weight": 700,
+      "caps": true,
+      "min": 14
+    },
+    "headline": {
+      "size": 68,
+      "leading": 1.05,
+      "tracking": -0.03,
+      "min": 36
+    },
+    "deck": {
+      "size": 26,
+      "leading": 1.42,
+      "min": 18
+    },
+    "body": {
+      "size": 25,
+      "leading": 1.46,
+      "min": 18
+    },
+    "name": {
+      "size": 64,
+      "leading": 1.04,
+      "tracking": -0.028,
+      "min": 36
+    },
+    "label": {
+      "size": 19,
+      "tracking": 0.14,
+      "min": 15
+    },
+    "field": {
+      "size": 30,
+      "leading": 1.4,
+      "min": 21
+    },
+    "step": {
+      "size": 24,
+      "leading": 1.5,
+      "min": 17
+    },
+    "punch": {
+      "size": 30,
+      "leading": 1.36,
+      "min": 21
+    },
+    "wire": {
+      "size": 18,
+      "tracking": 0.18,
+      "min": 14
+    },
+    "chip": {
+      "size": 17,
+      "tracking": 0.04,
+      "min": 13
+    },
+    "rowTitle": {
+      "size": 26,
+      "leading": 1.24,
+      "min": 19
+    },
+    "rowBody": {
+      "size": 22,
+      "leading": 1.38,
+      "min": 17
+    },
+    "statValue": {
+      "size": 90,
+      "leading": 1,
+      "min": 46
+    },
+    "statLabel": {
+      "size": 20,
+      "leading": 1.25,
+      "min": 16
+    },
+    "quote": {
+      "size": 54,
+      "leading": 1.2,
+      "min": 32
+    },
+    "caption": {
+      "size": 20,
+      "leading": 1.35,
+      "min": 16
+    },
+    "footer": {
+      "size": 17,
+      "tracking": 0.06
+    }
+  },
+  "rowStyle": "card",
+  "fill": {
+    "min": 0.7,
+    "maxGrow": 1.2
+  },
+  "objectSize": 0.16,
+  "space": {
+    "xs": 7,
+    "sm": 12,
+    "md": 20,
+    "lg": 30,
+    "xl": 46
+  },
+  "radius": {
+    "sm": 8,
+    "md": 14,
+    "lg": 22
+  },
+  "texture": {
+    "grain": 0.035,
+    "blotch": 0
+  },
+  "animate": {
+    "seconds": 4,
+    "fps": 30
+  },
+  "budgets": {
+    "eyebrow": 30,
+    "headline": 46,
+    "deck": 118,
+    "body": 190,
+    "name": 16,
+    "does": 115,
+    "why": 104,
+    "step": 40,
+    "punch": 66,
+    "chip": 16,
+    "rowTitle": 30,
+    "rowBody": 84,
+    "statValue": 6,
+    "statLabel": 26,
+    "quote": 120,
+    "caption": 90,
+    "maxRows": 5,
+    "maxSteps": 5,
+    "maxHow": 4
+  }
+}

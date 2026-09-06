@@ -169,6 +169,36 @@ export function checkDeck(deck, theme) {
         });
       }
     }
+    // The datasheet entry is a fixed form, and the value of a fixed form is
+    // that every slide fills the same fields. A missing one is not a shorter
+    // slide, it is a visible hole in a run of identical layouts — so these
+    // are errors rather than the usual budget warnings.
+    if (s.type === 'entry') {
+      if (!s.name) add(ERR, where, 'Entry with no name. The name heads the slide and labels the wire.');
+      cap(where, 'name', s.name, B.name);
+      cap(where, 'does', s.does, B.does);
+      cap(where, 'why', s.why, B.why);
+      cap(where, 'punch', s.punch, B.punch);
+      for (const f of ['does', 'why']) {
+        if (!s[f]) add(ERR, where, `Entry has no "${f}". Every entry fills the same fields; one left blank reads as an omission.`);
+      }
+      if (!Array.isArray(s.how) || !s.how.length) {
+        add(ERR, where, 'Entry with no "how" steps. The recipe is the reason the post gets saved.');
+      } else {
+        const maxHow = B.maxHow || 4;
+        if (s.how.length > maxHow) {
+          add(ERR, where, `${s.how.length} how-steps against a max of ${maxHow}. Longer than that is a tutorial, not a card.`);
+        }
+        s.how.forEach((st, j) => cap(`${where} step ${j + 1}`, 'step', st, B.step));
+      }
+      if (s.logo && !LOGO_NAMES().includes(s.logo)) {
+        add(ERR, where, `Unknown logo "${s.logo}". Have: ${LOGO_NAMES().join(', ')}`);
+      }
+      if (s.doodle && !allIconNames().includes(s.doodle)) {
+        add(WARN, where, `Unknown doodle "${s.doodle}" — falls back to a dot.`);
+      }
+    }
+
     if (s.type === 'quote' && !s.quote && !s.headline) add(ERR, where, 'Quote slide with no quote.');
 
     if (s.mascot && s.mascot !== false && !POSE_NAMES.includes(s.mascot)) {
