@@ -6,6 +6,14 @@ out/
 # Post-ready JPEG/MP4 exports, wherever they land.
 _post/
 
+# Theme previews. `previews.js` builds each pack a contact sheet of its own
+# output, which is exactly what you want locally and exactly what you do not
+# want committed: they are 40MB of PNG against 2MB of source, and each one is
+# rendered from whatever deck declares that theme — usually a decks/.local/ one
+# carrying your handle and your blog copy. Rebuild, do not store:
+#   node scripts/previews.js --all
+themes/*/preview.png
+
 node_modules/
 .DS_Store
 *.log

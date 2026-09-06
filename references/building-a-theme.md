@@ -149,3 +149,10 @@ sequence rather than repetition.
 - [ ] A deck of every slide type renders with no overflow
 - [ ] The same deck rendered twice is byte-identical
 - [ ] `rules.md` says what the theme is **not** for
+- [ ] `themes/<name>/preview.png` exists — `node scripts/previews.js <name>`,
+      or render the sample with `--preview`. `doctor.js` warns until it does.
+
+The preview is not decoration. A pack ships as a stylesheet and a paragraph of
+prose, and the next agent choosing between thirty of them is matching a
+mechanic described in words against a look it has never seen. One grid of the
+pack's own output settles in a glance what `rules.md` argues for in a page.

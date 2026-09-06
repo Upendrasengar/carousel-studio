@@ -34,6 +34,12 @@ for (const t of themes) {
   if (!skill.includes('`' + t + '`')) {
     add('ERROR', t, 'not in SKILL.md — an agent cannot discover this theme');
   }
+  // A pack is a stylesheet and a rules.md, and neither tells you what it looks
+  // like. WARN rather than ERROR: previews are built from whatever decks are on
+  // this machine, so a fresh clone has none and must still pass the gate.
+  if (!fs.existsSync(path.join(ROOT, 'themes', t, 'preview.png'))) {
+    add('WARN', t, 'no preview.png — run: node scripts/previews.js ' + t);
+  }
 
   const mod = await import(pathToFileURL(path.join(ROOT, 'themes', t, 'templates.js')).href);
   for (const ty of mod.SLIDE_TYPES.filter((x) => !STANDARD.includes(x))) {

@@ -13,10 +13,11 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import os from 'node:os';
 import { chromium } from 'playwright';
-import { loadTheme, listThemes, PLATFORMS } from './lib/theme.js';
+import { loadTheme, listThemes, PLATFORMS, THEMES_DIR } from './lib/theme.js';
 import { makeRng } from './lib/rng.js';
 import { textureLayer } from './lib/texture.js';
 import { FIT_FN } from './lib/fit.js';
+import { buildSheet } from './lib/sheet.js';
 
 const MIME = { '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
 
@@ -53,7 +54,14 @@ const USAGE = `Usage: node scripts/render.js <deck.json> [outDir] [options]
   --platform <name>   override the theme's canvas (${Object.keys(PLATFORMS).join(', ')})
   --panorama <n>      stitch n slides into one wide image
   --animate           render slides marked "animate": true as video
-  --themes            list theme packs and exit`;
+  --preview           also write the sheet to themes/<theme>/preview.png
+  --no-sheet          skip the contact sheet
+  --themes            list theme packs and exit
+
+Every render writes <outDir>/_review-sheet.png: all slides as one labelled
+grid, with the fit measurements printed under each. Use --preview when the
+render is a sample of the theme itself, so the pack carries a picture of what
+it outputs.`;
 
 /**
  * Unknown flags are an error, not a positional.
@@ -67,7 +75,7 @@ const USAGE = `Usage: node scripts/render.js <deck.json> [outDir] [options]
  */
 function parseArgs(argv) {
   const a = argv.slice(2);
-  const out = { input: null, outDir: 'out', theme: null, platform: null, list: false, panorama: 0, animate: false };
+  const out = { input: null, outDir: 'out', theme: null, platform: null, list: false, panorama: 0, animate: false, preview: false, sheet: true };
   const pos = [];
   const fail = (msg) => { console.error(`${msg}\n\n${USAGE}`); process.exit(1); };
 
@@ -86,6 +94,8 @@ function parseArgs(argv) {
       if (!Number.isInteger(n) || n < 0) fail('--panorama expects a whole number.');
       out.panorama = n;
     } else if (a[i] === '--animate') out.animate = true;
+    else if (a[i] === '--preview') out.preview = true;
+    else if (a[i] === '--no-sheet') out.sheet = false;
     else if (a[i] === '--themes') out.list = true;
     else if (a[i].startsWith('-')) fail(`Unknown option "${a[i]}".`);
     else pos.push(a[i]);
@@ -349,6 +359,29 @@ async function main() {
     const flag = notes.length ? `  (${notes.join('; ')})` : '';
     console.log(`  ${file}${flag}`);
     report.push({ index: i + 1, type: slide.type, ...fit });
+  }
+
+  // The contact sheet, built before the browser closes so it costs one page
+  // rather than a second launch. It is written on every render, not on request:
+  // a review artifact that has to be asked for is one that gets skipped, and
+  // the numbers it prints are the ones worth looking at.
+  if (args.sheet) {
+    try {
+      const sheetFile = path.join(args.outDir, '_review-sheet.png');
+      const sheet = await buildSheet(browser, { dir: args.outDir, outFile: sheetFile, theme, deck, report });
+      console.log(`\n  ${sheetFile}  (${sheet.slides} slides, ${sheet.cols} across)`);
+      if (args.preview) {
+        // The theme's own picture of itself. A pack is 900 lines of CSS and a
+        // rules.md; neither tells you what it looks like.
+        const previewFile = path.join(THEMES_DIR, theme.name, 'preview.png');
+        fs.copyFileSync(sheetFile, previewFile);
+        console.log(`  ${previewFile}  (theme preview updated)`);
+      }
+    } catch (e) {
+      // A sheet is review scaffolding. Losing it must never lose the render
+      // that produced it — the slides are already on disk and are the product.
+      console.warn(`  ! contact sheet failed: ${e.message}`);
+    }
   }
 
   await browser.close();

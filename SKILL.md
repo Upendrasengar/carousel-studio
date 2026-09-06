@@ -69,9 +69,13 @@ theme pack, not in the deck.
    Warnings are judgement calls — a warning about copy length means trim the
    copy, not raise the budget.
 5. **Render**: `node scripts/render.js decks/<slug>.json out/<slug>`.
-6. **Look at the output.** Read at least the hook and one dense slide as
-   images. The renderer reports which slides auto-shrank or lost the mascot;
-   those are copy problems, so fix the copy and re-render.
+6. **Look at the output.** Every render writes `out/<slug>/_review-sheet.png` —
+   the whole deck as one labelled grid with each slide's fit measurements
+   printed under it. Read that first: it is one image, and it is the only way
+   to see the deck's rhythm rather than eight slides in isolation. Then read
+   the hook and one dense slide at full size. The sheet flags which slides
+   auto-shrank, still overflow, or lost decoration; those are copy problems, so
+   fix the copy and re-render.
 7. **Publish** only if asked. See "Publishing" below.
 
 ## The two rules that matter most
@@ -166,14 +170,47 @@ node scripts/render.js decks/deck.json out/deck --platform linkedin
 node scripts/render.js decks/deck.json out/deck --animate   # video where marked
 node scripts/render.js decks/deck.json out/deck --theme vintage-print
 node scripts/render.js decks/deck.json out/deck --panorama 3 # stitch a wide strip
+node scripts/render.js decks/deck.json out/deck --preview    # also update the theme's preview
+node scripts/sheet.js  out/deck --theme ledger         # rebuild a sheet, no re-render
+node scripts/previews.js --all                         # give every pack a preview
 ```
 
 The output directory is the second positional argument, not a flag. Those
-five options are the whole surface — anything else leading with `-` is
+seven options are the whole surface — anything else leading with `-` is
 rejected by name rather than taken as a directory.
 
 Platforms: `instagram-portrait` (default), `instagram-square`,
 `instagram-story`, `linkedin`, `x`.
+
+## Contact sheets and theme previews
+
+**Every render writes `<outDir>/_review-sheet.png`** — all the deck's slides as
+one labelled grid, with what the fit pass measured on each printed underneath:
+fill percentage, `shrunk`, `OVERFLOWS`, dropped decoration, and a `video` badge
+where an MP4 was written too. Those numbers are already in
+`render-report.json`; nobody reads a JSON array, and under the picture that
+caused them they get looked at. Read the sheet before the individual slides.
+
+`--no-sheet` skips it. `node scripts/sheet.js <dir> --theme <name>` rebuilds one
+for a directory that is already rendered.
+
+**`themes/<name>/preview.png` is the pack's picture of itself** — the same sheet
+built from a sample render of that theme. A pack is a stylesheet and a
+`rules.md`, and neither tells you what it outputs.
+
+- Render a sample of a theme with **`--preview`** and it lands in the pack.
+- `node scripts/previews.js` builds one for every theme that lacks it;
+  `--all` rebuilds them; `--decks <dir>` adds a deck search path.
+- It picks the deck already written for that theme with the most slides, so
+  the preview exercises the pack's signature slide types. Rendering
+  `example.json` in all thirty would be cheaper and would show thirty packs
+  doing the same four standard types.
+- `doctor.js` warns when a pack has none. It warns rather than errors because
+  previews are built from local decks, so a fresh clone legitimately has none.
+
+Previews are **gitignored**: 40MB of PNG against 2MB of source, and most are
+rendered from `decks/.local/` decks carrying a real handle. Rebuild, do not
+store.
 
 ## Animated slides
 
