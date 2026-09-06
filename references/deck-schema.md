@@ -370,6 +370,16 @@ under about 56 characters. Numbered deck-wide like `page`.
 **`wire`** (console) — a `graph` of nodes and edges, plus `railAt` pointing at
 one of `deck.rail.items`.
 
+A graph — on the slide for `console`, under `media` with `"kind": "graph"` for
+`workbench` — is `nodes` of `{ id, x, y, label, note?, icon?, logo?, kind? }`
+and `edges` of `{ from, to, label?, dashed? }`. `x` and `y` are percentages of
+the graph box, so the same graph works at any canvas size. Set `"flow": true`
+on the graph and, on a slide that also sets `"animate": true`, a dot travels
+each edge: one leaves the source node, and when it reaches the hub every
+outgoing wire carries one at once. Edge direction is what orders the waves, so
+`from` and `to` stop being cosmetic — `check.js` warns when two nodes have no
+incoming edge, because that is what a reversed edge looks like.
+
 **`ladder`** (ladder) — one `task` and exactly three `rungs`, graded `weak`,
 `better`, `best` in that order. Each rung is `{ grade, text }`; `text` keeps
 its newlines, because the shape of the best prompt is the thing being praised.

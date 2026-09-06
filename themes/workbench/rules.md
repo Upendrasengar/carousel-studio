@@ -93,6 +93,28 @@ Six nodes at one x flare together, not one by one. That is correct: they are
 the same distance along the light's path. If you want them to arrive in
 sequence, stagger their `x`, not the CSS.
 
+## Motion: a pulse down the wiring
+
+Set `"flow": true` on a graph card and a dot travels each edge — one leaves the
+source, and when it lands on the hub every outgoing wire carries one. On the
+setup guide's cover that is: a dot crosses from AGENT to MCP over the first
+~1.9s, continues right as one dot along the trunk the six wires share, splits
+into six at the bus, and all six reach their platform together at ~3.5s. Then
+half a second of stillness before the loop repeats.
+
+**The split happens at the bus, not at the node.** Every edge out of the hub
+routes horizontally to the same midpoint before turning, so the six wires — and
+therefore the six dots — are one line until then. Drawing six dots on top of
+each other would look like one anyway; this is the wiring being honest.
+
+**It is opt-in per deck, and that is the point.** Dots travelling the wires
+assert a direction of work. True of a pipeline. A lie about a diagram that
+merely groups things, and worse than no motion, because the reader believes it.
+
+Waves come from edge direction, so `from` and `to` are no longer cosmetic on a
+flowing graph. `check.js` errors on a node no source can reach and warns when
+two nodes have no incoming edge — the shape a reversed edge makes.
+
 ## The aside
 
 One quiet italic line that must say something the paragraph deliberately does

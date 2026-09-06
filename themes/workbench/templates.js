@@ -108,8 +108,12 @@ function subject(s, ctx) {
   else if (m.kind === 'terminal') inner = terminalCard(m, ctx.accent);
   else if (m.kind === 'image') inner = shotCard(m);
   else if (m.kind === 'graph') {
+    // `flow` is opt-in per deck rather than on by default: dots travelling the
+    // wires assert a direction of work, which is true of a pipeline and a lie
+    // about a diagram that merely groups things.
     inner = `<div class="gcard">${nodeGraph(m.graph || m, {
       iconFn: icon, logoFn: logo, height: m.height || 420,
+      flow: (m.graph || m).flow ? { seconds: ctx.t.animate?.seconds || 4 } : false,
     })}</div>`;
   }
   return inner ? taped(inner, ctx) : '';
@@ -449,6 +453,13 @@ body::before { content:""; position:absolute; inset:0; z-index:0; pointer-events
 .ng-wire-dash { stroke-dasharray:5 4; stroke:${accent}; }
 .ng-pin { fill:${c.gutter}; }
 .ng-elab { font-family:Hand; font-size:24px; color:${accent}; }
+/* The travelling dot. Same warm white as the sheen and the node flare, so the
+   card reads as one light source rather than three effects. The halo is a
+   shadow rather than a bigger dot: it has to sit over a 1.6px wire without
+   swallowing it. Sizing and colour only — the primitive owns display and
+   timing, and keeps the dot hidden on slides that never move. */
+.ng-dot { width:11px; height:11px; border-radius:50%; background:#FFF6E2;
+  box-shadow:0 0 0 3px rgba(245,228,184,.30), 0 0 16px 4px rgba(255,229,180,.55); }
 
 .rows { list-style:none; display:flex; flex-direction:column; gap:${sp.xs}px;
   margin-top:${sp.xs}px; }

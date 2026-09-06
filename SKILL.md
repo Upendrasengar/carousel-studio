@@ -109,7 +109,9 @@ data rather than screenshots. Reach for the theme when the honest answer to
 one italic aside — above a dark card taped to the kraft: a line-numbered
 `code` file, a `terminal` session or a `graph`. A code card takes one
 `mark` naming the line and the token to circle, and an unmatched token throws
-rather than rendering a slide whose copy points at nothing.
+rather than rendering a slide whose copy points at nothing. A `graph` card can
+set `"flow": true` to send a dot down the wiring — see *A pulse along the
+wiring* below.
 
 `entry` — `datasheet` only. One connector as a filled-in form: a counter chip,
 a dashed wire naming both ends, a brand tile, then `does`, `why` and a numbered
@@ -290,6 +292,33 @@ Also: the sweep's travel is stated in percentages of its own width, so the
 start and end offsets must be **derived from the band width**, not typed. Narrow
 the band with a hardcoded end offset and the light parks half-on the card — in
 every still.
+
+### A pulse along the wiring
+
+`"flow": true` on a `graph` sends a dot down each edge: one leaves the source,
+and the moment it lands on the hub every outgoing wire carries one. It is
+opt-in per deck because it asserts a **direction of work** — true of a pipeline,
+a lie about a diagram that merely groups things. `check.js` errors on a flowing
+graph with an unreachable node and warns when two nodes have no incoming edge,
+which is almost always a reversed edge making a second source.
+
+Three things it will teach you again if you rebuild it:
+
+**Waves are derived, not declared.** Breadth-first from the nodes with no
+incoming edge gives every edge a hop number, and hop number is the wave. Add a
+seventh platform and it joins the split with nothing to update.
+
+**The dots are HTML at percentage positions, not SVG circles.** The wire `<svg>`
+is `preserveAspectRatio="none"` so a 0-100 layout fills any box — and a
+`<circle>` in that space renders as an ellipse whose squash depends on the
+card's aspect.
+
+**Hold full brightness through arrival, then go out at the node.** Fading a dot
+across the tail of its journey reads as a dot that gave up: measured, the first
+version died at 70 of the 80 units it had to cross. And it must be `opacity:0`
+at both 0% and 100% — stills of an animated slide are made by seeking every
+animation to just inside its last frame, so a dot that ended lit is parked
+mid-wire on the PNG that ships to the platforms taking no video.
 
 ## Determinism
 

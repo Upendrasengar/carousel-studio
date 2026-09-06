@@ -129,19 +129,25 @@ export function rowBadge(row, { iconFn, tint, ink }) {
  *
  * Themes style `.ng-*`; nothing here sets a colour.
  */
-export function nodeGraph(graph, { iconFn, logoFn, height = 460 } = {}) {
+export function nodeGraph(graph, { iconFn, logoFn, height = 460, flow = false } = {}) {
   if (!graph || !graph.nodes?.length) return '';
   const at = Object.fromEntries(graph.nodes.map((n) => [n.id, n]));
 
-  // Elbow routing. The longer axis moves first, so a mostly-horizontal edge
-  // leaves its node sideways — which is what makes the result read as wiring.
-  const path = (a, b) => {
+  // Elbow routing, as a list of corners. The longer axis moves first, so a
+  // mostly-horizontal edge leaves its node sideways — which is what makes the
+  // result read as wiring.
+  //
+  // This returns points rather than a `d` string because the travelling dot
+  // walks the same corners. One router, so a change to how wires bend cannot
+  // leave the dot cutting a corner the wire does not take.
+  const route = (a, b) => {
     const dx = b.x - a.x, dy = b.y - a.y;
-    if (Math.abs(dx) < 0.5 || Math.abs(dy) < 0.5) return `M${a.x},${a.y} L${b.x},${b.y}`;
+    if (Math.abs(dx) < 0.5 || Math.abs(dy) < 0.5) return [a, b];
     return Math.abs(dx) >= Math.abs(dy)
-      ? `M${a.x},${a.y} L${a.x + dx / 2},${a.y} L${a.x + dx / 2},${b.y} L${b.x},${b.y}`
-      : `M${a.x},${a.y} L${a.x},${a.y + dy / 2} L${b.x},${a.y + dy / 2} L${b.x},${b.y}`;
+      ? [a, { x: a.x + dx / 2, y: a.y }, { x: a.x + dx / 2, y: b.y }, b]
+      : [a, { x: a.x, y: a.y + dy / 2 }, { x: b.x, y: a.y + dy / 2 }, b];
   };
+  const path = (a, b) => route(a, b).map((p, i) => `${i ? 'L' : 'M'}${p.x},${p.y}`).join(' ');
 
   // Every part of the graph carries `--nx`, its horizontal position as a bare
   // 0-100 number. Nothing here reads it: it exists so a theme can key motion
@@ -173,10 +179,116 @@ export function nodeGraph(graph, { iconFn, logoFn, height = 460 } = {}) {
       </span></span>`;
   }).join('');
 
+  const pulse = flow ? flowPulse(graph, at, route, flow === true ? {} : flow) : '';
+
   return `<div class="ng" style="height:${height}px">
     <svg class="ng-wires" viewBox="0 0 100 100" preserveAspectRatio="none">${wires}${pins}</svg>
-    ${boxes}${labels}
+    ${boxes}${labels}${pulse}
   </div>`;
+}
+
+/**
+ * Travelling dots along the wiring: one leaves the source, and the moment it
+ * lands on the hub every outgoing wire carries one at once. A static diagram
+ * says these things are connected; this says which way the work moves.
+ *
+ * Wave order is DERIVED, not declared. Breadth-first from whichever nodes have
+ * no incoming edge gives every edge a hop number, and hop number is the wave.
+ * Add a seventh platform to the graph and it joins the split with nothing to
+ * change here — the same reason `--nx` is stamped rather than hand-tuned.
+ *
+ * Two things forced the shape of this:
+ *
+ * The dots are HTML at percentage positions, not SVG circles. The wire `<svg>`
+ * is `preserveAspectRatio="none"` — deliberately, so a graph laid out in 0-100
+ * fills any box — and a `<circle>` in that space renders as an ellipse whose
+ * squash depends on the card's aspect. A div at `left:%/top:%` is round at
+ * every size.
+ *
+ * Every dot holds `opacity:0` at both 0% and 100%. Stills of an animated slide
+ * are produced by seeking each animation to just inside its final frame, so a
+ * dot that ended lit would be parked mid-wire on the PNG that ships to the
+ * platforms that take no video.
+ */
+let FLOW_SEQ = 0;
+
+function flowPulse(graph, at, route, opts = {}) {
+  const edges = (graph.edges || []).filter((e) => at[e.from] && at[e.to]);
+  if (!edges.length) return '';
+
+  const D = opts.seconds || 4;
+  const lead = opts.lead ?? 0.05;         // quiet beat before the first dot
+  const end = opts.end ?? 0.88;           // last dot lands, then the loop rests
+  const rise = opts.rise ?? 0.08;         // of one wave, spent appearing
+  const land = opts.land ?? 0.02;         // of the loop, spent going out at the node
+
+  // Hop number per node: 0 for the sources, +1 across each edge.
+  const incoming = new Set(edges.map((e) => e.to));
+  const roots = graph.nodes.filter((n) => !incoming.has(n.id)).map((n) => n.id);
+  const out = new Map();
+  for (const e of edges) out.set(e.from, [...(out.get(e.from) || []), e]);
+  const hop = new Map((roots.length ? roots : [graph.nodes[0].id]).map((id) => [id, 0]));
+  for (const q = [...hop.keys()]; q.length;) {
+    const id = q.shift();
+    for (const e of out.get(id) || []) {
+      if (hop.has(e.to)) continue;
+      hop.set(e.to, hop.get(id) + 1);
+      q.push(e.to);
+    }
+  }
+  const waves = Math.max(...edges.map((e) => hop.get(e.from) ?? 0)) + 1;
+  const span = (end - lead) / waves;
+
+  const uid = `ngf${++FLOW_SEQ}`;
+  const rules = [];
+  const dots = edges.map((e, i) => {
+    const pts = route(at[e.from], at[e.to]);
+    const legs = pts.slice(1).map((p, k) => Math.hypot(p.x - pts[k].x, p.y - pts[k].y));
+    const total = legs.reduce((s, v) => s + v, 0) || 1;
+
+    // Waypoint times are proportional to leg length in graph units, which is
+    // exact only on a square box. The dot changes pace slightly at a corner on
+    // a tall card; a constant-speed version would need the box's pixel aspect,
+    // which is not known until layout.
+    const w0 = lead + (hop.get(e.from) ?? 0) * span;
+    const at01 = (k) => w0 + span * (legs.slice(0, k).reduce((s, v) => s + v, 0) / total);
+
+    const key = new Map();
+    const put = (pct, decl) => {
+      const at2 = Math.max(0, Math.min(100, pct * 100)).toFixed(2);
+      key.set(at2, { ...(key.get(at2) || {}), ...decl });
+    };
+    const stop = (pct, p) => put(pct, { left: `${p.x}%`, top: `${p.y}%` });
+
+    // Full brightness right through arrival, then out over `land` — the dot is
+    // absorbed by the node it reached. Fading it out across the tail of the
+    // journey instead reads as a dot that gave up: measured, the first version
+    // died at 70 of the 80 units it had to cross.
+    put(0, { opacity: 0 });
+    stop(w0, pts[0]);
+    put(w0, { opacity: 0 });
+    put(w0 + span * rise, { opacity: 1 });
+    pts.slice(1, -1).forEach((p, k) => stop(at01(k + 1), p));
+    stop(w0 + span, pts[pts.length - 1]);
+    put(w0 + span, { opacity: 1 });
+    put(w0 + span + land, { opacity: 0 });
+    put(1, { opacity: 0 });
+
+    const frames = [...key.entries()].sort((x, y) => Number(x[0]) - Number(y[0]))
+      .map(([pct, decl]) => `${pct}%{${Object.entries(decl).map(([k, v]) => `${k}:${v}`).join(';')}}`)
+      .join('');
+    rules.push(`@keyframes ${uid}-${i}{${frames}}`);
+    return `<span class="ng-dot" style="left:${pts[0].x}%; top:${pts[0].y}%; opacity:0; animation-name:${uid}-${i}"></span>`;
+  }).join('');
+
+  // Hidden unless the slide opted into motion, and hidden here rather than in
+  // the theme: a pack that styles `.ng-dot` and forgets the guard would leak
+  // seven dots onto every still.
+  return `<style>.ng-dot{display:none; position:absolute; transform:translate(-50%,-50%);
+    pointer-events:none; z-index:5}
+  .is-anim .ng-dot{display:block; animation-duration:${D}s; animation-timing-function:linear;
+    animation-iteration-count:infinite; animation-fill-mode:both}
+  ${rules.join('\n  ')}</style>${dots}`;
 }
 
 /**

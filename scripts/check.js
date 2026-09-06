@@ -813,18 +813,52 @@ export function checkDeck(deck, theme) {
       add(ERR, w, `railAt=${s2.railAt}, but deck.rail.items has ${items.length}.`);
     }
   }
-  for (const s2 of deck.slides.filter((x) => x.graph)) {
+  // Graphs arrive two ways: on the slide for the packs whose whole slide is a
+  // diagram, and under `media` for the packs that tape one to the page. Both
+  // reach the same primitive, so both get the same checks.
+  for (const s2 of deck.slides) {
+    const g = s2.graph || (s2.media?.kind === 'graph' ? s2.media : null);
+    if (!g?.nodes) continue;
     const w = `slide ${deck.slides.indexOf(s2) + 1} (${s2.type})`;
-    const ids = new Set((s2.graph.nodes || []).map((n) => n.id));
-    for (const e of (s2.graph.edges || [])) {
+    const ids = new Set(g.nodes.map((n) => n.id));
+    for (const e of (g.edges || [])) {
       if (!ids.has(e.from) || !ids.has(e.to)) {
         add(ERR, w, `graph edge ${e.from} -> ${e.to} names a node that does not exist.`);
       }
     }
-    for (const n of (s2.graph.nodes || [])) {
+    for (const n of g.nodes) {
       if (!(n.x >= 0 && n.x <= 100 && n.y >= 0 && n.y <= 100)) {
         add(ERR, w, `graph node "${n.id}" is at ${n.x},${n.y} — both must be 0-100.`);
       }
+    }
+
+    // A flowing graph releases its dots in waves, and the wave is the node's
+    // distance from a source. A node no source can reach has no distance: it
+    // never receives a dot, and anything leaving it fires in the first wave
+    // alongside the source, which reads as a second pulse from nowhere. The
+    // render succeeds either way, which is what makes this worth a check.
+    if (!g.flow) continue;
+    const edges = (g.edges || []).filter((e) => ids.has(e.from) && ids.has(e.to));
+    const out = new Map();
+    for (const e of edges) out.set(e.from, [...(out.get(e.from) || []), e]);
+    const incoming = new Set(edges.map((e) => e.to));
+    const roots = g.nodes.filter((n) => !incoming.has(n.id)).map((n) => n.id);
+    if (!roots.length) {
+      add(ERR, w, 'graph has flow but every node has an incoming edge, so nothing is the source the pulse leaves from.');
+    } else if (roots.length > 1) {
+      // Almost always a reversed edge: write `{from:"instagram", to:"mcp"}` by
+      // mistake and instagram becomes a second source, firing in the first wave
+      // beside the real one. A warning, because a genuine two-input diagram is
+      // a legitimate thing to draw.
+      add(WARN, w, `graph has flow and ${roots.length} nodes with no incoming edge (${roots.join(', ')}). The pulse leaves from all of them at once — check for a reversed edge.`);
+    }
+    const seen = new Set(roots.length ? roots : [g.nodes[0].id]);
+    for (const q = [...seen]; q.length;) {
+      for (const e of out.get(q.shift()) || []) if (!seen.has(e.to)) { seen.add(e.to); q.push(e.to); }
+    }
+    const stranded = g.nodes.filter((n) => !seen.has(n.id)).map((n) => n.id);
+    if (stranded.length) {
+      add(ERR, w, `graph has flow but ${stranded.join(', ')} cannot be reached from ${roots.join(', ') || g.nodes[0].id}. No dot ever arrives there.`);
     }
   }
 
